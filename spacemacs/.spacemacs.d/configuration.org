@@ -1,0 +1,224 @@
+#+TITLE: Spacemacs Configuration
+#+AUTHOR: Roland Coeurjoly
+#+EMAIL: rolandcoeurjoly@gmail.com
+#+OPTIONS: toc:nil num:nil
+
+* General settings
+** Lines
+    Wrap lines
+#+BEGIN_SRC emacs-lisp
+  (setq global-visual-line-mode t)
+#+END_SRC
+* Set personal information
+** Who am I? Where am I?
+
+#+BEGIN_SRC emacs-lisp
+  (setq user-full-name "Roland Coeurjoly"
+        user-mail-address "rolandcoeurjoly@gmail.com")
+#+END_SRC
+** Highlight the current line
+
+=global-hl-line-mode= softly highlights the background color of the line
+containing point. It makes it a bit easier to find point, and it's useful when
+pairing or presenting code.
+
+#+BEGIN_SRC emacs-lisp
+  (global-hl-line-mode)
+#+END_SRC
+* Org mode
+** Visual
+    I like seeing a little downward-pointing arrow instead of the usual ellipsis
+   (=...=) that org displays when there's stuff under a header.
+#+BEGIN_SRC emacs-lisp
+  (setq org-ellipsis "⤵")
+#+END_SRC
+** [[https://orgmode.org/worg/org-tutorials/encrypting-files.html][Crypto]]
+   I set org mode so that I can encrypt headings with the tag crypt
+   # #+BEGIN_SRC emacs-lisp
+   #   ;; Setting for GPG encryption in org mode
+   #   (custom-set-variables '(epg-gpg-program  "/usr/bin/gpg2"))
+
+   #   (require 'org-crypt)
+   #   (org-crypt-use-before-save-magic)
+   #   (setq org-tags-exclude-from-inheritance (quote ("crypt")))
+   #   ;;  set to nil to use symmetric encryption.
+   #   (setq org-crypt-key nil)
+   #   (setq org-tag-alist '(("crypt" . ?c)))
+   #   ;; Auto-saving does not cooperate with org-crypt.el: so you need
+   #   ;; to turn it off if you plan to use org-crypt.el quite often.
+   #   ;; Otherwise, you'll get an (annoying) message each time you
+   #   ;; start Org.
+
+   #   ;; To turn it off only locally, you can insert this:
+   #   ;;
+   #   ;; # -*- buffer-auto-save-file-name: nil; -*-
+   #   ;; Better yet would be to leave auto-save on globally but set it on only in org mode
+   #   ;; This is annoying
+   #   ;; Set again when org crypt encrypts when saving
+   #   ;; (add-hook 'org-mode-hook
+   #   ;;           'auto-save-mode)
+   #   ;; (add-hook 'org-mode-hook '(lambda()
+   #   ;;                             (set (make-local-variable 'auto-save) nil)))
+   #   ;; ;; Global Tags
+   #  #+END_SRC
+** Babel
+    Allow =babel= to evaluate Emacs lisp, verilog  or Gnuplot code.
+
+#+BEGIN_SRC emacs-lisp
+  (org-babel-do-load-languages
+   'org-babel-load-languages
+   '((emacs-lisp . t)
+     (gnuplot . t)
+     ;;(arduino . t)
+     ;;(verilog . t)
+     (clojure . t)
+     (C . t)
+     (python . t)))
+#+END_SRC
+    Use syntax highlighting in source blocks while editing.
+
+#+BEGIN_SRC emacs-lisp
+  (setq org-src-fontify-natively t)
+#+END_SRC
+[[https://www.wisdomandwonder.com/link/9573/how-to-correctly-enable-flycheck-in-babel-source-blocks][how to correctly enable flycheck in babel source blocks]]
+#+BEGIN_SRC emacs-lisp
+(defadvice org-edit-src-code (around set-buffer-file-name activate compile)
+  (let ((file-name (buffer-file-name))) ;; (1)
+    ad-do-it                            ;; (2)
+    (setq buffer-file-name file-name))) ;; (3)
+#+END_SRC
+Make TAB act as if it were issued in a buffer of the language's major mode.
+
+#+BEGIN_SRC emacs-lisp
+  (setq org-src-tab-acts-natively t)
+#+END_SRC
+
+Don't ask before evaluating code blocks.
+
+#+BEGIN_SRC emacs-lisp
+  (setq org-confirm-babel-evaluate nil)
+#+END_SRC
+
+For tangling to work with makefiles:
+
+#+BEGIN_SRC emacs-lisp
+  (setq org-src-preserve-indentation t)
+#+END_SRC
+** Project management
+    Record the time that a todo was archived.
+
+#+BEGIN_SRC emacs-lisp
+  (setq org-log-done 'time)
+#+END_SRC
+** Export
+    Translate regular ol' straight quotes to typographically-correct curly quotes
+when exporting.
+
+#+BEGIN_SRC emacs-lisp
+  (setq org-export-with-smart-quotes t)
+#+END_SRC
+
+Use flycheck in the appropriate buffers:
+
+#+BEGIN_SRC emacs-lisp
+  (add-hook 'markdown-mode-hook #'flycheck-mode)
+  (add-hook 'gfm-mode-hook #'flycheck-mode)
+  (add-hook 'text-mode-hook #'flycheck-mode)
+  (add-hook 'org-mode-hook #'flycheck-mode)
+  (add-hook 'verilog-mode-hook #'flycheck-mode)
+  ;;(add-hook 'arduino-mode-hook #'flycheck-mode)
+#+END_SRC
+* Programming
+** General
+   I use a few packages in virtually every programming or writing environment to manage the project, handle auto-completion, search for terms, and deal with version control. That's all in here.
+*** =flycheck=
+    Use =flycheck-mode= everywhere.
+ #+BEGIN_SRC emacs-lisp
+   (add-hook 'after-init-hook 'global-flycheck-mode)
+ #+END_SRC
+*** =company=
+     Use =company-mode= everywhere.
+  #+BEGIN_SRC emacs-lisp
+    (add-hook 'after-init-hook 'global-company-mode)
+  #+END_SRC
+*** Compile with the closest makefile (upward search)
+#+BEGIN_SRC emacs-lisp
+(defun compile-next-makefile ()
+  (interactive)
+  (let* ((default-directory (or (upward-find-file "Makefile") "."))
+         (compile-command (concat "cd " default-directory " && "
+                                  compile-command)))
+    (compile compile-command)))
+(defun upward-find-file (filename &optional startdir)
+  "Move up directories until we find a certain filename. If we
+  manage to find it, return the containing directory. Else if we
+  get to the toplevel directory and still can't find it, return
+  nil. Start at startdir or . if startdir not given"
+
+  (let ((dirname (expand-file-name
+		  (if startdir startdir ".")))
+	(found nil) ; found is set as a flag to leave loop if we find it
+	(top nil))  ; top is set when we get
+		    ; to / so that we only check it once
+
+    ; While we've neither been at the top last time nor have we found
+    ; the file.
+    (while (not (or found top))
+      ; If we're at / set top flag.
+      (if (string= (expand-file-name dirname) "/")
+	  (setq top t))
+
+      ; Check for the file
+      (if (file-exists-p (expand-file-name filename dirname))
+	  (setq found t)
+	; If not, move up a directory
+	(setq dirname (expand-file-name ".." dirname))))
+    ; return statement
+    (if found dirname nil)))
+(defun desperately-compile (command)
+  "Traveling up the path, find a Makefile and `compile'."
+  (interactive)
+  (when (locate-dominating-file default-directory "Makefile")
+  (with-temp-buffer
+    (cd (locate-dominating-file default-directory "Makefile"))
+    (list (compilation-read-command command))
+    (compile command))))
+#+END_SRC
+** Hardware
+*** Verilog
+#+BEGIN_SRC emacs-lisp
+     (autoload 'verilog-mode "verilog-mode" "Verilog mode" t )
+     (add-hook 'verilog-mode-hook
+               'auto-complete-mode
+               'company-mode)
+     (add-to-list 'auto-mode-alist '("\\.[ds]?vh?\\'" . verilog-mode))
+     (setq verilog-tool 'verilog-linter)
+     (setq verilog-linter "vlint ... ")
+     (setq verilog-coverage "coverage ... ")
+     (setq verilog-simulator "verilator ... ")
+     (setq verilog-compiler "verilator ... " )
+     (setq backup-directory-alist
+           `((".*" . ,temporary-file-directory)))
+     (setq auto-save-file-name-transforms
+           `((".*" ,temporary-file-directory t)))
+#+END_SRC
+** Software
+*** Python
+#+BEGIN_SRC emacs-lisp
+  (add-hook 'python-mode-hook 'jedi:setup)
+  (setq jedi:complete-on-dot t)
+  (setq elpy-rpc-backend "jedi")
+#+END_SRC
+*** Arduino
+    #+BEGIN_SRC emacs-lisp
+      ;; This doesn't work in Ubuntu
+      ;; (use-package arduino-mode)
+      ;; (autoload 'arduino-mode "arduino-mode" "Arduino mode" t )
+      ;; (add-hook 'arduino-mode-hook
+      ;;          'auto-complete-mode
+      ;;          'company-mode)
+    #+END_SRC
+* Load file upon startup
+#+BEGIN_SRC emacs-lisp
+  '(initial-buffer-choice "/home/rcl/Exocortex/Exocortex.org")
+#+END_SRC
