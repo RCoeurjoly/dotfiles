@@ -2,6 +2,12 @@
 
 eval $(gpg-agent --batch)
 
+function lazygit() {
+    git add .
+    git commit -m "`date`"
+    git push
+}
+
 function countpage() {
   pdf2dsc "$1" /dev/stdout | grep "Pages" | sed s/[^0-9]//g
 }
