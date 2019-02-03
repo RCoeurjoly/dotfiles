@@ -3,9 +3,11 @@
 eval $(gpg-agent --batch)
 
 function lazygit() {
+    cd ~/Exocortex
     git add .
     git commit -m "`date`"
     git push
+    cd
 }
 
 function countpage() {
