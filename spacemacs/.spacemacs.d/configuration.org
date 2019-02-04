@@ -73,6 +73,7 @@ pairing or presenting code.
      ;;(verilog . t)
      (clojure . t)
      (C . t)
+     (shell . t)
      (python . t)))
 #+END_SRC
     Use syntax highlighting in source blocks while editing.

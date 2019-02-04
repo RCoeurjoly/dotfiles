@@ -1,22 +1,19 @@
-pathmunge () {
-  if ! echo $PATH | egrep -q "(^|:)$1($|:)" ; then
-    if [ "$2" = "after" ] ; then
-      PATH=$PATH:$1
-    else
-      PATH=$1:$PATH
-    fi
-  fi
-}
+# pathmunge () {
+#   if ! echo $PATH | egrep -q "(^|:)$1($|:)" ; then
+#     if [ "$2" = "after" ] ; then
+#       PATH=$PATH:$1
+#     else
+#       PATH=$1:$PATH
+#     fi
+#   fi
+# }
 
-pathmunge /usr/local/sbin
-pathmunge /usr/local/bin
-pathmunge /usr/local/heroku/bin
-pathmunge /usr/lib/mutt
-pathmunge /sbin after
-pathmunge $HOME/bin after
-pathmunge $HOME/.bin after
-pathmunge $HOME/.cabal/bin after
-pathmunge $HOME/.local/bin after
-pathmunge $GOPATH/bin after
+
+# pathmunge /usr/local/heroku/bin
+# pathmunge /usr/lib/mutt
+# pathmunge /usr/local/sbin after
+# pathmunge /usr/bin after
+# pathmunge /usr/local/bin/ after
+PATH=$PATH:/usr/bin:/usr/local/bin/:/usr/local/sbin
 
 export PATH
