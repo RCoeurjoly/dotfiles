@@ -12,7 +12,7 @@
    '((emacs-lisp . t)
      (gnuplot . t)
      ;;(arduino . t)
-     ;;(verilog . t)
+     ;(verilog . t)
      (clojure . t)
      (C . t)
      (shell . t)
@@ -76,9 +76,9 @@ of FILE in the current directory, suitable for creation"
      (setq auto-save-file-name-transforms
            `((".*" ,temporary-file-directory t)))
 
-  (add-hook 'python-mode-hook 'jedi:setup)
-  (setq jedi:complete-on-dot t)
-  (setq elpy-rpc-backend "jedi")
+  (add-hook 'python-mode-hook 'company-jedi:setup)
+  (setq company-jedi:complete-on-dot t)
+  (setq elpy-rpc-backend "company-jedi")
 
       ;; This doesn't work in Ubuntu
       ;; (use-package arduino-mode)
