@@ -156,7 +156,7 @@ bar {
         tray_output primary
 }
 # # Start the appropriate programs on the right workspaces
-exec --no-startup-id i3-msg 'workspace 1:emacs; exec emacs26, workspace 2:web; exec abrowser, workspace 3:terminal; exec i3-sensible-terminal'
+exec --no-startup-id i3-msg 'workspace 1:emacs; exec emacs26, workspace 2:web; exec abrowser, workspace 3:terminal; exec i3-sensible-terminal, workspace 4:noise; exec vlc'
 
 # Pulse Audio controls
 bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume 0 +5% #increase sound volume

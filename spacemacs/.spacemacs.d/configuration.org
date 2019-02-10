@@ -34,33 +34,33 @@ pairing or presenting code.
 #+END_SRC
 ** [[https://orgmode.org/worg/org-tutorials/encrypting-files.html][Crypto]]
    I set org mode so that I can encrypt headings with the tag crypt
-   # #+BEGIN_SRC emacs-lisp
-   #   ;; Setting for GPG encryption in org mode
-   #   (custom-set-variables '(epg-gpg-program  "/usr/bin/gpg2"))
+   #+BEGIN_SRC emacs-lisp
+     ;; Setting for GPG encryption in org mode
+     (custom-set-variables '(epg-gpg-program  "/usr/bin/gpg2"))
 
-   #   (require 'org-crypt)
-   #   (org-crypt-use-before-save-magic)
-   #   (setq org-tags-exclude-from-inheritance (quote ("crypt")))
-   #   ;;  set to nil to use symmetric encryption.
-   #   (setq org-crypt-key nil)
-   #   (setq org-tag-alist '(("crypt" . ?c)))
-   #   ;; Auto-saving does not cooperate with org-crypt.el: so you need
-   #   ;; to turn it off if you plan to use org-crypt.el quite often.
-   #   ;; Otherwise, you'll get an (annoying) message each time you
-   #   ;; start Org.
+     (require 'org-crypt)
+     (org-crypt-use-before-save-magic)
+     (setq org-tags-exclude-from-inheritance (quote ("crypt")))
+     ;;  set to nil to use symmetric encryption.
+     (setq org-crypt-key nil)
+     (setq org-tag-alist '(("crypt" . ?c)))
+     ;; Auto-saving does not cooperate with org-crypt.el: so you need
+     ;; to turn it off if you plan to use org-crypt.el quite often.
+     ;; Otherwise, you'll get an (annoying) message each time you
+     ;; start Org.
 
-   #   ;; To turn it off only locally, you can insert this:
-   #   ;;
-   #   ;; # -*- buffer-auto-save-file-name: nil; -*-
-   #   ;; Better yet would be to leave auto-save on globally but set it on only in org mode
-   #   ;; This is annoying
-   #   ;; Set again when org crypt encrypts when saving
-   #   ;; (add-hook 'org-mode-hook
-   #   ;;           'auto-save-mode)
-   #   ;; (add-hook 'org-mode-hook '(lambda()
-   #   ;;                             (set (make-local-variable 'auto-save) nil)))
-   #   ;; ;; Global Tags
-   #  #+END_SRC
+     ;; To turn it off only locally, you can insert this:
+     ;;
+     ;; # -*- buffer-auto-save-file-name: nil; -*-
+     ;; Better yet would be to leave auto-save on globally but set it on only in org mode
+     ;; This is annoying
+     ;; Set again when org crypt encrypts when saving
+     (add-hook 'org-mode-hook
+               'auto-save-mode)
+     (add-hook 'org-mode-hook '(lambda()
+                                 (set (make-local-variable 'auto-save) nil)))
+     ;; ;; Global Tags
+    #+END_SRC
 ** Babel
     Allow =babel= to evaluate Emacs lisp, verilog  or Gnuplot code.
 
