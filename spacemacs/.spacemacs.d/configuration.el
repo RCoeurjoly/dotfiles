@@ -66,7 +66,7 @@
   (add-hook 'text-mode-hook #'flycheck-mode)
   (add-hook 'org-mode-hook #'flycheck-mode)
   (add-hook 'verilog-mode-hook #'flycheck-mode)
-  ;;(add-hook 'arduino-mode-hook #'flycheck-mode)
+  (add-hook 'arduino-mode-hook #'flycheck-mode)
 
    (add-hook 'after-init-hook 'global-flycheck-mode)
 

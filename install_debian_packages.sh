@@ -1,17 +1,17 @@
 #!/bin/sh
 
-sudo apt install stow
+sudo apt-get install stow
 # Installing emacs26
 
 sudo add-apt-repository ppa:kelleyk/emacs
-sudo apt remove emacs*
-sudo apt install emacs26
+sudo apt-get remove emacs*
+sudo apt-get install emacs26
 
 # Installing Spacemacs
 
 git clone https://github.com/syl20bnr/spacemacs ~/.emacs.d
 
-sudo apt install \
+sudo apt-get install \
      abook \
      aptitude \
      arandr \
@@ -167,7 +167,7 @@ cd
 ## End of installing instructions for formal verification with Yosys
 
 # For tlp power management.
-sudo apt install \
+sudo apt-get install \
      acpi-call-dkms \
      tlp \
      tp-smapi-dkms

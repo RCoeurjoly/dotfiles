@@ -127,7 +127,7 @@ Use flycheck in the appropriate buffers:
   (add-hook 'text-mode-hook #'flycheck-mode)
   (add-hook 'org-mode-hook #'flycheck-mode)
   (add-hook 'verilog-mode-hook #'flycheck-mode)
-  ;;(add-hook 'arduino-mode-hook #'flycheck-mode)
+  (add-hook 'arduino-mode-hook #'flycheck-mode)
 #+END_SRC
 * Programming
 ** General
