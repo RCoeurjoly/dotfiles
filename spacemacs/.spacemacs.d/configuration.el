@@ -85,7 +85,7 @@ of FILE in the current directory, suitable for creation"
 			if (equal d root)
 			return nil))))
  (require 'compile)
- (add-hook 'verilog-mode-hook (lambda () (set (make-local-variable 'compile-command) (format "make -f %s " (get-closest-pathname)))))
+ (add-hook 'verilog-mode-hook 'fundamental-mode-hook (lambda () (set (make-local-variable 'compile-command) (format "make -f %s " (get-closest-pathname)))))
 
      (autoload 'verilog-mode "verilog-mode" "Verilog mode" t )
      (add-hook 'verilog-mode-hook

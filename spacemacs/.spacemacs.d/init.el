@@ -313,7 +313,7 @@ before packages are loaded. If you are unsure, you should try in setting them in
 	'(("no_proxy" . "work\\.com")
 	  ("http" . "ptmproxy.gmv.es:80")))
   ;; https://github.com/syl20bnr/spacemacs/issues/11784
-  (add-to-list 'configuration-layer-elpa-archives '("melpa-stable" . "http://stable.melpa.org/packages/"))
+
   (add-to-list 'package-pinned-packages '(spaceline . "melpa-stable"))
   (add-to-list 'package-pinned-packages '(spaceline-all-the-icons . "melpa-stable"))
   (add-to-list 'package-pinned-packages '(all-the-icons . "melpa-stable"))
