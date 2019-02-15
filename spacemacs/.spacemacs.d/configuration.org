@@ -142,6 +142,12 @@ Use flycheck in the appropriate buffers:
   #+BEGIN_SRC emacs-lisp
     (add-hook 'after-init-hook 'global-company-mode)
   #+END_SRC
+*** =auto-complete=
+   Use =auto-complete-mode= everywhere.
+#+BEGIN_SRC emacs-lisp
+    (global-auto-complete-mode t)
+#+END_SRC
+
 *** Compile with the closest makefile (upward search)
 #+BEGIN_SRC emacs-lisp
 (defun* get-closest-pathname (&optional (file "Makefile"))
@@ -189,9 +195,9 @@ of FILE in the current directory, suitable for creation"
       ;; This doesn't work in Ubuntu
       ;; (use-package arduino-mode)
       ;; (autoload 'arduino-mode "arduino-mode" "Arduino mode" t )
-      ;; (add-hook 'arduino-mode-hook
-      ;;          'auto-complete-mode
-      ;;          'company-mode)
+      (add-hook 'arduino-mode-hook
+                'auto-complete-mode
+                'company-mode)
     #+END_SRC
 * Load file upon startup
 #+BEGIN_SRC emacs-lisp
