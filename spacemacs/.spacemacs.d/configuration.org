@@ -135,12 +135,12 @@ Use flycheck in the appropriate buffers:
 *** =flycheck=
     Use =flycheck-mode= everywhere.
  #+BEGIN_SRC emacs-lisp
-   (add-hook 'after-init-hook 'global-flycheck-mode)
+   (global-flycheck-mode t)
  #+END_SRC
 *** =company=
      Use =company-mode= everywhere.
   #+BEGIN_SRC emacs-lisp
-    (add-hook 'after-init-hook 'global-company-mode)
+    (global-company-mode t)
   #+END_SRC
 *** =auto-complete=
    Use =auto-complete-mode= everywhere.
@@ -192,12 +192,11 @@ of FILE in the current directory, suitable for creation"
 #+END_SRC
 *** Arduino
     #+BEGIN_SRC emacs-lisp
-      ;; This doesn't work in Ubuntu
-      ;; (use-package arduino-mode)
-      ;; (autoload 'arduino-mode "arduino-mode" "Arduino mode" t )
-      (add-hook 'arduino-mode-hook
-                'auto-complete-mode
-                'company-mode)
+;; This doesn't work in Ubuntu
+(autoload 'arduino-mode "arduino-mode" "Arduino mode" t )
+(add-hook 'arduino-mode-hook
+          'auto-complete-mode
+          'company-mode)
     #+END_SRC
 * Load file upon startup
 #+BEGIN_SRC emacs-lisp

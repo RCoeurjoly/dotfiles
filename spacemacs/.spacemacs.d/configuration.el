@@ -68,9 +68,11 @@
 (add-hook 'verilog-mode-hook #'flycheck-mode)
 (add-hook 'arduino-mode-hook #'flycheck-mode)
 
-(add-hook 'after-init-hook 'global-flycheck-mode)
+(global-flycheck-mode t)
 
-(add-hook 'after-init-hook 'global-company-mode)
+(global-company-mode t)
+
+(global-auto-complete-mode t)
 
 (defun* get-closest-pathname (&optional (file "Makefile"))
   "Determine the pathname of the first instance of FILE starting from the current directory towards root.
@@ -107,10 +109,9 @@ of FILE in the current directory, suitable for creation"
 (setq elpy-rpc-backend "company-jedi")
 
 ;; This doesn't work in Ubuntu
-;; (use-package arduino-mode)
-;; (autoload 'arduino-mode "arduino-mode" "Arduino mode" t )
-;; (add-hook 'arduino-mode-hook
-;;          'auto-complete-mode
-;;          'company-mode)
+(autoload 'arduino-mode "arduino-mode" "Arduino mode" t )
+(add-hook 'arduino-mode-hook
+          'auto-complete-mode
+          'company-mode)
 
 (find-file "/home/rcl/Exocortex/Exocortex.org")

@@ -1,7 +1,5 @@
 # -*- mode: sh -*-
 
-eval $(gpg-agent --batch)
-
 function lazygit() {
     cd ~/Exocortex
     git add .

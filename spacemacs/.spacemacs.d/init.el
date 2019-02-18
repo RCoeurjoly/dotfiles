@@ -47,8 +47,7 @@ values."
      better-defaults
      emacs-lisp
      git
-     ;; This doesn't load successfully in Ubuntu, in the master branch
-     ;; extra-langs
+     extra-langs
      markdown
      org
      (shell :variables

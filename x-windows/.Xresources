@@ -1,108 +1,85 @@
-!---------------------------------------
-! Xft settings
-!---------------------------------------
+xterm*faceName: Bitstream Vera Serif Mono
+mate-terminal*faceSize: 11
+mate-terminal*vt100*geometry: 80x60
+mate-terminal*saveLines: 16384
+mate-terminal*loginShell: true
+mate-terminal*charClass: 33:48,35:48,37:48,43:48,45-47:48,64:48,95:48,126:48
+mate-terminal*termName: mate-terminal-color
+mate-terminal*eightBitInput: false
 
-Xft.antialias: true
-Xft.dpi: 192
-Xft.hinting: true
-Xft.hintstyle: hintslight
-Xft.rgba: rgb
-
-!---------------------------------------
-! URxvt
-!---------------------------------------
-
-! Use fake transparency (better with tiling)
-URxvt.transparent: true
-URxvt.shading: 30
-
-URxvt.urgentOnBell: true
-URxvt.loginShell: true
-URxvt.internalBorder: 3
-URxvt.lineSpace: 0
-
-! Fonts
-URxvt.allow_bold: true
-URxvt*font: xft:Inconsolata:pixelsize=24
-
-! Scrollbar
-URxvt.scrollStyle: rxvt
-URxvt.scrollBar: false
-
-! do not scroll with output
-URxvt*scrollTtyOutput: false
-
-! scroll in relation to buffer (with mouse scroll or Shift+Page Up)
-URxvt*scrollWithBuffer: true
-
-! scroll back to the bottom on keypress
-URxvt*scrollTtyKeypress: true
-
-! Perl extensions
-URxvt.perl-ext-common: default,url-select,selection-to-clipboard,font-size
-URxvt.keysym.M-u: perl:url-select:select_next
-URxvt.url-select.underline: true
-
-! Cursor
-URxvt.cursorBlink: true
-URxvt.cursorUnderline: false
-URxvt.cursorColor: #657b83
-
-! Pointer
-! Hide the mouse pointer after a period of inactivity.
-URxvt.pointerBlank: true
-
-!---------------------------------------
-! Rofi
-!---------------------------------------
-
-rofi.font: Inconsolata 24
-rofi.color-enabled: true
-rofi.color-window: #002b37, #002b37, #003642
-rofi.color-normal: #002b37, #819396, #003642, #008ed4, #ffffff
-rofi.color-active: #002b37, #008ed4, #003642, #008ed4, #66c6ff
-rofi.color-urgent: #002b37, #da4281, #003642, #008ed4, #890661
-
-!---------------------------------------
-! Nord theme
-!---------------------------------------
-
-#define nord0 #2E3440
-#define nord1 #3B4252
-#define nord2 #434C5E
-#define nord3 #4C566A
-#define nord4 #D8DEE9
-#define nord5 #E5E9F0
-#define nord6 #ECEFF4
-#define nord7 #8FBCBB
-#define nord8 #88C0D0
-#define nord9 #81A1C1
-#define nord10 #5E81AC
-#define nord11 #BF616A
-#define nord12 #D08770
-#define nord13 #EBCB8B
-#define nord14 #A3BE8C
-#define nord15 #B48EAD
-
-*.foreground:   nord4
-*.background:   nord0
-*.cursorColor:  nord4
-*fading: 35
-*fadeColor: nord3
-
-*.color0: nord1
-*.color1: nord11
-*.color2: nord14
-*.color3: nord13
-*.color4: nord9
-*.color5: nord15
-*.color6: nord8
-*.color7: nord5
-*.color8: nord3
-*.color9: nord11
-*.color10: nord14
-*.color11: nord13
-*.color12: nord9
-*.color13: nord15
-*.color14: nord7
-*.color15: nord6
+!BLK Cursor
+#define _color0        #000d18
+#define _color8        #000d18
+!RED Tag
+#define _color1        #e89393
+#define _color9        #e89393
+!GRN SpecialKey
+#define _color2        #9ece9e
+#define _color10       #9ece9e
+!YEL Keyword
+#define _color3        #f0dfaf
+#define _color11       #f0dfaf
+!BLU Number
+#define _color4        #8cd0d3
+#define _color12       #8cd0d3
+!MAG Precondit
+#define _color5        #c0bed1
+#define _color13       #c0bed1
+!CYN Float
+#define _color6        #dfaf8f
+#define _color14       #dfaf8f
+!WHT Search
+#define _color7        #efefef
+#define _color15       #efefef
+!FMT Include, StatusLine, ErrorMsg
+#define _colorBD       #ffcfaf
+#define _colorUL       #ccdc90
+#define _colorIT       #80d4aa
+!TXT Normal, Normal, Cursor
+#define _foreground    #dcdccc
+#define _background    #1f1f1f
+#define _cursorColor   #8faf9f
+mate-terminal*color0         : _color0
+mate-terminal*color1         : _color1
+mate-terminal*color2         : _color2
+mate-terminal*color3         : _color3
+mate-terminal*color4         : _color4
+mate-terminal*color5         : _color5
+mate-terminal*color6         : _color6
+mate-terminal*color7         : _color7
+mate-terminal*color8         : _color8
+mate-terminal*color9         : _color9
+mate-terminal*color10        : _color10
+mate-terminal*color11        : _color11
+mate-terminal*color12        : _color12
+mate-terminal*color13        : _color13
+mate-terminal*color14        : _color14
+mate-terminal*color15        : _color15
+mate-terminal*colorBD        : _colorBD
+mate-terminal*colorIT        : _colorIT
+mate-terminal*colorUL        : _colorUL
+mate-terminal*foreground     : _foreground
+mate-terminal*background     : _background
+mate-terminal*cursorColor    : _cursorColor
+Mate-Terminal*color0         : _color0
+Mate-Terminal*color1         : _color1
+Mate-Terminal*color2         : _color2
+Mate-Terminal*color3         : _color3
+Mate-Terminal*color4         : _color4
+Mate-Terminal*color5         : _color5
+Mate-Terminal*color6         : _color6
+Mate-Terminal*color7         : _color7
+Mate-Terminal*color8         : _color8
+Mate-Terminal*color9         : _color9
+Mate-Terminal*color10        : _color10
+Mate-Terminal*color11        : _color11
+Mate-Terminal*color12        : _color12
+Mate-Terminal*color13        : _color13
+Mate-Terminal*color14        : _color14
+Mate-Terminal*color15        : _color15
+Mate-Terminal*colorBD        : _colorBD
+Mate-Terminal*colorIT        : _colorIT
+Mate-Terminal*colorUL        : _colorUL
+Mate-Terminal*foreground     : _foreground
+Mate-Terminal*background     : _background
+Mate-Terminal*cursorColor    : _cursorColor

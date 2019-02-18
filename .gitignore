@@ -3,3 +3,5 @@
 !spacemacs/.spacemacs.d/layers
 !spacemacs/.spacemacs.d/resources
 !spacemacs/.spacemacs.d/snippets
+spacemacs/.spacemacs.d/configuration.el
+spacemacs/.spacemacs.d/#*#
