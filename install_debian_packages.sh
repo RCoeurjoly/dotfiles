@@ -27,6 +27,7 @@ sudo apt-get install \
      feh \
      git \
      gksu \
+     gnome-terminal \
      gnupg2 \
      graphviz \
      htop \
