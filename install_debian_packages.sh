@@ -11,6 +11,12 @@ sudo apt-get install emacs26
 
 git clone https://github.com/syl20bnr/spacemacs ~/.emacs.d
 
+# Cloning Exocortex
+
+git clone https://github.com/RCoeurjoly/Exocortex
+
+# Installing Debian packages
+
 sudo apt-get install \
      abook \
      aptitude \
@@ -40,7 +46,7 @@ sudo apt-get install \
      pcmanfm \
      procmail \
      pwgen \
-     # python3-proselint \
+     python3-proselint \
      redshift \
      rlwrap \
      rofi \
