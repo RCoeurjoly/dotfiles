@@ -4,7 +4,7 @@ sudo apt-get install stow
 # Installing emacs26
 
 sudo add-apt-repository ppa:kelleyk/emacs
-sudo apt-get remove emacs*
+sudo apt-get update
 sudo apt-get install emacs26
 
 # Installing Spacemacs
