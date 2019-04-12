@@ -29,6 +29,7 @@ sudo apt-get install \
      gksu \
      gnome-terminal \
      gnupg2 \
+     gnuplot \
      graphviz \
      htop \
      i3 \
