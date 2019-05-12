@@ -1,7 +1,7 @@
 #!/bin/sh
 
 # Install all the necessary Debian packages, especially `stow`.
-./install_debian_packages.sh -y
+yes | ./debian_packages_installation.sh
 
 stow ~/dotfiles/bash
 stow ~/dotfiles/spacemacs
