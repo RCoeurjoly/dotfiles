@@ -1,17 +1,17 @@
 #!/bin/sh
 
 # Install all the necessary Debian packages, especially `stow`.
-./install_debian_packages.sh
+./install_debian_packages.sh -y
 
-stow bash
-stow spacemacs
-stow email
-stow firefox
-stow git
-stow lisp
-stow rss
-stow ruby
-stow x-windows
+stow ~/dotfiles/bash
+stow ~/dotfiles/spacemacs
+stow ~/dotfiles/email
+stow ~/dotfiles/firefox
+stow ~/dotfiles/git
+stow ~/dotfiles/lisp
+stow ~/dotfiles/rss
+stow ~/dotfiles/ruby
+stow ~/dotfiles/x-windows
 
 # Link .bash_profile -> .bashrc
 rm -f ~/.bash_profile
