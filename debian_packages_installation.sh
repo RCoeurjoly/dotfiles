@@ -1,6 +1,5 @@
 #!/bin/sh
 
-sudo apt-get install stow
 # Installing emacs26
 
 sudo add-apt-repository ppa:kelleyk/emacs
@@ -38,7 +37,6 @@ isync \
 libnotify-bin \
 msmtp \
 mutt \
-newsboat \
 notmuch \
 notmuch-mutt \
 openssl \
@@ -48,7 +46,6 @@ pasystray \
 pcmanfm \
 procmail \
 pwgen \
-python3-proselint \
 redshift \
 rlwrap \
 rofi \
