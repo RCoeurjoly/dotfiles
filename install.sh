@@ -16,7 +16,3 @@ stow ~/dotfiles/x-windows
 # Link .bash_profile -> .bashrc
 rm -f ~/.bash_profile
 ln -s ~/.bashrc ~/.bash_profile
-
-# Many of the tools in this repo are written in Ruby, and some depend on
-# external libraries. This installs those.
-./install_ruby_gems.sh
