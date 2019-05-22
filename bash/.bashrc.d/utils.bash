@@ -8,6 +8,12 @@ function lazygit() {
     cd
 }
 
+
+function set_keyboard() {
+    setxkbmap -layout us,es
+    setxkbmap -option 'grp:alt_shift_toggle'
+}
+
 function countpage() {
   pdf2dsc "$1" /dev/stdout | grep "Pages" | sed s/[^0-9]//g
 }
