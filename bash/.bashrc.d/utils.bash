@@ -8,12 +8,60 @@ function lazygit() {
     cd
 }
 
+<<<<<<< be4897a4f547f68571c5fb847a074e218aca9de9
 
 function set_keyboard() {
+=======
+function setkeyboard() {
+>>>>>>> Create utils for bluetooth connection
     setxkbmap -layout us,es
     setxkbmap -option 'grp:alt_shift_toggle'
 }
 
+<<<<<<< be4897a4f547f68571c5fb847a074e218aca9de9
+=======
+
+function switch_sink() {
+
+    # CLI options:  `a2dp': Audio Profile
+    #               `hsp':  Telephony Profile
+    #               <Index> Default Sink (try `0' or `1')
+
+    SINK=$( pacmd list-cards | grep -B 1 bluez )
+    INDEX=$( pacmd list-cards | grep -B 1 bluez | head -1 | awk ' { print $2 } ' )
+    SINK=$( pacmd list-cards | grep bluez )
+    MAC=$( pacmd list-cards | grep bluez | head -1 | awk -F . ' { print substr($2,0,17) }' )
+    BT_SINK="bluez_sink.$MAC"
+    BT_SOURCE="bluez_source.$MAC"
+
+    if [ "$1" = a2dp ]; then
+        echo Setting A2DP audio sink $BT_SINK
+        pacmd set-card-profile $INDEX a2dp_sink
+        pacmd set-default-sink $BT_SINK
+    elif [ "$1" = hsp ]; then
+        echo Setting HSP headset sink $BT_SOURCE
+        pacmd set-card-profile $INDEX headset_head_unit
+        pacmd set-default-sink $BT_SINK
+        pacmd set-default-source $BT_SOURCE
+    else
+        echo Resetting to internal audio
+        pacmd set-default-sink $1
+        pacmd set-default-source $1
+    fi
+}
+
+function connect_bluetooth() {
+    rfkill block 1
+    rfkill unblock 1
+    echo connect 0C:E0:E4:A0:8E:DB | bluetoothctl
+}
+
+function listen_bluetooth() {
+    connect_bluetooth
+    sleep 5 && switch_sink a2dp
+}
+
+>>>>>>> Create utils for bluetooth connection
 function countpage() {
   pdf2dsc "$1" /dev/stdout | grep "Pages" | sed s/[^0-9]//g
 }

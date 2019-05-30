@@ -30,8 +30,8 @@ alias be="bundle exec"
 alias migrate="be rake db:migrate db:test:prepare"
 
 ### Package management
-#alias agi="sudo apt install"
-#alias agr="sudo apt remove"
+alias agi="sudo apt install"
+alias agr="sudo apt remove"
 alias acs="apt search"
 alias agu="sudo apt update && sudo apt full-upgrade && sudo apt autoremove && sudo aptitude clean"
 alias ali="apt-mark showmanual"

@@ -13,6 +13,7 @@ export LC_ALL="en_US.UTF-8"
 export LC_CTYPE="en_US.UTF-8"
 export NAME="Roland Coeurjoly"
 export PROMPT_DIRTRIM=3
+export KICAD_SYMBOL_DIR="/usr/share/kicad/library/"
 
 ### local config settings, if any
 
