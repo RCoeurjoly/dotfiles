@@ -51,8 +51,6 @@ function switch_sink() {
 }
 
 function connect_bluetooth() {
-    rfkill block 1
-    rfkill unblock 1
     echo connect 0C:E0:E4:A0:8E:DB | bluetoothctl
 }
 

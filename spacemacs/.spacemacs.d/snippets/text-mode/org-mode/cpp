@@ -1,0 +1,8 @@
+# -*- mode: snippet -*-
+#name : cpp
+#key : cpp
+#contributor : Roland Coeurjoly
+# --
+#+begin_src C++ :includes '(<stdio.h> <algorithm> <string> <map> <sstream> <fstream> <stdexcept> <vector> <numeric> <iostream>) :flags -std=c++11
+$0
+#+end_src
