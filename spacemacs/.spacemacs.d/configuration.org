@@ -227,5 +227,5 @@ of FILE in the current directory, suitable for creation"
     #+END_SRC
 * Load file upon startup
 #+BEGIN_SRC emacs-lisp
-  ;;(find-file "/home/rcl/Exocortex/Exocortex.org")
+  (find-file "~/Exocortex/Exocortex.org")
 #+END_SRC

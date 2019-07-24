@@ -8,18 +8,10 @@ function lazygit() {
     cd
 }
 
-<<<<<<< be4897a4f547f68571c5fb847a074e218aca9de9
-
-function set_keyboard() {
-=======
 function setkeyboard() {
->>>>>>> Create utils for bluetooth connection
     setxkbmap -layout us,es
     setxkbmap -option 'grp:alt_shift_toggle'
 }
-
-<<<<<<< be4897a4f547f68571c5fb847a074e218aca9de9
-=======
 
 function switch_sink() {
 
@@ -59,7 +51,6 @@ function listen_bluetooth() {
     sleep 5 && switch_sink a2dp
 }
 
->>>>>>> Create utils for bluetooth connection
 function countpage() {
   pdf2dsc "$1" /dev/stdout | grep "Pages" | sed s/[^0-9]//g
 }
