@@ -156,7 +156,7 @@ bar {
         tray_output primary
 }
 # # Start the appropriate programs on the right workspaces
-exec --no-startup-id i3-msg 'workspace 1:emacs; exec emacs26 --insecure; workspace 2:web; exec abrowser; workspace 3:tor; exec cd /home/rcl/tor-browser_en-US && ./start-tor-browser.desktop; workspace 4:term; exec gnome-terminal; workspace 5:torrent; exec transmission-gtk'
+exec --no-startup-id i3-msg 'workspace 1:emacs; exec emacs26 || emacs-26.2; workspace 2:web; exec abrowser || firefox; workspace 3:tor; exec cd /home/rcl/tor-browser_en-US && ./start-tor-browser.desktop || ~/barrier/build/bin/barrier; workspace 4:term; exec gnome-terminal'
 
 # Pulse Audio controls
 bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume 0 +5% #increase sound volume
@@ -179,3 +179,4 @@ bindsym XF86AudioPrev exec playerctl previous
 exec setxkbmap -layout us,es
 exec setxkbmap -option 'grp:alt_shift_toggle'
 exec setkeyboard
+exec nohup ~/barrier/build/bin/barrier &>/dev/null &

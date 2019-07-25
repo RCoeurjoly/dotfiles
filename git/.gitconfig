@@ -53,4 +53,3 @@
 	includePullRequestsSection = false
 	includeIssuesSection = false
 [http]
-	proxy = http://ptmproxy.gmv.es:80

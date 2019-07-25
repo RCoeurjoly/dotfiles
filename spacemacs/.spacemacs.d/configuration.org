@@ -89,6 +89,7 @@ pairing or presenting code.
      (latex . t)
      (shell . t)
      (R . t)
+     (sql . t)
      (python . t)))
 #+END_SRC
     Use syntax highlighting in source blocks while editing.

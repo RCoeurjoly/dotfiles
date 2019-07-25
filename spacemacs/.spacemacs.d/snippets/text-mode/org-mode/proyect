@@ -1,0 +1,12 @@
+# -*- mode: snippet -*-
+#name : orgproject
+#key : project
+#contributor : Roland Coeurjoly
+# --
+* $1
+** Rationale
+   $2
+** Desired result
+   $3
+** Relevant information
+** Actions
