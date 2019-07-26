@@ -53,3 +53,5 @@
 	includePullRequestsSection = false
 	includeIssuesSection = false
 [http]
+[http]
+	sslVerify = false
