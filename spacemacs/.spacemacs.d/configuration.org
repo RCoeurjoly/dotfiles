@@ -43,7 +43,7 @@ pairing or presenting code.
   (setq org-ellipsis "⤵")
 #+END_SRC
 #+BEGIN_SRC emacs-lisp
-(setq org-bullets-bullet-list '("■" "◆" "▲" "▶"))
+;;(setq org-bullets-bullet-list '("■" "◆" "▲" "▶"))
 #+END_SRC
 ** [[https://orgmode.org/worg/org-tutorials/encrypting-files.html][Crypto]]
    I set org mode so that I can encrypt headings with the tag crypt
