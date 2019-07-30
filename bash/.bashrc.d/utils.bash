@@ -153,7 +153,7 @@ alias l='ls -CF'
 alias lh='ls -lahS'
 
 # find big files and directories
-alias ducks='du -cksh * | sort -rn | head'
+alias ducks='du -ch * | sort -rh | head -20'
 
 # Add an "alert" alias for long running commands.  Use like so:
 #   sleep 10; alert
