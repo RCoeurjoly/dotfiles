@@ -12,14 +12,19 @@ alias la="ls -la"
 alias ll="ls -l"
 alias ln="ln -v"
 alias ls="ls --color -h"
+alias lh='ls -lahS'
+
 alias mkdir="mkdir -p"
 alias mutt="cd $HOME/downloads; /usr/bin/mutt; cd - > /dev/null"
 alias myip="ip address | grep inet.*wlan0 | cut -d' ' -f6 | sed \"s/\/24//g\""
 alias pbcopy="xsel --clipboard --input"
 alias pbpaste="xsel --clipboard --output"
-alias speedtest='echo "scale=2; `curl  --progress-bar -w "%{speed_download}" http://speedtest.wdc01.softlayer.com/downloads/test10.zip -o /dev/null` / 131072" | bc | xargs -I {} echo {} mbps'
+alias speedtest='echo "scale=2; `curl  --progress-bar -w "%{speed_download}" http://10.0.4.247/repo/inntech/el7/boost_1.70.0-1.el7-1.x86_64.rpm -o /dev/null` / 104000000" | bc | xargs -I {} echo {} mbps'
 alias tree="tree -C" # add colors
 alias ut="tar xavf"
+
+# Make using all available cores
+alias make="make -j$( nproc --all )"
 
 usage() {
   du -sch "$@" | sort -h
@@ -38,3 +43,40 @@ alias ali="apt-mark showmanual"
 
 alias oports="echo 'User:      Command:   Port:'; echo '----------------------------' ; lsof -i 4 -P -n | grep -i 'listen' | awk '{print \$3, \$1, \$9}' | sed 's/ [a-z0-9\.\*]*:/ /' | sort -k 3 -n |xargs printf '%-10s %-10s %-10s\n' | uniq"
 alias serve="python -m SimpleHTTPServer"
+
+
+# enable color support of ls and also add handy aliases
+if [ -x /usr/bin/dircolors ]; then
+    test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
+    alias ls='ls --color=auto'
+    #alias dir='dir --color=auto'
+    #alias vdir='vdir --color=auto'
+
+    alias grep='grep --color=auto'
+    alias fgrep='fgrep --color=auto'
+    alias egrep='egrep --color=auto'
+fi
+
+# find big files and directories
+alias duh='du -h | sort -rh | head -20'
+
+# Add an "alert" alias for long running commands.  Use like so:
+#   sleep 10; alert
+alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
+
+# Alias definitions.
+# You may want to put all your additions into a separate file like
+# ~/.bash_aliases, instead of adding them here directly.
+# See /usr/share/doc/bash-doc/examples in the bash-doc package.
+
+if [ -f ~/.bash_aliases ]; then
+    . ~/.bash_aliases
+fi
+
+# Do the thing in bash instead of initrc
+
+if [ -t 1 ]
+then
+    bind '"\e[A": history-search-backward'
+    bind '"\e[B": history-search-forward'
+fi

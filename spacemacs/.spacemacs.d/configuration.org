@@ -9,6 +9,18 @@
 #+BEGIN_SRC emacs-lisp
   (setq global-visual-line-mode t)
 #+END_SRC
+** Terminal
+   Use the settings of [[https://stackoverflow.com/questions/12224909/is-there-a-way-to-get-my-emacs-to-recognize-my-bash-aliases-and-custom-functions/12229404#12229404][bashrc when using emacs term]]:
+#+begin_src emacs-lisp
+  (setq shell-file-name "bash")
+  (setq shell-command-switch "-ic")
+#+end_src
+** Spelling
+   Disable by default:
+   #+begin_src emacs-lisp
+(setq-default dotspacemacs-configuration-layers
+  '((spell-checking :variables spell-checking-enable-by-default nil)))
+   #+end_src
 * Set personal information
 ** Who am I? Where am I?
 
