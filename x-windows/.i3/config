@@ -163,7 +163,7 @@ bar {
         tray_output primary
 }
 # # Start the appropriate programs on the right workspaces
-exec --no-startup-id i3-msg 'workspace 5:barrier; exec ~/barrier/build/bin/barriers -f --no-tray --debug INFO --enable-crypto --address :24800 > /dev/null 2>&1; workspace 2:web; exec abrowser || firefox; workspace 3:tor; exec cd /home/rcl/tor-browser_en-US && ./start-tor-browser.desktop; workspace 4:term; exec gnome-terminal; workspace 1:emacs; exec emacs26 || emacs-26.2'
+exec --no-startup-id i3-msg 'workspace 5:barrier; exec ~/barrier/build/bin/barriers -f --no-tray --debug INFO --enable-crypto --address :24800 > /dev/null 2>&1; workspace 2:web; exec abrowser || firefox; workspace 3:tor; exec cd /home/rcl/tor-browser_en-US && ./start-tor-browser.desktop; workspace 4:term; exec gnome-terminal; workspace 1:emacs; exec emacs26 --user "" || emacs-26.2 --user ""'
 
 # Pulse Audio controls
 bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume 0 +5% #increase sound volume

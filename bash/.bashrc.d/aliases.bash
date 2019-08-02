@@ -13,6 +13,8 @@ alias ll="ls -l"
 alias ln="ln -v"
 alias ls="ls --color -h"
 alias lh='ls -lahS'
+# To solve Error (initialization): User <my_id> has no home directory issue
+alias emacs='emacs --user ""'
 
 alias mkdir="mkdir -p"
 alias mutt="cd $HOME/downloads; /usr/bin/mutt; cd - > /dev/null"
