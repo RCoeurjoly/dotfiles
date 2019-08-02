@@ -77,8 +77,5 @@ fi
 
 # Do the thing in bash instead of initrc
 
-if [ -t 1 ]
-then
-    bind '"\e[A": history-search-backward'
-    bind '"\e[B": history-search-forward'
-fi
+bind '"\e[A": history-search-backward'
+bind '"\e[B": history-search-forward'
