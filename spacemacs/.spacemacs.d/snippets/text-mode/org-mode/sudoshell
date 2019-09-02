@@ -1,0 +1,8 @@
+# -*- mode: snippet -*-
+#name : sudoshell
+#key : sudoshell
+#contributor : Roland Coeurjoly
+# --
+#+begin_src shell :dir "/sudo::" :cache no :results output
+$0
+#+end_src

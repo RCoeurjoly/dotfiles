@@ -9,6 +9,11 @@
 #+BEGIN_SRC emacs-lisp
   (setq global-visual-line-mode t)
 #+END_SRC
+** Visual
+   #+begin_src emacs-lisp
+(setq-default dotspacemacs-configuration-layers '(
+  (colors :variables colors-enable-nyan-cat-progress-bar t)))
+   #+end_src
 ** Terminal
    Use the settings of [[https://stackoverflow.com/questions/12224909/is-there-a-way-to-get-my-emacs-to-recognize-my-bash-aliases-and-custom-functions/12229404#12229404][bashrc when using emacs term]]:
 #+begin_src emacs-lisp
@@ -48,6 +53,22 @@ pairing or presenting code.
 (global-set-key "\C-cb" 'org-iswitchb)
 (global-font-lock-mode 1)
    #+END_SRC
+** TODOs
+*** Change to DONE when children are DONE
+    [[https://orgmode.org/manual/Breaking-down-tasks.html][If you would like a TODO entry to automatically change to DONE when all children are done, you can use the following setup:]]
+   #+begin_src emacs-lisp
+(defun org-summary-todo (n-done n-not-done)
+  "Switch entry to DONE when all subentries are done, to TODO otherwise."
+  (let (org-log-done org-log-states)   ; turn off logging
+    (org-todo (if (= n-not-done 0) "DONE" "TODO"))))
+
+(add-hook 'org-after-todo-statistics-hook 'org-summary-todo)
+   #+end_src
+
+*** Calculate statistics taking into account all [[https://orgmode.org/manual/Breaking-down-tasks.html][children]]
+    #+begin_src emacs-lisp
+(setq org-hierarchical-todo-statistics t)
+    #+end_src
 ** Visual
     I like seeing a little downward-pointing arrow instead of the usual ellipsis
    (=...=) that org displays when there's stuff under a header.
