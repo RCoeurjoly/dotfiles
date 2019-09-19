@@ -11,7 +11,12 @@
 #+END_SRC
 ** Visual
    #+begin_src emacs-lisp
+(add-hook 'org-mode-hook
+          (lambda () (face-remap-add-relative 'default :family "Monospace")))
    #+end_src
+
+   #+RESULTS:
+
 ** Terminal
    Use the settings of [[https://stackoverflow.com/questions/12224909/is-there-a-way-to-get-my-emacs-to-recognize-my-bash-aliases-and-custom-functions/12229404#12229404][bashrc when using emacs term]]:
 #+begin_src emacs-lisp
@@ -75,7 +80,13 @@ pairing or presenting code.
 #+END_SRC
 #+BEGIN_SRC emacs-lisp
 ;;(setq org-bullets-bullet-list '("■" "◆" "▲" "▶"))
+;;(setq org-bullets-bullet-list '("甲" "乙" "丙" "丁"))
+(setq org-bullets-bullet-list '("①" "②" "③" "④" "⑤" "⑥" "⑦" "⑧" "⑨" "⑩" "⑪" "⑫" "⑬" "⑭" "⑮" "⑯" "⑰" "⑱" "⑲" "⑳"))
 #+END_SRC
+
+#+RESULTS:
+| ① | ② | ③ | ④ | ⑤ | ⑥ | ⑦ | ⑧ | ⑨ | ⑩ | ⑪ | ⑫ | ⑬ | ⑭ | ⑮ | ⑯ | ⑰ | ⑱ | ⑲ | ⑳ |
+
 ** [[https://orgmode.org/worg/org-tutorials/encrypting-files.html][Crypto]]
    I set org mode so that I can encrypt headings with the tag crypt
    #+BEGIN_SRC emacs-lisp
