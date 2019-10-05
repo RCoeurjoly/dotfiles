@@ -23,12 +23,6 @@
   (setq shell-file-name "bash")
   (setq shell-command-switch "-ic")
 #+end_src
-** Spelling
-   Disable by default:
-   #+begin_src emacs-lisp
-(setq-default dotspacemacs-configuration-layers
-  '((spell-checking :variables spell-checking-enable-by-default nil)))
-   #+end_src
 * Set personal information
 ** Who am I? Where am I?
 

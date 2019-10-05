@@ -9,6 +9,7 @@ pathmunge () {
 }
 
 pathmunge /usr/local/sbin
+pathmunge /home/rcl/.cask/bin
 pathmunge /usr/bin
 pathmunge /usr/share
 pathmunge /usr/local/bin
