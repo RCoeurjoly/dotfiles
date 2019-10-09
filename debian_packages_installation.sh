@@ -16,7 +16,7 @@ git clone https://github.com/RCoeurjoly/Exocortex ~/Exocortex
 
 # Installing Debian packages
 
-sudo apt-get install \
+sudo apt-get install stow \
 abook \
 aptitude \
 arandr \
