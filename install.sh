@@ -1,7 +1,7 @@
 #!/bin/sh
 
 # Install all the necessary Debian packages, especially `stow`.
-yes | ./debian_packages_installation.sh
+bash -c "yes || true" | ./debian_packages_installation.sh
 
 # Link .bash_profile -> .bashrc
 rm -f ~/.bashrc
