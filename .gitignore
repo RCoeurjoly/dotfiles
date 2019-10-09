@@ -4,4 +4,5 @@
 !spacemacs/.spacemacs.d/resources
 !spacemacs/.spacemacs.d/snippets
 spacemacs/.spacemacs.d/configuration.el
-spacemacs/.spacemacs.d/#*#
+spacemacs/.spacemacs.d/.cask
+spacemacs/.spacemacs.d/*test-results*

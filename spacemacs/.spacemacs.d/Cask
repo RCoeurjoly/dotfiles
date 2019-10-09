@@ -1,0 +1,8 @@
+
+(source melpa)
+
+(files "init.el")
+
+(development
+ (depends-on "ecukes")
+ (depends-on "espuds"))
