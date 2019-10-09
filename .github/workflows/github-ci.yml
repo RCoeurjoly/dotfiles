@@ -6,14 +6,14 @@ jobs:
   build:
 
     runs-on: ubuntu-latest
-    
+
     steps:
     - uses: actions/checkout@v1
     - name: Run a one-line script
-      run: 
+      run:
     - name: Run a multi-line script
       run: |
-	yes | bash debian_packages_installation.sh
+        yes | bash debian_packages_installation.sh
         bash install.sh
-	echo Add other actions to build,
+        echo Add other actions to build,
         echo test, and deploy your project.
