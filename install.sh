@@ -7,7 +7,7 @@ bash debian_packages_installation.sh
 
 # # Link .bash_profile -> .bashrc
 rm -f ~/.bashrc
-rm -f ~/.emacs.d/
+rm -rf ~/.emacs.d/
 
 stow bash
 stow spacemacs
