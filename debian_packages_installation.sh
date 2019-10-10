@@ -2,7 +2,7 @@
 
 # Installing Debian packages
 
-sudo apt-get install \
+sudo apt install \
 abook \
 aptitude \
 arandr \
