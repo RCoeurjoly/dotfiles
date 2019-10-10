@@ -13,7 +13,4 @@ jobs:
       run:
     - name: Run a multi-line script
       run: |
-        bash debian_packages_installation.sh
         bash install.sh
-        echo Add other actions to build,
-        echo test, and deploy your project.

@@ -1,17 +1,19 @@
 #!/bin/sh
 
+sudo apt install stow
 # Install all the necessary Debian packages, especially `stow`.
-bash debian_packages_installation.sh
 
-# Link .bash_profile -> .bashrc
-rm -f ~/.bashrc
+# bash debian_packages_installation.sh
 
-stow bash
-stow spacemacs
-stow email
-stow firefox
-stow git
-stow lisp
-stow rss
-stow ruby
-stow x-windows
+# # Link .bash_profile -> .bashrc
+# rm -f ~/.bashrc
+
+# stow bash
+# stow spacemacs
+# stow email
+# stow firefox
+# stow git
+# stow lisp
+# stow rss
+# stow ruby
+# stow x-windows
