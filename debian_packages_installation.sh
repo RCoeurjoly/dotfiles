@@ -2,7 +2,7 @@
 
 # Installing Debian packages
 
-apt-get install \
+sudo apt-get install \
         abook \
         aptitude \
         arandr \
@@ -58,21 +58,17 @@ apt-get install \
         zathura
 
 # For tlp power management.
-apt-get install \
+sudo apt-get install \
         acpi-call-dkms \
         tlp \
         tp-smapi-dkms
 
 # Installing emacs26
 
-add-apt-repository ppa:kelleyk/emacs
-apt-get update
-apt-get install emacs26
+sudo add-apt-repository ppa:kelleyk/emacs
+sudo apt-get update
+sudo apt-get install emacs26
 
 # Installing Spacemacs
 
 git clone https://github.com/syl20bnr/spacemacs ~/.emacs.d
-
-# Cloning Exocortex
-
-git clone https://github.com/RCoeurjoly/Exocortex ~/Exocortex
