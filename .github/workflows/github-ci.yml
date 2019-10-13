@@ -5,10 +5,7 @@ on: [push]
 jobs:
   build:
 
-    runs-on:
-      - ubuntu-latest
-      - ubuntu-18.04
-      - ubuntu-16.04
+    runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v1
     - name: Run a one-line script
