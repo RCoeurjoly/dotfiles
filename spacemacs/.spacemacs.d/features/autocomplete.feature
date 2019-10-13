@@ -13,13 +13,16 @@ Feature: autocomplete
     And I insert
     """
     import re
-    match = re
     """
 
   Scenario: autocomplete funcion
-    When I place the cursor after "match = re"
-    And I type ".de"
+    When I place the cursor after "import re"
+    And I turn on python-mode
+    And I start an action chain
     And I press "RET"
+    And I type "match = re.de"
+    And I press "RET"
+    And I execute the action chain
     Then I should see:
     """
     import re
