@@ -7,7 +7,8 @@ Feature: org
     And the buffer is empty
 
   Scenario: Create new heading
-    When I press "C-return"
+    When I turn on org-mode
+    And I press "<C-return>"
     And I type "New heading"
     Then I should see:
     """

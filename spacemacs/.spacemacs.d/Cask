@@ -1,8 +1,9 @@
-
+(source gnu)
 (source melpa)
 
 (files "init.el")
 
 (development
  (depends-on "ecukes")
- (depends-on "espuds"))
+ (depends-on "espuds")
+ (depends-on "undercover"))
