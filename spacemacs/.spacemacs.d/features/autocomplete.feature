@@ -4,7 +4,11 @@ Feature: autocomplete
   The functions should autocomplete
 
   Background:
-    Given I am in buffer "autocomplete.py"
+    Given I load the following:
+    """
+    (load "~/dotfiles/spacemacs/.spacemacs.d/init.el")
+    """
+    And I am in buffer "autocomplete.py"
     And the buffer is empty
     And I insert
     """
