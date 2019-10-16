@@ -18,3 +18,5 @@ stow lisp
 stow rss
 stow ruby
 stow x-windows
+
+source ~/.bashrc
