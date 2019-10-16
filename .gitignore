@@ -6,3 +6,4 @@
 spacemacs/.spacemacs.d/configuration.el
 spacemacs/.spacemacs.d/.cask
 spacemacs/.spacemacs.d/*test-results*
+spacemacs/.spacemacs.d/.ecukes-failing-scenarios

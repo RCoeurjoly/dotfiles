@@ -26,5 +26,5 @@ Feature: autocomplete
     Then I should see:
     """
     import re
-    match = re.DEBUG
+    match = re.de
     """
