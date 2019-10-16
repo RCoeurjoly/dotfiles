@@ -72,3 +72,7 @@ sudo apt-get install emacs26
 # Installing Spacemacs
 
 git clone https://github.com/syl20bnr/spacemacs ~/.emacs.d
+
+# Installing Cask
+
+curl -fsSL https://raw.githubusercontent.com/cask/cask/master/go | python
