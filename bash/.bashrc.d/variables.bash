@@ -1,4 +1,5 @@
 source $HOME/.bin/git-completion.sh
+ulimit -c unlimited
 
 export ALTERNATE_EDITOR=""
 export BROWSER="firefox"

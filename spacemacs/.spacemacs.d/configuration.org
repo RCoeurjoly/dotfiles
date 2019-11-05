@@ -16,6 +16,12 @@
    #+end_src
 
    #+RESULTS:
+*** Theme
+    #+begin_src emacs-lisp
+(add-to-list 'custom-theme-load-path "~/.emacs.d/themes/")
+(load-theme `cyberpunk-2019 t)
+    #+end_src
+
 
 ** Terminal
    Use the settings of [[https://stackoverflow.com/questions/12224909/is-there-a-way-to-get-my-emacs-to-recognize-my-bash-aliases-and-custom-functions/12229404#12229404][bashrc when using emacs term]]:

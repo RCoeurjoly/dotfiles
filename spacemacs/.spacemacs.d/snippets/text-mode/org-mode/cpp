@@ -3,6 +3,8 @@
 #key : cpp
 #contributor : Roland Coeurjoly
 # --
-#+begin_src C++ :includes '(<stdio.h> <algorithm> <string> <map> <sstream> <fstream> <stdexcept> <vector> <numeric> <iostream>) :flags -std=c++11
+#+HEADER: :includes <iostream> <numeric> <vector> <stdexcept> <fstream> <sstream> <map> <string> <algorithm> <stdio.h>
+#+HEADER: :flags -std=c++11
+#+begin_src C++
 $0
 #+end_src
