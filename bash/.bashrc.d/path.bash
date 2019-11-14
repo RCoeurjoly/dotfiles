@@ -8,6 +8,7 @@ pathmunge () {
   fi
 }
 
+pathmunge /usr/lib64/ccache
 pathmunge /usr/local/sbin
 pathmunge $HOME/.cask/bin
 pathmunge /usr/bin

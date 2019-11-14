@@ -255,6 +255,12 @@ of FILE in the current directory, suitable for creation"
            `((".*" ,temporary-file-directory t)))
 #+END_SRC
 ** Software
+*** CPP
+    #+begin_src emacs-lisp
+;;((c++-mode (helm-make-build-dir . "build/")))
+;;(put 'helm-make-build-dir 'safe-local-variable 'stringp)
+    #+end_src
+
 *** Python
 #+BEGIN_SRC emacs-lisp
 ;  (add-hook 'python-mode-hook 'company-jedi:setup)
