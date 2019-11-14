@@ -17,6 +17,7 @@ export PROMPT_DIRTRIM=3
 export KICAD_SYMBOL_DIR="/usr/share/kicad/library/"
 export SOCKS5_PASSWORD=''
 export GDBHISTSIZE=-1
+export PS1=" \[\033[34m\]\u@\h \[\033[33m\]\w\[\033[31m\]\[\033[00m\] $ "
 ### local config settings, if any
 
 if [ -e $HOME/.bashrc.local ]; then
