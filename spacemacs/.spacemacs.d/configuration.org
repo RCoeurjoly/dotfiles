@@ -19,7 +19,6 @@
 *** Theme
     #+begin_src emacs-lisp
 (add-to-list 'custom-theme-load-path "~/.emacs.d/themes/")
-(load-theme `cyberpunk-2019 t)
     #+end_src
 
 
