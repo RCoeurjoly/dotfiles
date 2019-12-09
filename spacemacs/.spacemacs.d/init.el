@@ -36,9 +36,7 @@ values."
      ;; ;; Uncomment some layer names and press <SPC f e R> (Vim style) or
      ;; ;; <M-m f e R> (Emacs style) to install them.
      ;; ;; ----------------------------------------------------------------
-     (c-c++ :variables
-            c-c++-default-mode-for-headers 'c++-mode
-            c-c++-enable-clang-support t)
+     (c-c++ :variables c-c++-enable-clang-support t)
      python
      shell-scripts
      (auto-completion :variables
@@ -358,7 +356,8 @@ you should place your code here."
  '(python-shell-virtualenv-root "/home/rcl/readability-metric/")
  '(safe-local-variable-values
    (quote
-    ((eval setq visual-line-mode t)
+    ((helm-make-build-dir . "build")
+     (eval setq visual-line-mode t)
      (eval setq global-visual-line-mode t)
      (eval setq org-hierarchical-todo-statistics t)
      (eval spacemacs/toggle-spelling-checking-off)

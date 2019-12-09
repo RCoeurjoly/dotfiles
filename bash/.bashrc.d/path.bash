@@ -11,6 +11,7 @@ pathmunge () {
 pathmunge /usr/lib64/ccache
 pathmunge /usr/local/sbin
 pathmunge $HOME/.cask/bin
+pathmunge $HOME/scripts
 pathmunge /usr/bin
 pathmunge /usr/share
 pathmunge /usr/local/bin
