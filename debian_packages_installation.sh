@@ -65,9 +65,8 @@ sudo apt-get install \
 
 # Installing emacs26
 
-sudo add-apt-repository ppa:kelleyk/emacs
-sudo apt-get update
-sudo apt-get install emacs26
+curl https://nixos.org/nix/install | sh
+nix-env --install emacs
 
 # Installing Spacemacs
 
