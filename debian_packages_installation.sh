@@ -66,6 +66,7 @@ sudo apt-get install \
 # Installing emacs26
 
 curl https://nixos.org/nix/install | sh
+. /home/runner/.nix-profile/etc/profile.d/nix.sh
 nix-env --install emacs
 
 # Installing Spacemacs
