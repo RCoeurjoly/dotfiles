@@ -1,9 +1,13 @@
 # -*- mode: sh -*-
 
 alias dc="docker-compose"
-alias clangcmake="CXX='clang_complete_args.py g++' cmake .."
-alias clangcomplete="clangcmake && make && find .. | ag clang_complete | xargs cat | sort | uniq > ../.clang_complete"
-alias newclangcomplete="rm -rf * && clangcomplete"
+alias clangcmakepp="CXX='clang_complete_args.py g++' cmake .."
+alias clangcmakecc="CXX='clang_complete_args.py gcc' cmake .."
+alias gatherclangcomplete="find .. | ag clang_complete | xargs cat | sort | uniq > ../.clang_complete"
+alias clangcompletepp="clangcmakepp && make && gatherclangcomplete"
+alias clangcompletecc="clangcmakecc && make && gatherclangcomplete"
+alias newclangcompletepp="rm -rf * && clangcompletepp"
+alias newclangcompletecc="rm -rf * && clangcompletecc"
 alias gg="git grep -n"
 #alias git="hub"
 alias gpg="gpg2"
