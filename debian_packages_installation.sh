@@ -11,7 +11,6 @@ compton \
 curl \
 feh \
 git \
-gksu \
 gnome-terminal \
 gnupg2 \
 gnuplot \
