@@ -120,3 +120,6 @@
 3.17.1 rake:< 13.0&>= 0.8|checksum:2bec4dc1f287897dc058795a12196914db91061d476823d5a257787be2dc02dc,rubygems:>= 1.4
 3.17.2 rake:< 13.0&>= 0.8|checksum:8eb5d4050ba6033f3b9e6db34683a91f955a004d1d750fb521b4ccc64a6321a0,rubygems:>= 1.4
 3.18.0 rake:< 13.0&>= 0.8|checksum:bd46bafe1e935bc9d728cbe8da1e395ee2fdb3c0f69187680fca51f332781246,rubygems:>= 1.4
+3.18.1 rake:< 13.0&>= 0.8|checksum:a1af446cff7ee955e4bacf5b7a8756c5b7aa4b85111a2bccf08dfc03a080a4ac,rubygems:>= 1.4
+3.19.0 rake:< 13.0&>= 0.8|checksum:1835a3149c5f96e685406d58741854767b10badf002657a17c339f58c89da3bd,rubygems:>= 1.4
+3.20.0 rake:< 15.0&>= 0.8|checksum:767e286f04a1987552ea267218b742deafebcdfd119f3e28b81ccc601526acff,rubygems:>= 1.4

@@ -32,3 +32,10 @@
 6.0.1 |checksum:bcdde980879bd2edd557dea3b9ea16bd439932e3b01517d0dce97bfba1d9957f,ruby:>= 1.9.3
 6.6.2 |checksum:38caf653ac145ceba3dd39990600bcf3e5b923b965e745d28c5a572a46309507,ruby:>= 1.9.3
 7.0.0 |checksum:b1daf0fd71c9dd853cef0cd433946acddafc325b6a3bb8f52d0c6f9fc0025c4d,ruby:>= 1.9.3
+8.0.0 |checksum:26381f9270b85ef900daa6c4c2795ecaf3f3ae5840d9ea34a2defc53acf56bab,ruby:>= 2.3
+8.0.1 |checksum:3302c5bb0fc9c51001c54f22dfa0cddf15f35ff95adb9426a72f05644b364035,ruby:>= 2.3
+8.0.2 |checksum:f2ed7fd841f134e89f07a6cb00b0fd74cd9b235ad19aeca6fa74216ef3b265c9,ruby:>= 2.3
+8.1.0 |checksum:1ede442cac40248e3bc91aa4b06fae133740959f314fe16fc281dac7452308f2,ruby:>= 2.3
+8.2.0 |checksum:905cdb90f8039464bb5545dc95eb83ce1e8f702bbbe737d57042a5f96ba06ac6,ruby:>= 2.3
+8.2.1 |checksum:f6b9d78e1f66cd139e290eda3aa658e772ee4ec856bc02957568d61e21b79c3a,ruby:>= 2.3
+8.3.0 |checksum:91ccce57bfec6219b3daab7802e1ee6ac50e039f385b87604b17d696f0879189,ruby:>= 2.3

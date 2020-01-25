@@ -80,3 +80,7 @@
 6.1.0.beta3 |checksum:79e45baf5c9acfbfb492c9bb68bf2cda28878f79f719f9745290170d25461327,ruby:>= 2.2.2,rubygems:>= 2.2
 6.1.0 |checksum:ace0c97e0805bfdc3583cc774c38bc0d138c93d22f3e3f3c742e0d1dc9d08697,ruby:>= 2.2.2,rubygems:>= 2.2
 6.1.1 |checksum:774ea15fbf4f8284a9bea4530810ed973773e3eb506316d5d45e686a0553671d,ruby:>= 2.2.2,rubygems:>= 2.2
+5.0.1 |checksum:fd33dd346feb97c56db6869a2b568aa9420d70aad25b05f965824e68826d1b22,ruby:>= 1.9.3,rubygems:>= 2.2
+6.0.1.1 |checksum:e510ecb2f8cffe96c44096215f6b50663884d7b18063ba0e7c2f7f79fadd035e,ruby:>= 2.2.2,rubygems:>= 2.2
+6.1.2 |checksum:eb137e70b3dc012cb5550c4dd9d0b8083502cacc4b07b514891052ac6f4b037e,ruby:>= 2.2.2,rubygems:>= 2.2
+6.2.0 |checksum:292ec1e7cc1ac2dc7828bbd66180c53d64800a660105907ea22f93d607d307be,ruby:>= 2.2.2,rubygems:>= 2.2

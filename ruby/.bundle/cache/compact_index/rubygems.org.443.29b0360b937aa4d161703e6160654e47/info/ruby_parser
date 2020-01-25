@@ -60,3 +60,5 @@
 3.12.0 sexp_processor:~> 4.9|checksum:bd7c7dc8de3b27665246b182061b83f81d077435b2bd77a1b8c753577a9fe059
 3.13.0 sexp_processor:~> 4.9|checksum:9731d322ed8251d325602e6b82c647c667a263090593f9be6f331f73ab231311
 3.13.1 sexp_processor:~> 4.9|checksum:273f1d203a7686d7945640a92e8f65d5b1f4109da1e4e1a16039e6aa19d37068
+3.14.0 sexp_processor:~> 4.9|checksum:0b6f6534e4ffec35097e34bcbf4d68cc16a3ece4d70ff4e16c7076bb622cb2ef
+3.14.1 sexp_processor:~> 4.9|checksum:ffb4dcf7707c7ee6edb53039f8394e5741a94eeb17a75d0d1cc76333ab19cdbe,ruby:~> 2.2

@@ -128,3 +128,4 @@
 5.2.0.rc2 |checksum:1c7a64540c2e937636856853ce6455315ae1f760e826f8d8e02f2005b01e1d5a,ruby:>= 2.2.6,rubygems:> 1.3.1
 5.2.0.rc3 |checksum:4e652f3beee4529c74f32aad7a1ba2ea5d33d827b925d83685e8056ff99b6c7b,ruby:>= 2.2.6,rubygems:> 1.3.1
 5.2.0 |checksum:80a8a71d39e9f917ed265f66c0c5985f1849fc5e7156ac48f14dd1d4af683c80,ruby:>= 2.2.6
+6.0.0.beta1 |checksum:4966161a2eaf4795af3b36fb8df768930a6a8d61aa3b0d8e1f6bc88deba588f7,ruby:>= 2.3,rubygems:> 1.3.1

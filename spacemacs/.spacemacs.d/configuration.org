@@ -210,7 +210,7 @@ Use flycheck in the appropriate buffers:
 *** CPP
     #+begin_src emacs-lisp
 (add-to-list 'auto-mode-alist '("\\.h\\'" . c++-mode))
-(load "~/clang/tools/clang-format/clang-format.el")
+;;(load "~/clang/tools/clang-format/clang-format.el")
 (global-set-key [C-M-tab] 'clang-format-region)
 ;;((c++-mode (helm-make-build-dir . "build/")))
 ;;(put 'helm-make-build-dir 'safe-local-variable 'stringp)

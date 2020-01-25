@@ -164,3 +164,4 @@
 3.6.0 rspec-core:~> 3.6.0,rspec-expectations:~> 3.6.0,rspec-mocks:~> 3.6.0|checksum:ebc3d479cf2f144b3deef5d72dbb1cc6a15750899d26a8da164a2cc53c04a5d9
 3.7.0 rspec-core:~> 3.7.0,rspec-expectations:~> 3.7.0,rspec-mocks:~> 3.7.0|checksum:0174cfbed780e42aa181227af623e2ae37511f20a2fdfec48b54f6cf4d7a6404
 3.8.0 rspec-core:~> 3.8.0,rspec-expectations:~> 3.8.0,rspec-mocks:~> 3.8.0|checksum:83f519611bb674d456e87397fea7c5b15b1af8bdc77ce929673ae3b4b656f796
+3.9.0 rspec-core:~> 3.9.0,rspec-expectations:~> 3.9.0,rspec-mocks:~> 3.9.0|checksum:90a037a7cc02365d7c112201881839aafbc875a88094423bc8cba778c98bfac3

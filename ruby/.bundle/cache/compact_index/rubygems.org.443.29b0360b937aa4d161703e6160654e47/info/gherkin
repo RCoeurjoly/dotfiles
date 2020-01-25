@@ -546,3 +546,12 @@
 6.0.14 c21e:~> 1.1,cucumber-messages:~> 1.1|checksum:c55dbe248999fa1092c141a68a329c77126750b79eb52b6ca061d2fbb4d8dcc0,ruby:>= 1.9.3
 6.0.15 c21e:~> 1.1.8,cucumber-messages:~> 2.0.0|checksum:eaa9428e97f2880e7d868aa347dde5ce758ade36a727cde6a1f367d5f9f4da26,ruby:>= 1.9.3
 6.0.17 c21e:~> 1.1.9,cucumber-messages:~> 2.1.2|checksum:e2236bcab32f118c116841a3dd186c063d67a00d32199df963b92c5d26536c67,ruby:>= 2.3
+7.0.1 c21e:~> 1.2.1,cucumber-messages:~> 4.0.0|checksum:960752bb3af320486dd3e293e9a78a1fb401f0c4aa9406815ba447b699fa6bea,ruby:>= 2.3
+7.0.2 c21e:~> 2.0.0,cucumber-messages:~> 4.0.0|checksum:c9bdd57e083e27ee5646a76c197903759c847bd15d28790ee18ceaf560c99aec,ruby:>= 2.3
+7.0.3 c21e:~> 2.0.0,cucumber-messages:~> 4.0.0|checksum:54f889f4f7ce0a7496b2094043931431b363efefb349dcbfbdcfb9f13abe2fb5,ruby:>= 2.3
+7.0.4 c21e:>= 2.0.0&~> 2.0,cucumber-messages:>= 5.0.1&~> 5.0|checksum:994aebfe0f86eebc19b11358325f88c39cb6df8b96c4477f404fc6ba0acb5d9c,ruby:>= 2.3
+8.0.0 cucumber-messages:>= 6.0.1&~> 6.0|checksum:96b9f8c1c11c92f4d1acd8073d32fa54d3c24f8459927853541c684c14529c3b,ruby:>= 2.3
+8.1.1 cucumber-messages:>= 6.0.2&~> 6.0|checksum:95b2ccf46e4909347b9dccab831a463fdeac4e166f6663a80aef180dad2c286d,ruby:>= 2.3
+8.2.0 cucumber-messages:>= 7.0.0&~> 7.0|checksum:46bc20e2c44a9d3b23d758c2702cfa0d659d14300e387521a61cf1f4f7892f4f,ruby:>= 2.3
+8.2.1 cucumber-messages:>= 7.0.0&~> 7.0|checksum:dd2640d7d6c5586e759779bb2eabfdabf7ad01ab0f387fe4370aae96f35c8265,ruby:>= 2.3
+9.0.0 cucumber-messages:>= 8.0.0&~> 8.0|checksum:06ed1e18f65702268b78d5009b07f77d146fba9fa5bd26c06c103cf9e1c59ae1,ruby:>= 2.3
