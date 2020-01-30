@@ -14,6 +14,10 @@ function setkeyboard() {
     setxkbmap -option 'grp:rctrl_toggle'
 }
 
+function findprocess(){
+    ps -aux | grep -v grep | grep "${1}\|PID"
+}
+
 function whichkeyboard(){
     KEYBOARD=$( xset -q | grep -A 0 'LED' | cut -c59-67 )
     if [ $KEYBOARD  = 00000000 ]; then

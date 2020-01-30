@@ -1,6 +1,7 @@
 # -*- mode: sh -*-
 
 alias dc="docker-compose"
+alias enter_docker="cd ~/docker-services/dev/ && MY_UID=$UID docker-compose up -d && docker-compose exec dev_rhel7 bash"
 alias clangcmakepp="CXX='clang_complete_args.py g++' cmake .."
 alias clangcmakecc="CXX='clang_complete_args.py gcc' cmake .."
 alias gatherclangcomplete="find .. | ag clang_complete | xargs cat | sort | uniq > ../.clang_complete"
@@ -31,6 +32,16 @@ alias pbpaste="xsel --clipboard --output"
 alias speedtest='echo "scale=2; `curl  --progress-bar -w "%{speed_download}" http://10.0.4.247/repo/inntech/el7/boost_1.70.0-1.el7-1.x86_64.rpm -o /dev/null` / 104000000" | bc | xargs -I {} echo {} mbps'
 alias tree="tree -C" # add colors
 alias ut="tar xavf"
+alias pcsu='sudo pcs resource unmanage '
+alias pcsm='sudo pcs resource manage '
+alias pcsd='sudo pcs resource disable '
+alias pcse='sudo pcs resource enable '
+alias pcsc='sudo pcs resource cleanup '
+alias pcsw='sudo pcs resource show '
+alias pcsx='sudo pcs resource delete '
+alias pcsr='sudo pcs resource restart '
+alias pcss='sudo pcs status | grep '
+
 
 # Make using all available cores
 alias make="make -j$( nproc --all )"
