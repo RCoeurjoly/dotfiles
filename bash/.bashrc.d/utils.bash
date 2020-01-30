@@ -15,7 +15,11 @@ function setkeyboard() {
 }
 
 function findprocess(){
-    ps -aux | grep -v grep | grep "${1}\|PID"
+    if [ "$(ps -aux | grep -v grep | grep "${1}\|PID" | wc -l)" -eq 1 ]; then
+        echo "Process" ${1} "not found"
+    else
+        ps -aux | grep -v grep | grep "${1}\|PID"
+    fi
 }
 
 function whichkeyboard(){
