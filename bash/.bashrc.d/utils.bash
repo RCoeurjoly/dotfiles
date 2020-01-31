@@ -22,6 +22,39 @@ function findprocess(){
     fi
 }
 
+function amIinDocker(){
+    if isGCCgood && isOSgood; then
+        echo "You are in Docker"
+        return 0
+    else
+        echo "You are not in Docker"
+        return 1
+    fi
+}
+
+function isGCCgood(){
+    GCC_IN_DOCKER='gcc (GCC) 4.8.5 20150623 (Red Hat 4.8.5-36)
+Copyright (C) 2015 Free Software Foundation, Inc.
+This is free software; see the source for copying conditions.  There is NO
+warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.'
+
+    if [ "$(gcc --version)" == "${GCC_IN_DOCKER}" ]; then
+        return 0
+    else
+        return 1
+    fi
+}
+
+function isOSgood(){
+    REDHAT_RELEASE_IN_DOCKER='CentOS Linux release 7.5.1804 (Core) '
+
+    if [ "$(cat /etc/redhat-release)" == "${REDHAT_RELEASE_IN_DOCKER}" ]; then
+        return 0
+    else
+        return 1
+    fi
+}
+
 function whichkeyboard(){
     KEYBOARD=$( xset -q | grep -A 0 'LED' | cut -c59-67 )
     if [ $KEYBOARD  = 00000000 ]; then
