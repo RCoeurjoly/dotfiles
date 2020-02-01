@@ -71,8 +71,7 @@ curl https://nixos.org/nix/install | sh
 nix-env --install emacs
 whereis emacs
 #sudo mv /usr/bin/emacs /usr/bin/oldemacs
-#sudo ln -s /nix/store/acc8bl45j58b8yxj8wadr0ji5kh1sqry-user-environment/bin/emacs-26.3 /usr/bin/emacs
-
+sudo ln -s /nix/store/frqw5dvvblq67kjbqn217a9832ikcjif-user-environment/bin/emacs /usr/bin/emacs
 # Installing Spacemacs
 
 git clone https://github.com/syl20bnr/spacemacs ~/.emacs.d
