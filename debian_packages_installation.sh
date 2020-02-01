@@ -69,8 +69,8 @@ sudo apt-get install \
 curl https://nixos.org/nix/install | sh
 . /home/runner/.nix-profile/etc/profile.d/nix.sh
 nix-env --install emacs
-sudo mv /usr/bin/emacs /usr/bin/oldemacs
-sudo ln -s /nix/store/acc8bl45j58b8yxj8wadr0ji5kh1sqry-user-environment/bin/emacs-26.3 /usr/bin/emacs
+#sudo mv /usr/bin/emacs /usr/bin/oldemacs
+#sudo ln -s /nix/store/acc8bl45j58b8yxj8wadr0ji5kh1sqry-user-environment/bin/emacs-26.3 /usr/bin/emacs
 
 # Installing Spacemacs
 
