@@ -69,7 +69,7 @@ sudo apt-get install \
 curl https://nixos.org/nix/install | sh
 . /home/runner/.nix-profile/etc/profile.d/nix.sh
 nix-env --install emacs
-source bash/.bashrc
+source dotfiles/bash/.bashrc.d/utils.bash
 createEmacsLink
 #sudo mv /usr/bin/emacs /usr/bin/oldemacs
 
