@@ -1,0 +1,14 @@
+Feature: Test Completing using ecukes
+  In order to test functions that use completing method calls
+  As an Ecukes user
+  I want to run this feature successfully
+
+  Scenario: Choose Color
+    When I start an action chain
+    When I press "M-x"
+    And I type "et-choose-color"
+    And I press "RET"
+    And I type "CadetBlue"
+    And I press "RET"
+    And I execute the action chain
+    Then et-curr-color should be "CadetBlue"
