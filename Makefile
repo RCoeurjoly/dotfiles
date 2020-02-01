@@ -1,4 +1,4 @@
-EMACS ?= emacs
+EMACS ?= emacs26
 CASK ?= cask
 
 all: test
