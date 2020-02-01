@@ -75,6 +75,21 @@ function isOSgood(){
     fi
 }
 
+function createEmacsLink() {
+    for location in $(whereis emacs);
+    do
+        SEARCH_RESULT="$(echo $location | grep "\/nix.*user-environment\/bin\/emacs")"
+        if [ "${SEARCH_RESULT}" ]; then
+            NIX_EMACS=${SEARCH_RESULT}
+            sudo rm /usr/bin/emacs
+            sudo ln -s ${NIX_EMACS} /usr/bin/emacs;
+            return 0
+        fi
+    done
+    echo "No nix emacs installation found"
+    return 1
+}
+
 function whichkeyboard(){
     KEYBOARD=$( xset -q | grep -A 0 'LED' | cut -c59-67 )
     if [ $KEYBOARD  = 00000000 ]; then
