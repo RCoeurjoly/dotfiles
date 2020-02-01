@@ -11,10 +11,11 @@ rm -rf ~/.emacs.d/
 
 stow bash
 stow spacemacs
-stow email
-stow firefox
+stow x-windows
 stow git
+stow gdb
+stow firefox
+stow email
 stow lisp
 stow rss
 stow ruby
-stow x-windows
