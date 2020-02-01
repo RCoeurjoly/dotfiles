@@ -18,7 +18,10 @@ export KICAD_SYMBOL_DIR="/usr/share/kicad/library/"
 export SOCKS5_PASSWORD=''
 export GDBHISTSIZE=-1
 export PS1=" \[\033[34m\]\u@\h \[\033[33m\]\w\[\033[31m\]\[\033[00m\] $ "
-export HISTCONTROL=ignoreboth:erasedups
+export HISTCONTROL=ignoredups:erasedups
+# After each command, append to the history file and reread it
+export PROMPT_COMMAND="${PROMPT_COMMAND:+$PROMPT_COMMAND$'\n'}history -a; history -c; history -r"
+export HISTTIMEFORMAT="%d/%m/%y %T "
 
 ### local config settings, if any
 

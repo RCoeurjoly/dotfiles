@@ -15,10 +15,30 @@ function setkeyboard() {
 }
 
 function findprocess(){
-    if [ "$(ps -aux | grep -v grep | grep "${1}\|PID" | wc -l)" -eq 1 ]; then
-        echo "Process" ${1} "not found"
-    else
+    if [ "$(ps -aux | grep -v grep | grep "${1}\|PID" | wc -l)" -ne 1 ]; then
         ps -aux | grep -v grep | grep "${1}\|PID"
+        return 0
+    else
+        echo "Process" ${1} "not found"
+        return 1
+    fi
+}
+
+function ishistoryuniq(){
+    if [ "$(grep -v ^# ~/.bash_history | wc -l)" -eq "$(grep -v ^# ~/.bash_history | uniq | wc -l)" ]; then
+        #echo "$(grep -v ^# ~/.bash_history | wc -l)"
+        #echo "$(grep -v ^# ~/.bash_history | uniq | wc -l)"
+        #echo "$(${COMMAND_SEARCH} | wc -l)"
+        #echo "$(${COMMAND_SEARCH} | uniq | wc -l)"
+        echo "All unique commands in history"
+        return 0
+    else
+        # echo "$(grep -v ^# ~/.bash_history | wc -l)"
+        # echo "$(grep -v ^# ~/.bash_history | uniq | wc -l)"
+        # echo "$(${COMMAND_SEARCH} | wc -l)"
+        # echo "$(${COMMAND_SEARCH} | uniq | wc -l)"
+        echo "History not uniq"
+        return 1
     fi
 }
 
@@ -122,8 +142,7 @@ esac
 
 # don't put duplicate lines or lines starting with space in the history.
 # See bash(1) for more options
-export HISTCONTROL=ignoreboth:erasedups
-export HISTTIMEFORMAT="%d/%m/%y %T "
+
 
 # append to the history file, don't overwrite it
 shopt -s histappend
@@ -198,9 +217,6 @@ fi
 
 # When the shell exits, append to the history file instead of overwriting it
 shopt -s histappend
-
-# After each command, append to the history file and reread it
-export PROMPT_COMMAND="${PROMPT_COMMAND:+$PROMPT_COMMAND$'\n'}history -a; history -c; history -r"
 
 bind '"\e[A": history-search-backward'
 bind '"\e[B": history-search-forward'
