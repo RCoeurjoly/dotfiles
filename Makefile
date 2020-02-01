@@ -5,9 +5,9 @@ all: test
 
 install:
 	bash install.sh
-	cd spacemacs/.spacemacs.d; ${CASK}
+	cd ~/dotfiles/spacemacs/.spacemacs.d; ${CASK}
 
 test:
-	cd spacemacs/.spacemacs.d; ${CASK} exec ecukes
+	cd ~/dotfiles/spacemacs/.spacemacs.d; ${CASK} exec ecukes --reporter spec
 
 .PHONY:	all install test
