@@ -6,7 +6,7 @@ Feature: autocomplete
   Background:
     Given I load the following:
     """
-    (load "~/dotfiles/spacemacs/.spacemacs.d/init.el")
+    (load "spacemacs/.spacemacs.d/init.el")
     """
     And I am in buffer "autocomplete.py"
     And the buffer is empty
