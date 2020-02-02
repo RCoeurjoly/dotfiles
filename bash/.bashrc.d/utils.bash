@@ -30,12 +30,68 @@ isKindleMounted() {
     return 1
 }
 
+getMTPpoint() {
+    number="([0-9]*):\s"
+    pocketComputerRegex="AsusZenFone\s5\sA500KL\s\(MTP\)"
+    bigReaderRegex="VariousViewpia\sDR/bq\sKepler\sDebugging"
+
+    # if no command line arg given exit
+    if [ -z $1 ]
+    then
+        exit 1
+    elif [ -n $1 ]
+    then
+        # otherwise make first arg as device
+        device=$1
+    fi
+
+    # use case statement to make decision for rental
+    case $device in
+        "pocket_computer")
+            deviceRegex=${pocketComputerRegex};;
+        "big_reader")
+            deviceRegex=${bigReaderRegex};;
+        ,*)
+            echo "Sorry, $device is not a known device!";
+            return 1;;
+    esac
+
+    if [[ $(simple-mtpfs -l)  =~ ${number}${deviceRegex} ]]
+    then
+        echo "${BASH_REMATCH[1]}"
+        return 0
+    else
+        echo "$device is not connected"
+        return 1
+    fi
+}
+
+isPocketComputerMounted() {
+    return 1
+}
+
 mountPocketComputer() {
+    mkdir ~/pocketComputer
+    return 1
+}
+
+unmountPocketComputer() {
+    fusemount -u ~/pocketComputer
+    rmdir ~/pocketComputer
+}
+
+isBigReaderMounted() {
     return 1
 }
 
 mountBigReader() {
+    mkdir ~/bigReader
     return 1
+}
+
+unmountBigReader() {
+    fusemount -u ~/bigReader
+    rmdir ~/bigReader
 }
 
 lazygit() {
