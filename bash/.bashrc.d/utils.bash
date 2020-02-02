@@ -1,6 +1,44 @@
 # -*- mode: sh -*-
+is_user_root () { [ ${EUID:-$(id -u)} -eq 0 ]; }
 
-function lazygit() {
+findKindle() {
+    #        NAME           FSTYPE LABEL
+    regex="([A-Za-z0-9]*)\s*vfat\s*Kindle"
+    if [[ $(lsblk -f) =~ $regex ]]
+    then
+        echo "/dev/${BASH_REMATCH[1]}"
+        return 0
+    else
+        echo "No Kindle is connected"
+        return 1
+    fi
+}
+
+isKindleMounted() {
+    #        NAME           FSTYPE LABEL    UUID        MOUNTPOINT
+    regex="([A-Za-z0-9]*)\s*vfat\s*Kindle\s*5854-3617\s*(/media/kindle)"
+    if [[ $(lsblk -f) =~ $regex ]]
+    then
+        echo "Kindle (/dev/${BASH_REMATCH[1]}) already mounted in ${BASH_REMATCH[2]}"
+        return 0
+    elif findKindle >&/dev/null
+    then
+        echo "Kindle not mounted, available at $(findKindle)"
+    else
+        findKindle
+    fi
+    return 1
+}
+
+mountPocketComputer() {
+    return 1
+}
+
+mountBigReader() {
+    return 1
+}
+
+lazygit() {
     CURRENTDIR=$( pwd )
     cd ~/Exocortex
     git add .
@@ -9,12 +47,12 @@ function lazygit() {
     cd $CURRENTDIR
 }
 
-function setkeyboard() {
+setkeyboard() {
     setxkbmap -layout us,es
     setxkbmap -option 'grp:rctrl_toggle'
 }
 
-function findprocess(){
+findprocess(){
     if [ "$(ps -aux | grep -v grep | grep "${1}\|PID" | wc -l)" -ne 1 ]; then
         ps -aux | grep -v grep | grep "${1}\|PID"
         return 0
@@ -24,7 +62,7 @@ function findprocess(){
     fi
 }
 
-function ishistoryuniq(){
+ishistoryuniq(){
     if [ "$(grep -v ^# ~/.bash_history | wc -l)" -eq "$(grep -v ^# ~/.bash_history | uniq | wc -l)" ]; then
         #echo "$(grep -v ^# ~/.bash_history | wc -l)"
         #echo "$(grep -v ^# ~/.bash_history | uniq | wc -l)"
@@ -42,7 +80,7 @@ function ishistoryuniq(){
     fi
 }
 
-function amIinDocker(){
+amIinDocker(){
     if isGCCgood && isOSgood; then
         echo "You are in Docker"
         return 0
@@ -52,7 +90,7 @@ function amIinDocker(){
     fi
 }
 
-function isGCCgood(){
+isGCCgood(){
     GCC_IN_DOCKER='gcc (GCC) 4.8.5 20150623 (Red Hat 4.8.5-36)
 Copyright (C) 2015 Free Software Foundation, Inc.
 This is free software; see the source for copying conditions.  There is NO
@@ -65,7 +103,7 @@ warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.'
     fi
 }
 
-function isOSgood(){
+isOSgood(){
     REDHAT_RELEASE_IN_DOCKER='CentOS Linux release 7.5.1804 (Core) '
 
     if [ "$(cat /etc/redhat-release)" == "${REDHAT_RELEASE_IN_DOCKER}" ]; then
@@ -75,7 +113,7 @@ function isOSgood(){
     fi
 }
 
-function createEmacsLink() {
+createEmacsLink() {
     for location in $(whereis emacs);
     do
         SEARCH_RESULT="$(echo $location | grep "\/nix.*user-environment\/bin\/emacs")"
@@ -90,7 +128,7 @@ function createEmacsLink() {
     return 1
 }
 
-function whichkeyboard(){
+whichkeyboard(){
     KEYBOARD=$( xset -q | grep -A 0 'LED' | cut -c59-67 )
     if [ $KEYBOARD  = 00000000 ]; then
         echo en
@@ -99,7 +137,7 @@ function whichkeyboard(){
     fi
 }
 
-function switch_sink() {
+switch_sink() {
 
     # CLI options:  `a2dp': Audio Profile
     #               `hsp':  Telephony Profile
@@ -128,20 +166,20 @@ function switch_sink() {
     fi
 }
 
-function connect_bluetooth() {
+connect_bluetooth() {
     echo connect 0C:E0:E4:A0:8E:DB | bluetoothctl
 }
 
-function listen_bluetooth() {
+listen_bluetooth() {
     connect_bluetooth
     sleep 5 && switch_sink a2dp
 }
 
-function countpage() {
+countpage() {
   pdf2dsc "$1" /dev/stdout | grep "Pages" | sed s/[^0-9]//g
 }
 
-function path() {
+path() {
   echo $PATH | tr ':' '\n'
 }
 
