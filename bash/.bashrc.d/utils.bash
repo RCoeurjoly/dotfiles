@@ -70,14 +70,68 @@ isPocketComputerMounted() {
     return 1
 }
 
+
+mountMTPdevice() {
+    # if no command line arg given exit
+    if [ -z $1 ]
+    then
+        exit 1
+    elif [ -n $1 ]
+    then
+        # otherwise make first arg as device
+        device=$1
+    fi
+
+    # use case statement to make decision for rental
+    case $device in
+        "pocket_computer");;
+        "big_reader");;
+        *)
+            echo "Sorry, $device is not a known device!";
+            return 1;;
+    esac
+
+    mkdir ~/${device}
+    if getMTPpoint ${device} >&/dev/null
+    then
+        simple-mtpfs --device $(getMTPpoint ${device}) ~/${device}
+        return 0
+    else
+        return 1
+    fi
+}
+
+unmountMTPdevice() {
+    # if no command line arg given exit
+    if [ -z $1 ]
+    then
+        exit 1
+    elif [ -n $1 ]
+    then
+        # otherwise make first arg as device
+        device=$1
+    fi
+
+    # use case statement to make decision for rental
+    case $device in
+        "pocket_computer");;
+        "big_reader");;
+        *)
+            echo "Sorry, $device is not a known device!";
+            return 1;;
+    esac
+
+    fusemount -u ~/${device}
+    rmdir ~/${device}
+}
+
+
 mountPocketComputer() {
-    mkdir ~/pocketComputer
-    return 1
+    mountMTPdevice pocket_computer
 }
 
 unmountPocketComputer() {
-    fusemount -u ~/pocketComputer
-    rmdir ~/pocketComputer
+    unmountMTPdevice pocket_computer
 }
 
 isBigReaderMounted() {
@@ -85,13 +139,11 @@ isBigReaderMounted() {
 }
 
 mountBigReader() {
-    mkdir ~/bigReader
-    return 1
+    mountMTPdevice big_reader
 }
 
 unmountBigReader() {
-    fusemount -u ~/bigReader
-    rmdir ~/bigReader
+    unmountMTPdevice big_reader
 }
 
 lazygit() {
