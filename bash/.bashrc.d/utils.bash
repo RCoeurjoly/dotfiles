@@ -51,7 +51,7 @@ getMTPpoint() {
             deviceRegex=${pocketComputerRegex};;
         "big_reader")
             deviceRegex=${bigReaderRegex};;
-        ,*)
+        *)
             echo "Sorry, $device is not a known device!";
             return 1;;
     esac
