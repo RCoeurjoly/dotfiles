@@ -1,6 +1,10 @@
 # -*- mode: sh -*-
 is_user_root () { [ ${EUID:-$(id -u)} -eq 0 ]; }
 
+ssh5 () { ssh drcoeurjoly@10.0.9.240}
+
+ssh6 () { ssh drcoeurjoly@10.0.9.241}
+
 findKindle() {
     #        NAME           FSTYPE LABEL
     regex="([A-Za-z0-9]*)\s*vfat\s*Kindle"
