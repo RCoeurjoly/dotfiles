@@ -1,0 +1,8 @@
+# -*- mode: snippet -*-
+#name : scriptshell
+#key : scriptshell
+#contributor : Roland Coeurjoly
+# --
+#+begin_src shell :shebang #!/bin/bash -i :results output :tangle $0
+#!/bin/bash
+#+end_src
