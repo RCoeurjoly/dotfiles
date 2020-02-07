@@ -1,7 +1,6 @@
 # -*- mode: sh -*-
 
 alias dc="docker-compose"
-alias enter_docker="MY_UID=$UID docker-compose -f ~/docker-services/dev/docker-compose.yml up -d && docker-compose -f ~/docker-services/dev/docker-compose.yml exec dev_rhel7 bash"
 alias clangcmakepp="CXX='clang_complete_args.py g++' cmake .."
 alias clangcmakecc="CXX='clang_complete_args.py gcc' cmake .."
 alias gatherclangcomplete="find .. | ag clang_complete | xargs cat | sort | uniq > ../.clang_complete"

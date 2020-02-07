@@ -5,6 +5,15 @@ ssh5 () { ssh drcoeurjoly@10.0.9.240; }
 
 ssh6 () { ssh drcoeurjoly@10.0.9.241; }
 
+enter_docker () {
+    MY_UID=$UID docker-compose -f ~/docker-services/dev/docker-compose.yml up -d
+    docker-compose -f ~/docker-services/dev/docker-compose.yml exec dev_rhel7 bash
+}
+
+build_dockerimage () {
+    docker image build ~/docker-services/base_dev/ -t service:base_dev --build-arg "USER=$USER" --build-arg "UID=$UID"
+}
+
 findKindle() {
     #        NAME           FSTYPE LABEL
     regex="([A-Za-z0-9]*)\s*vfat\s*Kindle"
