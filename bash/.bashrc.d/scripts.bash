@@ -41,11 +41,12 @@ warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.'
 }
 
 tangle_scripts () {
-    emacs --batch -l org --eval '(org-babel-tangle-file "~/dotfiles/scripts/scripts.org")'
+    emacs --user "$(echo $USER)" -q --batch -l org --eval '(org-babel-tangle-file "~/dotfiles/scripts/scripts.org")'
     echo $(sha512sum ~/dotfiles/scripts/scripts.org) > ~/dotfiles/bash/.bashrc.d/scripts_checksum
 }
 sha512sum -c ~/dotfiles/bash/.bashrc.d/scripts_checksum >&/dev/null
 if [ $? -eq 1 ]; then
     tangle_scripts
+    echo "\n\n\ntangling done\n\n\n"
     source ~/.bashrc
 fi
