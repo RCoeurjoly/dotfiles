@@ -1,15 +1,38 @@
-* TODO MTP device handling
+* Devices
+** MTP
+** Kindle
+   #+NAME: Kindle
+   #+begin_src shell :noweb yes :exports code
+<<unmountKindle>>
+   #+end_src
+*** Unmount
+   #+NAME: unmountKindle
+   #+begin_src shell :noweb yes :exports code
+/bin/umount -l /media/kindle
+   #+end_src
 
-* Architecture
-  #+begin_src shell :shebang #!/bin/bash :noweb yes :results output :tangle tangled/scripts.bash
-<<Docker>>
-  #+end_src
+*** Get highlights
+    #+NAME: zitat_kindle
+    #+begin_src shell :noweb yes :exports code
+~/zitat/zitat.py /media/kindle/documents/My Clippings.txt ~/my_clippings/clippings.org
+    #+end_src
 
 * Tangling all these scripts
-
-#+begin_src shell :shebang #!/bin/bash :results output :tangle tangled/tangle_scripts
-emacs --batch -l org --eval '(org-babel-tangle-file "~/dotfiles/scripts/scripts.org")'
+** Actual tangling
+#+NAME: tangle_scripts
+#+begin_src shell :shebang #!/bin/bash :noweb yes :results output
+tangle_scripts () {
+    emacs --batch -l org --eval '(org-babel-tangle-file "~/dotfiles/scripts/scripts.org")'
+    <<tangleChecksum>>
+}
 #+end_src
+
+** Scripts checksum
+   #+NAME: tangleChecksum
+   #+begin_src shell :noweb yes :exports code
+echo $(sha512sum ~/dotfiles/scripts/scripts.org) > ~/dotfiles/bash/.bashrc.d/scripts_checksum
+   #+end_src
+
 * Docker
 ** Entering docker
 
@@ -72,3 +95,14 @@ isOSgood(){
     fi
 }
 #+end_src
+* Architecture
+  #+begin_src shell :shebang #!/bin/bash :noweb yes :results output :tangle ../bash/.bashrc.d/scripts.bash
+<<Docker>>
+<<shouldItangleMyScripts>>
+<<tangle_scripts>>
+sha512sum -c ~/dotfiles/bash/.bashrc.d/scripts_checksum >&/dev/null
+if [ $? -eq 1 ]; then
+    tangle_scripts
+    source ~/.bashrc
+fi
+  #+end_src

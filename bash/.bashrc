@@ -4,6 +4,7 @@ source ~/.bashrc.d/path.bash
 source ~/.bashrc.d/aliases.bash
 source ~/.bashrc.d/prompt.bash
 source ~/.bashrc.d/utils.bash
+source ~/.bashrc.d/scripts.bash
 
 # If not running interactively, don't do anything
 case $- in
