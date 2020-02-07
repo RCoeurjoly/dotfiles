@@ -4,7 +4,7 @@ CASK ?= cask
 all: test
 
 install:
-	bash install.sh
+	bash install_all.sh
 	cd spacemacs/.spacemacs.d; ${CASK}
 
 test:

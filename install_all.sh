@@ -3,7 +3,7 @@
 sudo apt install stow
 # Install all the necessary Debian packages, especially `stow`.
 
-bash debian_packages_installation.sh
+bash install_debian_packages.sh
 
 # # Link .bash_profile -> .bashrc
 rm -f ~/.bashrc
