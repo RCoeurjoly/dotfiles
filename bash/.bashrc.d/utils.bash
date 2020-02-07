@@ -5,9 +5,10 @@ ssh5 () { ssh drcoeurjoly@10.0.9.240; }
 
 ssh6 () { ssh drcoeurjoly@10.0.9.241; }
 
-enter_docker () {
+switch_to_docker () {
+    CURRENTDIR=$( pwd )
     MY_UID=$UID docker-compose -f ~/docker-services/dev/docker-compose.yml up -d
-    docker-compose -f ~/docker-services/dev/docker-compose.yml exec dev_rhel7 bash
+    docker-compose -f ~/docker-services/dev/docker-compose.yml exec dev_rhel7 bash -c "cd ${CURRENTDIR} && bash"
 }
 
 build_dockerimage () {
