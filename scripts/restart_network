@@ -1,0 +1,14 @@
+#!/bin/bash -i
+HNAME=8.8.8.8
+count=2 # Send only two pings.
+while [ true ]
+do
+if ping -c $count "$HNAME" 2> /dev/null
+then
+    echo "\"$HNAME\" up."
+else
+    echo "\"$HNAME\" seems to be down. Reloading."
+    service network-manager restart
+    sleep 5
+fi
+done

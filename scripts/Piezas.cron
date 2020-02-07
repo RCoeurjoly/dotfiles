@@ -1,0 +1,12 @@
+## $Id:
+## Tareas OMSDomain
+
+30 08 * * 1-5     /home/drcoeurjoly/SS5555xx/script/SS5555xx start
+30 08 * * 1-5     /home/drcoeurjoly/MD5555xx/script/MD5555xx start
+30 08 * * 1-5     sudo /home/drcoeurjoly/DF5555xx/script/DF5555xx start
+30 08 * * 1-5     sudo /data/programs/oms/RT5555xx/script/RT5555xx start
+00 21 * * 1-5     /home/drcoeurjoly/SS5555xx/script/SS5555xx stop
+00 21 * * 1-5     /home/drcoeurjoly/MD5555xx/script/MD5555xx stop
+00 21 * * 1-5     sudo /home/drcoeurjoly/DF5555xx/script/DF5555xx stop
+00 21 * * 1-5     sudo  /data/programs/oms/RT5555xx/script/RT5555xx stop
+30 22 * * 1-5     sudo /home/drcoeurjoly/inntech/desarrollo/oms/oms-trd-eod/out/OMSDomainEOD /home/drcoeurjoly/DF5555xx/etc/DF5555xx.cfg

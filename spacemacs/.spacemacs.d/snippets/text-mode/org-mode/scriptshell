@@ -1,8 +1,8 @@
 # -*- mode: snippet -*-
-#name : scriptshell
-#key : scriptshell
+#name : tangleshell
+#key : tangleshell
 #contributor : Roland Coeurjoly
 # --
-#+begin_src shell :shebang #!/bin/bash -i :results output :tangle $0
-#!/bin/bash
+#+begin_src shell :shebang #!/bin/bash :results output :tangle $1
+$2
 #+end_src
