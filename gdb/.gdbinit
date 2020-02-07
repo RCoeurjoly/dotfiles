@@ -1,7 +1,7 @@
 # set history size unlimited
 set history save on
 #set history remove-duplicates unlimited
-set history filename ~/dotfiles/gdb/.gdb_history
+set history filename ~/.gdb_history
 #
 #   STL GDB evaluators/views/utilities - 1.03
 #
