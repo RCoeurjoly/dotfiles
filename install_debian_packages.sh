@@ -62,12 +62,12 @@ DEBIAN_PACKAGES="abook \
 "
 
 for package in ${DEBIAN_PACKAGES}; do
-    sudo apt --assume-yes install $package
+    yes | sudo apt install $package
     echo !!
 done
 
 # For tlp power management.
-sudo apt-get --assume-yes install \
+sudo apt-get -y install \
      acpi-call-dkms \
      tlp \
      tp-smapi-dkms
