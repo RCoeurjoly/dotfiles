@@ -3,7 +3,7 @@
 I hope you like fiddling with your `.spacemacs.d` ad nauseam, 'cause I obviously do.
 This is a fork of [[https://github.com/hrs/dotfiles][hrs' dotfiles]] repo. I depart from it in that I now use Spacemacs and not plain Emacs.
 However, I still do three things inspired by his repo:
-- Unique shell command (sudo bash install.sh) to install everything I need in a system
+- Unique shell command (sudo bash install_all.sh) to install everything I need in a system
 - Stow all dotfiles to be able to put them under version control easily
 - Emacs/Spacemacs configuration maintained in a literate programming style
 
