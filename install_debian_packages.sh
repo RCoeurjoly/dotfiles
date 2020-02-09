@@ -8,6 +8,8 @@ DEBIAN_PACKAGES="abook \
      build-essential \
      compton \
      curl \
+     docker \
+     docker-compose \
      feh \
      gdb \
      gdbserver \
