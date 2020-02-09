@@ -11,7 +11,7 @@ sudo apt install \
      curl \
      feh \
      gdb \
-     gdb-server \
+     gdbserver \
      git \
      gnome-terminal \
      gnupg2 \
