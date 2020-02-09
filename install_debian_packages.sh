@@ -27,9 +27,12 @@ DEBIAN_PACKAGES="aptitude \
      unar \
 "
 
-for package in ${DEBIAN_PACKAGES}; do
+for package in ${DEBIAN_PACKAGES};
+do
+    echo
+    echo "Installing" $package
+    echo
     yes | sudo apt install $package
-    echo !!
 done
 
 # For tlp power management.
@@ -37,6 +40,3 @@ sudo apt-get -y install \
      acpi-call-dkms \
      tlp \
      tp-smapi-dkms
-
-sudo apt autoremove
-sudo apt autoclean
