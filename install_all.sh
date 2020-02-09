@@ -1,9 +1,10 @@
 #!/bin/sh
 
-sudo apt install stow
 # Install all the necessary Debian packages, especially `stow`.
 
 bash install_debian_packages.sh
+
+bash install_emacs.sh
 
 # # Link .bash_profile -> .bashrc
 rm -f ~/.bashrc
