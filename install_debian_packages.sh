@@ -8,6 +8,7 @@ DEBIAN_PACKAGES="abook \
      build-essential \
      compton \
      curl \
+     dirmngr \
      docker \
      docker-compose \
      feh \
@@ -61,11 +62,11 @@ DEBIAN_PACKAGES="abook \
 "
 
 for package in ${DEBIAN_PACKAGES}; do
-    sudo apt install $package
+    sudo apt --assume-yes install $package
 done
 
 # For tlp power management.
-sudo apt-get install \
+sudo apt-get --assume-yes install \
      acpi-call-dkms \
      tlp \
      tp-smapi-dkms
