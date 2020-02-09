@@ -1,5 +1,3 @@
-![[https://github.com/RCoeurjoly/dotfiles/workflows/CI/badge.svg][CI]]
-
 * rcl's dotfiles
 
 I hope you like fiddling with your `.spacemacs.d` ad nauseam, 'cause I obviously do.
