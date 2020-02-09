@@ -1,4 +1,4 @@
-[[https://github.com/RCoeurjoly/dotfiles/workflows/CI/badge.svg][CI]]
+![[https://github.com/RCoeurjoly/dotfiles/workflows/CI/badge.svg][CI]]
 
 * rcl's dotfiles
 
