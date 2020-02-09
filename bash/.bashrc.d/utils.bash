@@ -3,6 +3,8 @@ is_user_root () { [ ${EUID:-$(id -u)} -eq 0 ]; }
 
 ssh5 () { ssh drcoeurjoly@10.0.9.240; }
 
+gdbmi () { gdb -i=mi; }
+
 ssh6 () { ssh drcoeurjoly@10.0.9.241; }
 
 findKindle() {
