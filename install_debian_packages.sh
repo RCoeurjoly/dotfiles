@@ -2,8 +2,7 @@
 
 # Installing Debian packages
 
-sudo apt install \
-     abook \
+DEBIAN_PACKAGES="abook \
      aptitude \
      arandr \
      build-essential \
@@ -57,9 +56,17 @@ sudo apt install \
      xdotool \
      xsel \
      zathura
+"
+
+for package in ${DEBIAN_PACKAGES}; do
+    sudo apt install $package
+done
 
 # For tlp power management.
 sudo apt-get install \
      acpi-call-dkms \
      tlp \
      tp-smapi-dkms
+
+sudo apt autoremove
+sudo apt autoclean
