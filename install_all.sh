@@ -14,8 +14,6 @@ stow spacemacs
 stow x-windows
 stow git
 stow gdb
-stow firefox
-stow email
 stow lisp
 stow rss
 stow ruby
