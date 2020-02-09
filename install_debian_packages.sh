@@ -32,7 +32,7 @@ do
     echo
     echo "Installing" $package
     echo
-    yes | sudo apt install $package >&/dev/null
+    sudo apt -y install $package >&/dev/null
 done
 
 # For tlp power management.
