@@ -6,6 +6,10 @@ bash install_debian_packages.sh
 
 bash install_emacs.sh
 
+bash install_histories.sh
+
+bash install_udev_rules.sh
+
 # # Link .bash_profile -> .bashrc
 rm -f ~/.bashrc
 rm -rf ~/.emacs.d/
