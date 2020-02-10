@@ -17,6 +17,7 @@ DEBIAN_PACKAGES="aptitude \
      gnuplot \
      graphviz \
      i3 \
+     ibus \
      imagemagick \
      openssl \
      pandoc \
