@@ -18,6 +18,7 @@ DEBIAN_PACKAGES="aptitude \
      graphviz \
      i3 \
      ibus \
+     ibus-pinyin \
      imagemagick \
      openssl \
      pandoc \
