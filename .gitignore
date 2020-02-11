@@ -8,3 +8,4 @@ spacemacs/.spacemacs.d/.cask
 spacemacs/.spacemacs.d/*test-results*
 spacemacs/.spacemacs.d/.ecukes-failing-scenarios
 *xz
+core*
