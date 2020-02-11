@@ -39,14 +39,20 @@ warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.'
         return 1
     fi
 }
+switch_to_traditional () {
+    dconf write /desktop/ibus/engine/pinyin/InitSimplifiedChinese false; ibus restart
+}
+switch_to_simplified () {
+    dconf write /desktop/ibus/engine/pinyin/InitSimplifiedChinese true; ibus restart
+}
 
 tangle_scripts () {
-    emacs --user "$(echo $USER)" -q --batch -l org --eval '(org-babel-tangle-file "~/dotfiles/scripts/scripts.org")'
+    emacs --batch -l org --eval '(org-babel-tangle-file "~/dotfiles/scripts/scripts.org")'
     echo $(sha512sum ~/dotfiles/scripts/scripts.org) > ~/dotfiles/bash/.bashrc.d/scripts_checksum
 }
 sha512sum -c ~/dotfiles/bash/.bashrc.d/scripts_checksum >&/dev/null
 if [ $? -eq 1 ]; then
     tangle_scripts
-    echo "\n\n\ntangling done\n\n\n"
+    echo -e "\n\n\ntangling done\n\n\n"
     source ~/.bashrc
 fi
