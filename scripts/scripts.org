@@ -2,7 +2,6 @@
   #+begin_src shell :shebang #!/bin/bash :noweb yes :results output :tangle ../bash/.bashrc.d/scripts.bash
 <<Docker>>
 <<Chinese>>
-<<shouldItangleMyScripts>>
 <<tangle_scripts>>
 sha512sum -c ~/dotfiles/bash/.bashrc.d/scripts_checksum >&/dev/null
 if [ $? -eq 1 ]; then
@@ -17,15 +16,14 @@ fi
 #+begin_src shell :shebang #!/bin/bash :noweb yes :results output
 tangle_scripts () {
     emacs --batch -l org --eval '(org-babel-tangle-file "~/dotfiles/scripts/scripts.org")'
-    <<tangleChecksum>>
+    <<createChecksumFile>>
 }
 #+end_src
 
 
 
-
 ** Scripts checksum
-   #+NAME: tangleChecksum
+   #+NAME: createChecksumFile
    #+begin_src shell :noweb yes :exports code
 echo $(sha512sum ~/dotfiles/scripts/scripts.org) > ~/dotfiles/bash/.bashrc.d/scripts_checksum
    #+end_src
