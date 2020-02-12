@@ -1,0 +1,4 @@
+#!/bin/bash
+sudo ln -fs /home/drcoeurjoly/RT5555xx/ /data/programs/oms/RT5555xx
+
+sudo /home/drcoeurjoly/RT5555xx/bin/RT5555xx /home/drcoeurjoly/RT5555xx/etc/RT5555xx.cfg

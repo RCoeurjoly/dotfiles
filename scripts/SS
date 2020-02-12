@@ -1,0 +1,4 @@
+#!/bin/bash
+sudo ln -fs /home/drcoeurjoly/SS5555xx/ /data/programs/oms/SS5555xx
+
+/home/drcoeurjoly/SS5555xx/bin/SS5555xx /home/drcoeurjoly/SS5555xx/etc/SS5555xx.cfg
