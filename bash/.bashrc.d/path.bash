@@ -24,5 +24,6 @@ pathmunge $HOME/.cabal/bin after
 pathmunge $HOME/.local/bin after
 pathmunge $GOPATH/bin after
 pathmunge $HOME/go/bin
+pathmunge $HOME/.gem/bin
 
 export PATH

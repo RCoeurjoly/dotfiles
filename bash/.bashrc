@@ -73,3 +73,6 @@ export NVM_DIR="$HOME/.nvm"
 
 # added by Nix installer
 if [ -e /home/rcl/.nix-profile/etc/profile.d/nix.sh ]; then . /home/rcl/.nix-profile/etc/profile.d/nix.sh; fi
+
+# Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
+export PATH="$PATH:$HOME/.rvm/bin"
