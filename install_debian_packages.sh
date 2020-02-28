@@ -12,6 +12,7 @@ DEBIAN_PACKAGES="aptitude \
      gdb \
      gdbserver \
      git \
+     global \
      gnome-terminal \
      gnupg2 \
      gnuplot \

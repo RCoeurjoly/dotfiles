@@ -46,7 +46,7 @@ switch_to_simplified () {
     dconf write /desktop/ibus/engine/pinyin/InitSimplifiedChinese true; ibus restart
 }
 grepcpp () {
-    grep -IRs --include=\*.{cpp,h} "${@}"
+    grep -IRsn --exclude-dir=build --include=\*.{cpp,h} "${@}"
 }
 tangle_scripts () {
     emacs --batch -l org --eval '(org-babel-tangle-file "~/dotfiles/scripts/scripts.org")'

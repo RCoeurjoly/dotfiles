@@ -137,6 +137,6 @@ switch_to_simplified () {
   #+NAME: grepcpp
   #+begin_src shell :noweb yes :exports code
 grepcpp () {
-    grep -IRs --include=\*.{cpp,h} "${@}"
+    grep -IRsn --exclude-dir=build --include=\*.{cpp,h} "${@}"
 }
   #+end_src
