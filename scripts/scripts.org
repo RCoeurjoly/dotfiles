@@ -2,7 +2,7 @@
   #+begin_src shell :shebang #!/bin/bash :noweb yes :results output :tangle ../bash/.bashrc.d/scripts.bash
 <<Docker>>
 <<Chinese>>
-<<grepcpp>>
+<<programming>>
 <<tangle_scripts>>
 sha512sum -c ~/dotfiles/bash/.bashrc.d/scripts_checksum >&/dev/null
 if [ $? -eq 1 ]; then
@@ -134,9 +134,31 @@ switch_to_simplified () {
 }
     #+end_src
 * Programming
+
+  #+NAME: programming
+  #+begin_src shell :noweb yes :exports code
+<<grepcpp>>
+<<generateclangcomplete>>
+  #+end_src
+
+
   #+NAME: grepcpp
   #+begin_src shell :noweb yes :exports code
 grepcpp () {
     grep -IRsn --exclude-dir=build --include=\*.{cpp,h} "${@}"
 }
   #+end_src
+
+
+#+NAME: generateclangcomplete
+#+begin_src shell :noweb yes :exports code
+generateclangcomplete () {
+    GIT_ROOT=$(git rev-parse --show-toplevel)
+    echo "Removing"${GIT_ROOT}/build/
+    rm -rf ${GIT_ROOT}/build/
+    mkdir ${GIT_ROOT}/build/
+    cd ${GIT_ROOT}/build
+    clangcompletepp
+    cd -
+}
+#+end_src

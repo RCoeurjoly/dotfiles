@@ -1,6 +1,6 @@
 # -*- mode: snippet -*-
-#name : valdesarrollo
-#key : valdesarrollo
+#name : sshdesarrollo
+#key : sshdesarrollo
 #contributor : Roland Coeurjoly
 # --
 #+begin_src sh :dir /sshx:drcoeurjoly@10.0.9.240:~/ :results verbatim

@@ -48,6 +48,15 @@ switch_to_simplified () {
 grepcpp () {
     grep -IRsn --exclude-dir=build --include=\*.{cpp,h} "${@}"
 }
+generateclangcomplete () {
+    GIT_ROOT=$(git rev-parse --show-toplevel)
+    echo "Removing"${GIT_ROOT}/build/
+    rm -rf ${GIT_ROOT}/build/
+    mkdir ${GIT_ROOT}/build/
+    cd ${GIT_ROOT}/build
+    clangcompletepp
+    cd -
+}
 tangle_scripts () {
     emacs --batch -l org --eval '(org-babel-tangle-file "~/dotfiles/scripts/scripts.org")'
     echo $(sha512sum ~/dotfiles/scripts/scripts.org) > ~/dotfiles/bash/.bashrc.d/scripts_checksum

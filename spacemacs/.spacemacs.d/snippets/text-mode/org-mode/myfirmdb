@@ -1,0 +1,12 @@
+# -*- mode: snippet -*-
+#name : myfirmdb
+#key : myfirmdb
+#contributor : Roland Coeurjoly
+# --
+#+header: :engine mysql
+#+header: :dbuser root
+#+header: :dbpassword redhatbolsa
+#+header: :database oms_5555
+#+begin_src sql
+$0
+#+end_src
