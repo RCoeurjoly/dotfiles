@@ -46,7 +46,10 @@ switch_to_simplified () {
     dconf write /desktop/ibus/engine/pinyin/InitSimplifiedChinese true; ibus restart
 }
 grepcpp () {
-    grep -IRsn --exclude-dir=build --include=\*.{cpp,h} "${@}"
+    greper --include=\*.{cpp,h} "${@}"
+}
+greper () {
+    grep -IRsn --exclude-dir=build --exclude=\*.bash_history "${@}"
 }
 generateclangcomplete () {
     GIT_ROOT=$(git rev-parse --show-toplevel)
@@ -64,6 +67,6 @@ tangle_scripts () {
 sha512sum -c ~/dotfiles/bash/.bashrc.d/scripts_checksum >&/dev/null
 if [ $? -eq 1 ]; then
     tangle_scripts
-    echo -e "\n\n\ntangling done\n\n\n"
+    echo -e "\n\n\nTangling done\n\n\n"
     source ~/.bashrc
 fi

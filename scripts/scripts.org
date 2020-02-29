@@ -1,13 +1,13 @@
 * Architecture
   #+begin_src shell :shebang #!/bin/bash :noweb yes :results output :tangle ../bash/.bashrc.d/scripts.bash
 <<Docker>>
-<<Chinese>>
+<<language>>
 <<programming>>
 <<tangle_scripts>>
 sha512sum -c ~/dotfiles/bash/.bashrc.d/scripts_checksum >&/dev/null
 if [ $? -eq 1 ]; then
     tangle_scripts
-    echo -e "\n\n\ntangling done\n\n\n"
+    echo -e "\n\n\nTangling done\n\n\n"
     source ~/.bashrc
 fi
   #+end_src
@@ -111,6 +111,11 @@ isOSgood(){
 }
 #+end_src
 * Language
+  #+NAME: language
+  #+begin_src shell :noweb yes :exports code
+<<Chinese>>
+  #+end_src
+
 ** Chinese
    #+NAME: Chinese
    #+begin_src shell :noweb yes :exports code
@@ -138,17 +143,12 @@ switch_to_simplified () {
   #+NAME: programming
   #+begin_src shell :noweb yes :exports code
 <<grepcpp>>
+<<greper>>
 <<generateclangcomplete>>
   #+end_src
 
 
-  #+NAME: grepcpp
-  #+begin_src shell :noweb yes :exports code
-grepcpp () {
-    grep -IRsn --exclude-dir=build --include=\*.{cpp,h} "${@}"
-}
-  #+end_src
-
+** C++ stuff
 
 #+NAME: generateclangcomplete
 #+begin_src shell :noweb yes :exports code
@@ -162,3 +162,18 @@ generateclangcomplete () {
     cd -
 }
 #+end_src
+** Grepping away!
+
+  #+NAME: grepcpp
+  #+begin_src shell :noweb yes :exports code
+grepcpp () {
+    greper --include=\*.{cpp,h} "${@}"
+}
+  #+end_src
+
+  #+NAME: greper
+  #+begin_src shell :noweb yes :exports code
+greper () {
+    grep -IRsn --exclude-dir=build --exclude=\*.bash_history "${@}"
+}
+  #+end_src
