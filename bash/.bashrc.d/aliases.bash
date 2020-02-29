@@ -1,8 +1,8 @@
 # -*- mode: sh -*-
 
 alias dc="docker-compose"
-alias clangcmakepp="CXX='clang_complete_args.py g++' cmake"
-alias clangcmakecc="CXX='clang_complete_args.py gcc' cmake"
+alias clangcmakepp="CXX='clang_complete_args.py g++' cmake .."
+alias clangcmakecc="CXX='clang_complete_args.py gcc' cmake .."
 alias gatherclangcomplete="find .. | ag clang_complete | xargs cat | sort | uniq > ../.clang_complete"
 alias clangcompletepp="clangcmakepp && make && gatherclangcomplete"
 alias clangcompletecc="clangcmakecc && make && gatherclangcomplete"
@@ -14,7 +14,7 @@ alias sbcl="rlwrap sbcl"
 alias lisp="sbcl --noinform"
 alias lispi="sbcl -noinform --load"
 alias la="ls -la"
-alias ll="ls -l"
+alias ll="ls -l -a"
 alias ln="ln -v"
 alias ls="ls --color -h"
 alias lh='ls -lahS'

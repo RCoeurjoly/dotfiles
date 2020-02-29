@@ -5,6 +5,7 @@
 DEBIAN_PACKAGES="aptitude \
      arandr \
      build-essential \
+     clang \
      cmake \
      curl \
      docker \

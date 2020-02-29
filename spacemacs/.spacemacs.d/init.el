@@ -36,14 +36,13 @@ values."
      ;; ;; Uncomment some layer names and press <SPC f e R> (Vim style) or
      ;; ;; <M-m f e R> (Emacs style) to install them.
      ;; ;; ----------------------------------------------------------------
-     (c-c++ :variables
-            c-c++-enable-clang-support t
-            =c-c++-backend= 'lsp-clangd
-            c++-enable-organize-includes-on-save t
-            c-c++-enable-clang-format-on-save t
-            c-c++-enable-google-style t
-            c-c++-enable-google-newline t
-            c-c++-enable-auto-newline t)
+     (c-c++ :variables c-c++-enable-clang-support t)
+            ;; =c-c++-backend= 'lsp-clangd
+            ;; c++-enable-organize-includes-on-save t
+            ;; c-c++-enable-clang-format-on-save t
+            ;; c-c++-enable-google-style t
+            ;; c-c++-enable-google-newline t
+            ;; c-c++-enable-auto-newline t)
      python
      imenu-list
      shell-scripts

@@ -8,6 +8,6 @@ install:
 	cd spacemacs/.spacemacs.d; ${CASK}
 
 test:
-	cd spacemacs/.spacemacs.d; ${CASK} exec ecukes --reporter spec
+	cd spacemacs/.spacemacs.d; cask install; ${CASK} exec ecukes --reporter spec
 
 .PHONY:	all install test
