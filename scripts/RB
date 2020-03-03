@@ -1,0 +1,4 @@
+#!/bin/bash
+sudo ln -fs /home/drcoeurjoly/RB5555xx/ /data/programs/oms/RB5555xx
+
+sudo /home/drcoeurjoly/RB5555xx/bin/RB5555xx /home/drcoeurjoly/RB5555xx/etc/RB5555xx.cfg

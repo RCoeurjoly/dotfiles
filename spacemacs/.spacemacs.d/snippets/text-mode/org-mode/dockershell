@@ -1,0 +1,8 @@
+# -*- mode: snippet -*-
+#name : dockershell
+#key : dockershell
+#contributor : Roland Coeurjoly
+# --
+#+begin_src sh :dir /docker:drcoeurjoly@dev_dev_rhel7_1:~/$1 :results verbatim
+$2
+#+end_src
