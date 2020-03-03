@@ -145,6 +145,7 @@ switch_to_simplified () {
 <<grepcpp>>
 <<greper>>
 <<generateclangcomplete>>
+<<timestamp>>
   #+end_src
 
 
@@ -177,3 +178,10 @@ greper () {
     grep -IRsn --exclude-dir=build --exclude=\*.bash_history "${@}"
 }
   #+end_src
+** Timestamping
+   #+NAME: timestamp
+   #+begin_src shell :noweb yes :exports code
+timestamp () {
+    date +"%Y-%m-%d_%H:%M:%S.%N"
+}
+   #+end_src
