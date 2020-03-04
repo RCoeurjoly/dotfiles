@@ -1,5 +1,6 @@
-* Architecture
-  #+begin_src shell :shebang #!/bin/bash :noweb yes :results output :tangle ../bash/.bashrc.d/scripts.bash
+* Utils
+** Architecture
+   #+begin_src shell :shebang #!/bin/bash :noweb yes :results output :tangle ../bash/.bashrc.d/scripts.bash
 <<Docker>>
 <<language>>
 <<programming>>
@@ -10,49 +11,55 @@ if [ $? -eq 1 ]; then
     echo -e "\n\n\nTangling done\n\n\n"
     source ~/.bashrc
 fi
-  #+end_src
-* Tangling all these scripts
-** Actual tangling
-#+NAME: tangle_scripts
-#+begin_src shell :shebang #!/bin/bash :noweb yes :results output
+   #+end_src
+** Tangling all these scripts
+*** Actual tangling
+ #+NAME: tangle_scripts
+ #+begin_src shell :shebang #!/bin/bash :noweb yes :results output
 tangle_scripts () {
     emacs --batch -l org --eval '(org-babel-tangle-file "~/dotfiles/scripts/scripts.org")'
     <<createChecksumFile>>
 }
-#+end_src
+ #+end_src
 
 
 
-** Scripts checksum
-   #+NAME: createChecksumFile
-   #+begin_src shell :noweb yes :exports code
-echo $(sha512sum ~/dotfiles/scripts/scripts.org) > ~/dotfiles/bash/.bashrc.d/scripts_checksum
-   #+end_src
-
-* Devices
-** MTP
-** Kindle
-   #+NAME: Kindle
-   #+begin_src shell :noweb yes :exports code
-<<unmountKindle>>
-   #+end_src
-*** Unmount
-   #+NAME: unmountKindle
-   #+begin_src shell :noweb yes :exports code
-/bin/umount -l /media/kindle
-   #+end_src
-
-*** Get highlights
-    #+NAME: zitat_kindle
+*** Scripts checksum
+    #+NAME: createChecksumFile
     #+begin_src shell :noweb yes :exports code
-~/zitat/zitat.py /media/kindle/documents/My Clippings.txt ~/my_clippings/clippings.org
+echo $(sha512sum ~/dotfiles/scripts/scripts.org) > ~/dotfiles/bash/.bashrc.d/scripts_checksum
     #+end_src
 
-* Docker
-** Entering docker
+** Devices
+*** MTP
+*** Kindle
+    #+NAME: Kindle
+    #+begin_src shell :noweb yes :exports code
+<<unmountKindle>>
+    #+end_src
+**** Unmount
+    #+NAME: unmountKindle
+    #+begin_src shell :noweb yes :exports code
+/bin/umount -l /media/kindle
+    #+end_src
 
-#+NAME: Docker
-#+begin_src shell :noweb yes :exports code
+**** Get highlights
+     #+NAME: zitat_kindle
+     #+begin_src shell :noweb yes :exports code
+~/zitat/zitat.py /media/kindle/documents/My Clippings.txt ~/my_clippings/clippings.org
+     #+end_src
+
+** Docker
+   #+NAME: Docker
+   #+begin_src shell :noweb yes :exports code
+<<amIinDocker>>
+<<enter_docker>>
+   #+end_src
+
+*** Entering docker
+
+ #+NAME: enter_docker
+ #+begin_src shell :noweb yes :exports code
 switch_to_docker () {
     build_dockerimage
     CURRENTDIR=$( pwd )
@@ -63,12 +70,11 @@ switch_to_docker () {
 build_dockerimage () {
     docker image build ~/docker-services/base_dev/ -t service:base_dev --build-arg "USER=$USER" --build-arg "UID=$UID"
 }
-<<amIinDocker>>
-#+end_src
+ #+end_src
 
-** Checking if I am in Docker
-#+NAME: amIinDocker
-#+begin_src shell :noweb yes :exports code
+*** Checking if I am in Docker
+ #+NAME: amIinDocker
+ #+begin_src shell :noweb yes :exports code
 amIinDocker(){
     if isGCCgood && isOSgood; then
         echo "You are in Docker"
@@ -80,10 +86,10 @@ amIinDocker(){
 }
 <<isOSgood>>
 <<isGCCgood>>
-#+end_src
+ #+end_src
 
-#+NAME: isGCCgood
-#+begin_src shell :noweb yes :exports code
+ #+NAME: isGCCgood
+ #+begin_src shell :noweb yes :exports code
 isGCCgood(){
     GCC_IN_DOCKER='gcc (GCC) 4.8.5 20150623 (Red Hat 4.8.5-36)
 Copyright (C) 2015 Free Software Foundation, Inc.
@@ -96,10 +102,10 @@ warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.'
         return 1
     fi
 }
-#+end_src
+ #+end_src
 
-#+NAME: isOSgood
-#+begin_src shell :noweb yes :exports code
+ #+NAME: isOSgood
+ #+begin_src shell :noweb yes :exports code
 isOSgood(){
     REDHAT_RELEASE_IN_DOCKER='CentOS Linux release 7.5.1804 (Core) '
 
@@ -109,52 +115,52 @@ isOSgood(){
         return 1
     fi
 }
-#+end_src
-* Language
-  #+NAME: language
-  #+begin_src shell :noweb yes :exports code
-<<Chinese>>
-  #+end_src
-
-** Chinese
-   #+NAME: Chinese
+ #+end_src
+** Language
+   #+NAME: language
    #+begin_src shell :noweb yes :exports code
-<<switch_to_traditional>>
-<<switch_to_simplified>>
+<<Chinese>>
    #+end_src
 
-*** Switch to traditional
-    #+NAME: switch_to_traditional
+*** Chinese
+    #+NAME: Chinese
     #+begin_src shell :noweb yes :exports code
+<<switch_to_traditional>>
+<<switch_to_simplified>>
+    #+end_src
+
+**** Switch to traditional
+     #+NAME: switch_to_traditional
+     #+begin_src shell :noweb yes :exports code
 switch_to_traditional () {
     dconf write /desktop/ibus/engine/pinyin/InitSimplifiedChinese false; ibus restart
 }
-    #+end_src
+     #+end_src
 
-*** Switch to simplified
-#+NAME: switch_to_simplified
-    #+begin_src shell :noweb yes :exports code
+**** Switch to simplified
+ #+NAME: switch_to_simplified
+     #+begin_src shell :noweb yes :exports code
 switch_to_simplified () {
     dconf write /desktop/ibus/engine/pinyin/InitSimplifiedChinese true; ibus restart
 }
-    #+end_src
-* Programming
+     #+end_src
+** Programming
 
-  #+NAME: programming
-  #+begin_src shell :noweb yes :exports code
+   #+NAME: programming
+   #+begin_src shell :noweb yes :exports code
 <<grepcpp>>
 <<greper>>
 <<generateclangcomplete>>
 <<timestamp>>
 <<git>>
 <<jokes>>
-  #+end_src
+   #+end_src
 
 
-** C++ stuff
+*** C++ stuff
 
-#+NAME: generateclangcomplete
-#+begin_src shell :noweb yes :exports code
+ #+NAME: generateclangcomplete
+ #+begin_src shell :noweb yes :exports code
 generateclangcomplete () {
     GIT_ROOT=$(git rev-parse --show-toplevel)
     echo "Removing"${GIT_ROOT}/build/
@@ -164,42 +170,42 @@ generateclangcomplete () {
     clangcompletepp
     cd -
 }
-#+end_src
-** Grepping away!
+ #+end_src
+*** Grepping away!
 
-  #+NAME: grepcpp
-  #+begin_src shell :noweb yes :exports code
+   #+NAME: grepcpp
+   #+begin_src shell :noweb yes :exports code
 grepcpp () {
     greper --include=\*.{cpp,h} "${@}"
 }
-  #+end_src
+   #+end_src
 
-  #+NAME: greper
-  #+begin_src shell :noweb yes :exports code
+   #+NAME: greper
+   #+begin_src shell :noweb yes :exports code
 greper () {
     grep -IRsn --exclude-dir=build --exclude=\*.bash_history "${@}"
 }
-  #+end_src
-** Timestamping
-   #+NAME: timestamp
-   #+begin_src shell :noweb yes :exports code
+   #+end_src
+*** Timestamping
+    #+NAME: timestamp
+    #+begin_src shell :noweb yes :exports code
 timestamp () {
     date +"%Y-%m-%d_%H:%M:%S.%N"
 }
-   #+end_src
-** Git
+    #+end_src
+*** Git
 
-   #+NAME: git
-   #+begin_src shell :noweb yes :exports code
+    #+NAME: git
+    #+begin_src shell :noweb yes :exports code
 <<lazygit>>
 <<areTherePirateVersions>>
-   #+end_src
+    #+end_src
 
 
-*** Git hooks
+**** Git hooks
 
-    #+NAME: areTherePirateVersions
-    #+begin_src shell :noweb yes :exports code
+     #+NAME: areTherePirateVersions
+     #+begin_src shell :noweb yes :exports code
 areTherePirateVersions() {
     if [ "$(git tag | grep pirate | wc -l)" == 0 ]; then
         return 0
@@ -207,11 +213,11 @@ areTherePirateVersions() {
         return 1
     fi
 }
-    #+end_src
-**** pre-push
+     #+end_src
+***** pre-push
 
 
- #+begin_src shell :shebang #!/bin/bash :results output :tangle git-hooks/pre-push
+  #+begin_src shell :shebang #!/bin/bash :results output :tangle git-hooks/pre-push
 #!/usr/bin/env bash
 
 # An example hook script to verify what is about to be pushed.  Called by "git
@@ -276,11 +282,11 @@ else
 fi
 
 exit $rc
- #+end_src
-*** Lazygit
+  #+end_src
+**** Lazygit
 
-    #+NAME: lazygit
-    #+begin_src shell :noweb yes :exports code
+     #+NAME: lazygit
+     #+begin_src shell :noweb yes :exports code
 lazygit() {
     cd ~/Exocortex
     git add .
@@ -288,20 +294,32 @@ lazygit() {
     git push
     cd -
 }
+     #+end_src
+
+
+*** Jokes
+    #+NAME: jokes
+    #+begin_src shell :noweb yes :exports code
+<<hitchhikersGuideToTheGalaxy>>
     #+end_src
 
+**** The Hitchhiker's Guide to the Galaxy
 
-** Jokes
-   #+NAME: jokes
-   #+begin_src shell :noweb yes :exports code
-<<hitchhikersGuideToTheGalaxy>>
-   #+end_src
-
-*** The Hitchhiker's Guide to the Galaxy
-
-   #+NAME: hitchhikersGuideToTheGalaxy
-   #+begin_src shell :noweb yes :exports code
+    #+NAME: hitchhikersGuideToTheGalaxy
+    #+begin_src shell :noweb yes :exports code
 hitchhikersGuideToTheGalaxy() {
     return 42
 }
-   #+end_src
+    #+end_src
+** Pending classification
+* Aliases
+** Pending classification
+
+* Variables
+** Pending classification
+
+* Path
+** Pending classification
+
+* Prompt
+** Pending classification
