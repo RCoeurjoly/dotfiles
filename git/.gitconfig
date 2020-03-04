@@ -35,6 +35,7 @@
   excludesfile = ~/.gitignore
 	pager = diff-so-fancy | less --tabs=4 -RFX
 	editor = emacs
+	hookspath = ~/dotfiles/scripts/git-hooks
 [fetch]
   prune = true
 [grep]

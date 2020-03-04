@@ -63,6 +63,15 @@ generateclangcomplete () {
 timestamp () {
     date +"%Y-%m-%d_%H:%M:%S.%N"
 }
+areTherePirateVersions() {
+    if [ "$(git tag | grep pirate | wc -l)" == 0 ]; then
+        echo "No pirate versions. You can push"
+        return 0
+    else
+        echo "Cannot push, pirate version" $(git tag | grep pirate) "found"
+        return 1
+    fi
+}
 tangle_scripts () {
     emacs --batch -l org --eval '(org-babel-tangle-file "~/dotfiles/scripts/scripts.org")'
     echo $(sha512sum ~/dotfiles/scripts/scripts.org) > ~/dotfiles/bash/.bashrc.d/scripts_checksum
