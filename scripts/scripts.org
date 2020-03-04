@@ -260,7 +260,7 @@ done
 
 #areTherePirateVersions
 hitchhikersGuideToTheGalaxy
-return $?
+exit $?
 
 exit 0
 #+end_src
