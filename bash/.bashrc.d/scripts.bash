@@ -65,10 +65,8 @@ timestamp () {
 }
 areTherePirateVersions() {
     if [ "$(git tag | grep pirate | wc -l)" == 0 ]; then
-        echo "No pirate versions. You can push"
         return 0
     else
-        echo "Cannot push, pirate version" $(git tag | grep pirate) "found"
         return 1
     fi
 }

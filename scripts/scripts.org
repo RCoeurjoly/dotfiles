@@ -193,20 +193,17 @@ timestamp () {
    #+begin_src shell :noweb yes :exports code
 areTherePirateVersions() {
     if [ "$(git tag | grep pirate | wc -l)" == 0 ]; then
-        echo "No pirate versions. You can push"
         return 0
     else
-        echo "Cannot push, pirate version" $(git tag | grep pirate) "found"
         return 1
     fi
 }
    #+end_src
-
 *** pre-push
 
 
 #+begin_src shell :shebang #!/bin/bash :results output :tangle git-hooks/pre-push
-#!/bin/bash
+#!/usr/bin/env bash
 
 # An example hook script to verify what is about to be pushed.  Called by "git
 # push" after it has checked the remote status, but before anything has been
@@ -258,10 +255,18 @@ do
 	fi
 done
 
-areTherePirateVersions
-rc=$?; if [[ $rc != 0 ]]; then exit $rc; fi
+source ~/.bashrc # this does nothing, sourcing directly scripts.bash is needed. Weird.
+source ~/.bashrc.d/scripts.bash
 
-exit 0
+areTherePirateVersions
+rc=$?
+if [[ $rc != 0 ]]; then
+    echo "Cannot push, pirate version" $(git tag | grep pirate) "found"
+else
+    echo "No pirate versions. You can push"
+fi
+
+exit $rc
 #+end_src
 
 ** Jokes

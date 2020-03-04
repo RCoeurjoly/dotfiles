@@ -1,5 +1,5 @@
 #!/bin/bash
-#!/bin/bash
+#!/usr/bin/env bash
 
 # An example hook script to verify what is about to be pushed.  Called by "git
 # push" after it has checked the remote status, but before anything has been
@@ -51,7 +51,15 @@ do
 	fi
 done
 
-areTherePirateVersions
-rc=$?; if [[ $rc != 0 ]]; then exit $rc; fi
+source ~/.bashrc # this does nothing, sourcing directly scripts.bash is needed. Weird.
+source ~/.bashrc.d/scripts.bash
 
-exit 0
+areTherePirateVersions
+rc=$?
+if [[ $rc != 0 ]]; then
+    echo "Cannot push, pirate version" $(git tag | grep pirate) "found"
+else
+    echo "No pirate versions. You can push"
+fi
+
+exit $rc
