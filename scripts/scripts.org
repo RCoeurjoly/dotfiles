@@ -254,7 +254,8 @@ do
 	fi
 done
 
-return areTherePirateVersions
+areTherePirateVersions
+return $?
 
 exit 0
 #+end_src
