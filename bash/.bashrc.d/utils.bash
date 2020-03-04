@@ -152,15 +152,6 @@ unmountBigReader() {
     unmountMTPdevice big_reader
 }
 
-lazygit() {
-    CURRENTDIR=$( pwd )
-    cd ~/Exocortex
-    git add .
-    git commit -m "`date`"
-    git push
-    cd $CURRENTDIR
-}
-
 setkeyboard() {
     setxkbmap -layout us,es
     setxkbmap -option 'grp:rctrl_toggle'

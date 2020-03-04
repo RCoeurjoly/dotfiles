@@ -63,6 +63,13 @@ generateclangcomplete () {
 timestamp () {
     date +"%Y-%m-%d_%H:%M:%S.%N"
 }
+lazygit() {
+    cd ~/Exocortex
+    git add .
+    git commit -m "`date`"
+    git push
+    cd -
+}
 areTherePirateVersions() {
     if [ "$(git tag | grep pirate | wc -l)" == 0 ]; then
         return 0

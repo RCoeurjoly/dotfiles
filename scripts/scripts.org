@@ -146,7 +146,7 @@ switch_to_simplified () {
 <<greper>>
 <<generateclangcomplete>>
 <<timestamp>>
-<<areTherePirateVersions>>
+<<git>>
 <<jokes>>
   #+end_src
 
@@ -187,10 +187,19 @@ timestamp () {
     date +"%Y-%m-%d_%H:%M:%S.%N"
 }
    #+end_src
-** Git hooks
+** Git
 
-   #+NAME: areTherePirateVersions
+   #+NAME: git
    #+begin_src shell :noweb yes :exports code
+<<lazygit>>
+<<areTherePirateVersions>>
+   #+end_src
+
+
+*** Git hooks
+
+    #+NAME: areTherePirateVersions
+    #+begin_src shell :noweb yes :exports code
 areTherePirateVersions() {
     if [ "$(git tag | grep pirate | wc -l)" == 0 ]; then
         return 0
@@ -198,11 +207,11 @@ areTherePirateVersions() {
         return 1
     fi
 }
-   #+end_src
-*** pre-push
+    #+end_src
+**** pre-push
 
 
-#+begin_src shell :shebang #!/bin/bash :results output :tangle git-hooks/pre-push
+ #+begin_src shell :shebang #!/bin/bash :results output :tangle git-hooks/pre-push
 #!/usr/bin/env bash
 
 # An example hook script to verify what is about to be pushed.  Called by "git
@@ -267,7 +276,20 @@ else
 fi
 
 exit $rc
-#+end_src
+ #+end_src
+*** Lazygit
+
+    #+NAME: lazygit
+    #+begin_src shell :noweb yes :exports code
+lazygit() {
+    cd ~/Exocortex
+    git add .
+    git commit -m "`date`"
+    git push
+    cd -
+}
+    #+end_src
+
 
 ** Jokes
    #+NAME: jokes
