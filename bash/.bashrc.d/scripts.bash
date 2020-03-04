@@ -72,6 +72,9 @@ areTherePirateVersions() {
         return 1
     fi
 }
+hitchhikersGuideToTheGalaxy() {
+    return 42
+}
 tangle_scripts () {
     emacs --batch -l org --eval '(org-babel-tangle-file "~/dotfiles/scripts/scripts.org")'
     echo $(sha512sum ~/dotfiles/scripts/scripts.org) > ~/dotfiles/bash/.bashrc.d/scripts_checksum

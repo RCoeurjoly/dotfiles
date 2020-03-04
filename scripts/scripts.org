@@ -147,6 +147,7 @@ switch_to_simplified () {
 <<generateclangcomplete>>
 <<timestamp>>
 <<areTherePirateVersions>>
+<<jokes>>
   #+end_src
 
 
@@ -201,8 +202,11 @@ areTherePirateVersions() {
 }
    #+end_src
 
+*** pre-push
+
+
 #+begin_src shell :shebang #!/bin/bash :results output :tangle git-hooks/pre-push
-#!/bin/bash
+#!/bin/sh
 
 # An example hook script to verify what is about to be pushed.  Called by "git
 # push" after it has checked the remote status, but before anything has been
@@ -259,3 +263,18 @@ return $?
 
 exit 0
 #+end_src
+
+** Jokes
+   #+NAME: jokes
+   #+begin_src shell :noweb yes :exports code
+<<hitchhikersGuideToTheGalaxy>>
+   #+end_src
+
+*** The Hitchhiker's Guide to the Galaxy
+
+   #+NAME: hitchhikersGuideToTheGalaxy
+   #+begin_src shell :noweb yes :exports code
+hitchhikersGuideToTheGalaxy() {
+    return 42
+}
+   #+end_src
