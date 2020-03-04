@@ -206,7 +206,7 @@ areTherePirateVersions() {
 
 
 #+begin_src shell :shebang #!/bin/bash :results output :tangle git-hooks/pre-push
-#!/bin/sh
+#!/bin/bash
 
 # An example hook script to verify what is about to be pushed.  Called by "git
 # push" after it has checked the remote status, but before anything has been
@@ -258,8 +258,7 @@ do
 	fi
 done
 
-#areTherePirateVersions
-hitchhikersGuideToTheGalaxy
+areTherePirateVersions
 exit $?
 
 exit 0
