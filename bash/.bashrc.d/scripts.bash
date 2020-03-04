@@ -1,14 +1,4 @@
 #!/bin/bash
-switch_to_docker () {
-    build_dockerimage
-    CURRENTDIR=$( pwd )
-    MY_UID=$UID docker-compose -f ~/docker-services/dev/docker-compose.yml up -d
-    docker-compose -f ~/docker-services/dev/docker-compose.yml exec dev_rhel7 bash -c "cd ${CURRENTDIR} && bash"
-}
-
-build_dockerimage () {
-    docker image build ~/docker-services/base_dev/ -t service:base_dev --build-arg "USER=$USER" --build-arg "UID=$UID"
-}
 amIinDocker(){
     if isGCCgood && isOSgood; then
         echo "You are in Docker"
@@ -38,6 +28,16 @@ warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.'
     else
         return 1
     fi
+}
+switch_to_docker () {
+    build_dockerimage
+    CURRENTDIR=$( pwd )
+    MY_UID=$UID docker-compose -f ~/docker-services/dev/docker-compose.yml up -d
+    docker-compose -f ~/docker-services/dev/docker-compose.yml exec dev_rhel7 bash -c "cd ${CURRENTDIR} && bash"
+}
+
+build_dockerimage () {
+    docker image build ~/docker-services/base_dev/ -t service:base_dev --build-arg "USER=$USER" --build-arg "UID=$UID"
 }
 switch_to_traditional () {
     dconf write /desktop/ibus/engine/pinyin/InitSimplifiedChinese false; ibus restart
