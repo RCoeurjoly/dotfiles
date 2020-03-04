@@ -258,7 +258,8 @@ do
 	fi
 done
 
-areTherePirateVersions
+#areTherePirateVersions
+hitchhikersGuideToTheGalaxy
 return $?
 
 exit 0
