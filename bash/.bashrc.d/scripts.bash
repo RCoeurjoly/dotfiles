@@ -49,7 +49,7 @@ grepcpp () {
     greper --include=\*.{cpp,h} "${@}"
 }
 greper () {
-    grep -IRsn --exclude-dir=build --exclude=\*.bash_history "${@}"
+    grep -IRsnE --exclude-dir=build --exclude=\*.bash_history "${@}"
 }
 generateclangcomplete () {
     GIT_ROOT=$(git rev-parse --show-toplevel)
