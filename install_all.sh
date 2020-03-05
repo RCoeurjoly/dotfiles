@@ -21,9 +21,7 @@ stow git
 stow gdb
 stow lisp
 stow rss
-stow ruby
 
+# ibus-setup
 
-ibus-setup
-
-ibus restart
+# ibus restart
