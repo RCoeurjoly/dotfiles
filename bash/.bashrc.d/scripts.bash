@@ -46,10 +46,10 @@ switch_to_simplified () {
     dconf write /desktop/ibus/engine/pinyin/InitSimplifiedChinese true; ibus restart
 }
 grepcpp () {
-    greper --include=\*.{cpp,h} "${@}"
+    grep -IRsnE --exclude-dir=build --include="*.h" --include="*.cpp" --include="*.hpp" "${@}"
 }
 greper () {
-    grep -IRsnE --exclude-dir=build --exclude=\*.bash_history "${@}"
+    grep -IRsnE --exclude-dir=build --exclude="*.bash_history" "${@}"
 }
 generateclangcomplete () {
     GIT_ROOT=$(git rev-parse --show-toplevel)
