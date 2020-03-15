@@ -4,5 +4,7 @@
 #contributor : Roland Coeurjoly
 # --
 #+begin_src sh :dir /docker:drcoeurjoly@dev_dev_rhel7_1:~/$1 :results verbatim
+exec 2>&1
 $2
+:
 #+end_src

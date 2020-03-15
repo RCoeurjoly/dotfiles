@@ -296,5 +296,10 @@ of FILE in the current directory, suitable for creation"
 * Docker
 #+begin_src emacs-lisp
 (fset 'open_file_in_docker
-   "\C-x\C-f\C-a\C-k/docker\C-?::drcoeurjoly@dev_dev_rhel7_1:/home/drcoeurjoly/Exocortex/Exocortex.org")
+   "\C-x\C-f\C-a\C-k/docker\C-?::drcoeurjoly@dev_dev_rhel7_1:/data/programs/oms/include/vtstore/1.6.6/Node.h")
+#+end_src
+
+#+begin_src emacs-lisp
+(defun file_in_docker
+    find-file "/docker:drcoeurjoly@dev_dev_rhel7_1:/")
 #+end_src
