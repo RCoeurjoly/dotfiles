@@ -3,6 +3,10 @@ ulimit -c unlimited
 
 export ALTERNATE_EDITOR=""
 export BROWSER="firefox"
+export CC="gcc"
+export CXX="g++"
+export CMAKE_C_COMPILER="gcc"
+export CMAKE_CXX_COMPILER="g++"
 export EDITOR="$HOME/.bin/em"
 export EMAIL="rolandcoeurjoly@gmail.com"
 export GOPATH="$HOME/code/go"
