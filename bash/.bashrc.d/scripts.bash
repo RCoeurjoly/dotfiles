@@ -85,9 +85,9 @@ findFIXfield () {
     FixValues=/usr/local/quickfix-1.13.3.VT13/include/quickfix/FixValues.h
     VTFixFieldNumbers=/data/programs/vtcommon/include/vtfix-base/9.5.8/VTFixFieldNumbers.h
     VTFixFields=/data/programs/vtcommon/include/vtfix-base/9.5.8/VTFixFields.h
+    query_input=$1
 
-
-    grep -ih \"$1\" $VTFIXDataDictionary $FixValues $VTFixFieldNumbers $VTFixFields
+    grep -vh required $VTFIXDataDictionary $FixValues $VTFixFieldNumbers $VTFixFields | grep -Phi "field\s(number|name)=\".*?${query_input}.*?\""
 }
 tangle_scripts () {
     emacs --batch -l org --eval '(org-babel-tangle-file "~/dotfiles/scripts/scripts.org")'
