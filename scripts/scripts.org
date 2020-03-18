@@ -154,6 +154,7 @@ switch_to_simplified () {
 <<timestamp>>
 <<git>>
 <<jokes>>
+<<fix>>
    #+end_src
 
 
@@ -193,6 +194,26 @@ timestamp () {
     date +"%Y-%m-%d_%H:%M:%S.%N"
 }
     #+end_src
+*** Fix
+    #+NAME: fix
+    #+begin_src shell :noweb yes :exports code
+<<findFIXfield>>
+    #+end_src
+**** Find FIX field
+     #+NAME: findFIXfield
+     #+begin_src shell :noweb yes :exports code
+findFIXfield () {
+    VTFIXDataDictionary=/data/programs/vtcommon-files/dictionary/VTFIXDataDictionary.xml
+    FixValues=/usr/local/quickfix-1.13.3.VT13/include/quickfix/FixValues.h
+    VTFixFieldNumbers=/data/programs/vtcommon/include/vtfix-base/9.5.8/VTFixFieldNumbers.h
+    VTFixFields=/data/programs/vtcommon/include/vtfix-base/9.5.8/VTFixFields.h
+
+
+    grep -ih \"$1\" $VTFIXDataDictionary $FixValues $VTFixFieldNumbers $VTFixFields
+}
+     #+end_src
+
+
 *** Git
 
     #+NAME: git

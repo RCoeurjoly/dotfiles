@@ -80,6 +80,15 @@ areTherePirateVersions() {
 hitchhikersGuideToTheGalaxy() {
     return 42
 }
+findFIXfield () {
+    VTFIXDataDictionary=/data/programs/vtcommon-files/dictionary/VTFIXDataDictionary.xml
+    FixValues=/usr/local/quickfix-1.13.3.VT13/include/quickfix/FixValues.h
+    VTFixFieldNumbers=/data/programs/vtcommon/include/vtfix-base/9.5.8/VTFixFieldNumbers.h
+    VTFixFields=/data/programs/vtcommon/include/vtfix-base/9.5.8/VTFixFields.h
+
+
+    grep -ih \"$1\" $VTFIXDataDictionary $FixValues $VTFixFieldNumbers $VTFixFields
+}
 tangle_scripts () {
     emacs --batch -l org --eval '(org-babel-tangle-file "~/dotfiles/scripts/scripts.org")'
     echo $(sha512sum ~/dotfiles/scripts/scripts.org) > ~/dotfiles/bash/.bashrc.d/scripts_checksum

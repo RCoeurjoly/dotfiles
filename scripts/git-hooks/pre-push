@@ -46,7 +46,7 @@ do
 		if [ -n "$commit" ]
 		then
 			echo >&2 "Found WIP commit in $local_ref, not pushing"
-			#exit 1
+			exit 1
 		fi
 	fi
 done
