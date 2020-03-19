@@ -80,7 +80,7 @@ areTherePirateVersions() {
 hitchhikersGuideToTheGalaxy() {
     return 42
 }
-findFIXfield () {
+findFIXfield_in_Docker () {
     VTFIXDataDictionary=/data/programs/vtcommon-files/dictionary/VTFIXDataDictionary.xml
     FixValues=/usr/local/quickfix-1.13.3.VT13/include/quickfix/FixValues.h
     VTFixFieldNumbers=/data/programs/vtcommon/include/vtfix-base/9.5.8/VTFixFieldNumbers.h
@@ -88,6 +88,36 @@ findFIXfield () {
     query_input=$1
 
     grep -vh required $VTFIXDataDictionary $FixValues $VTFixFieldNumbers $VTFixFields | grep -Phi "field\s(number|name)=\".*?${query_input}.*?\""
+}
+
+findFIXfield () {
+    amIinDocker >/dev/null
+    rc=$?
+    if [[ $rc != 0 ]]; then
+        docker-compose -f ~/docker-services/dev/docker-compose.yml exec dev_rhel7 bash -c "source ~/.bashrc.d/scripts.bash >/dev/null && findFIXfield_in_Docker $1" 2>/dev/null | grep -Pi "field.*$1.*?\""
+    else
+        findFIXfield_in_Docker "$1"
+    fi
+}
+findMeaningOfValueOfFIXfield_in_Docker () {
+    VTFIXDataDictionary=/data/programs/vtcommon-files/dictionary/VTFIXDataDictionary.xml
+    FixValues=/usr/local/quickfix-1.13.3.VT13/include/quickfix/FixValues.h
+    VTFixFieldNumbers=/data/programs/vtcommon/include/vtfix-base/9.5.8/VTFixFieldNumbers.h
+    VTFixFields=/data/programs/vtcommon/include/vtfix-base/9.5.8/VTFixFields.h
+    VALUE=$1
+    FIELD_NAME=$2
+
+    grep -Phi  "const.*${FIELD_NAME}.*'${VALUE}'.*;" $VTFIXDataDictionary $FixValues $VTFixFieldNumbers $VTFixFields
+}
+
+findMeaningOfValueOfFIXfield () {
+    amIinDocker >/dev/null
+    rc=$?
+    if [[ $rc != 0 ]]; then
+        docker-compose -f ~/docker-services/dev/docker-compose.yml exec dev_rhel7 bash -c "source ~/.bashrc.d/scripts.bash >/dev/null && findMeaningOfValueOfFIXfield_in_Docker $1 $2" 2>/dev/null | grep "const.*;"
+    else
+        findFIXfield_in_Docker "$1" "$2"
+    fi
 }
 tangle_scripts () {
     emacs --batch -l org --eval '(org-babel-tangle-file "~/dotfiles/scripts/scripts.org")'
