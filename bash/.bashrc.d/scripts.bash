@@ -46,10 +46,10 @@ switch_to_simplified () {
     dconf write /desktop/ibus/engine/pinyin/InitSimplifiedChinese true; ibus restart
 }
 grepcpp () {
-    grep -IRsnE --exclude-dir=build --include="*.h" --include="*.cpp" --include="*.hpp" "${@}"
+    grep -IRsnEi --exclude-dir=build --include="*.h" --include="*.cpp" --include="*.hpp" "${@}"
 }
 greper () {
-    grep -IRsnE --exclude-dir=build --exclude="*.bash_history" "${@}"
+    grep -IRsnEi --exclude-dir=build --exclude="*.bash_history" "${@}"
 }
 generateclangcomplete () {
     GIT_ROOT=$(git rev-parse --show-toplevel)
@@ -116,7 +116,7 @@ findMeaningOfValueOfFIXfield () {
     if [[ $rc != 0 ]]; then
         docker-compose -f ~/docker-services/dev/docker-compose.yml exec dev_rhel7 bash -c "source ~/.bashrc.d/scripts.bash >/dev/null && findMeaningOfValueOfFIXfield_in_Docker $1 $2" 2>/dev/null | grep "const.*;"
     else
-        findFIXfield_in_Docker "$1" "$2"
+        findMeaningOfValueOfFIXfield_in_Docker "$1" "$2"
     fi
 }
 tangle_scripts () {
