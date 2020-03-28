@@ -365,7 +365,8 @@ you should place your code here."
  '(python-shell-virtualenv-root "/home/rcl/readability-metric/")
  '(safe-local-variable-values
    (quote
-    ((helm-make-build-dir . "~/inntech/desarrollo/oms/oms-trd/build")
+    ((helm-make-build-dir . "~/inntech/desarrollo/oms/robot/build")
+     (helm-make-build-dir . "~/inntech/desarrollo/oms/oms-trd/build")
      (helm-make-build-dir . "build")
      (eval setq visual-line-mode t)
      (eval setq global-visual-line-mode t)

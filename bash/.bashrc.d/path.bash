@@ -25,5 +25,6 @@ pathmunge $HOME/.local/bin after
 pathmunge $GOPATH/bin after
 pathmunge $HOME/go/bin
 pathmunge $HOME/.gem/bin
+pathmunge /usr/lib64/ccache
 
 export PATH

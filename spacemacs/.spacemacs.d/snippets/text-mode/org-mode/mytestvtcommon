@@ -1,12 +1,12 @@
 # -*- mode: snippet -*-
-#name : myvtcommon
-#key : myvtcommon
+#name : mytestvtcommon
+#key : mytestvtcommon
 #contributor : Roland Coeurjoly
 # --
 #+header: :engine mysql
 #+header: :dbuser root
 #+header: :dbpassword redhatbolsa
-#+header: :database vtcommon
+#+header: :database testrd_vtcommon
 #+begin_src sql
 $0
 #+end_src

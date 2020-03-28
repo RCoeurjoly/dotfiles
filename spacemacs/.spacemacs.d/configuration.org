@@ -188,8 +188,9 @@ Insertion of code blocks
     #+end_src
 
 ** Links
+   By default is eww
    #+begin_src emacs-lisp
-(setq browse-url-browser-function 'eww-browse-url)
+;;(setq browse-url-browser-function 'eww-browse-url)
    #+end_src
 
 ** Export
@@ -220,6 +221,11 @@ Use flycheck in the appropriate buffers:
 ;;((c++-mode (helm-make-build-dir . "build/")))
 ;;(put 'helm-make-build-dir 'safe-local-variable 'stringp)
     #+end_src
+**** Compiling
+     #+begin_src emacs-lisp
+(setq compile-command "docker-compose -f ~/docker-services/dev/docker-compose.yml exec dev_rhel7 bash -c \"make\"")
+     #+end_src
+
 
 *** Python
 #+BEGIN_SRC emacs-lisp
@@ -296,6 +302,12 @@ of FILE in the current directory, suitable for creation"
 #+BEGIN_SRC emacs-lisp
 (find-file "~/Exocortex/Exocortex.org")
 #+END_SRC
+* Diff
+  #+begin_src emacs-lisp
+(setq ediff-diff-options "-w")
+(setq diff-switches "-u --ignore-space-change")
+  #+end_src
+
 * Docker
 #+begin_src emacs-lisp
 (fset 'open_file_in_docker

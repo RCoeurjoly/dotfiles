@@ -9,7 +9,7 @@ amIinDocker(){
     fi
 }
 isOSgood(){
-    REDHAT_RELEASE_IN_DOCKER='CentOS Linux release 7.5.1804 (Core) '
+    REDHAT_RELEASE_IN_DOCKER='CentOS Linux release 7.7.1908 (Core)'
 
     if [ "$(cat /etc/redhat-release)" == "${REDHAT_RELEASE_IN_DOCKER}" ]; then
         return 0
@@ -18,7 +18,7 @@ isOSgood(){
     fi
 }
 isGCCgood(){
-    GCC_IN_DOCKER='gcc (GCC) 4.8.5 20150623 (Red Hat 4.8.5-36)
+    GCC_IN_DOCKER='gcc (GCC) 4.8.5 20150623 (Red Hat 4.8.5-39)
 Copyright (C) 2015 Free Software Foundation, Inc.
 This is free software; see the source for copying conditions.  There is NO
 warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.'
@@ -30,14 +30,25 @@ warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.'
     fi
 }
 switch_to_docker () {
-    build_dockerimage
-    CURRENTDIR=$( pwd )
-    MY_UID=$UID docker-compose -f ~/docker-services/dev/docker-compose.yml up -d
-    docker-compose -f ~/docker-services/dev/docker-compose.yml exec dev_rhel7 bash -c "cd ${CURRENTDIR} && bash"
+    amIinDocker >/dev/null
+    rc=$?
+    if [[ $rc != 0 ]]; then
+        CURRENTDIR=$( pwd )
+        build_dockerimage
+        MY_UID=$UID docker-compose -f ~/docker-services/dev/docker-compose.yml up -d
+        docker-compose -f ~/docker-services/dev/docker-compose.yml exec dev_rhel7 bash -c "cd ${CURRENTDIR} && bash"
+    else
+        echo "You are already in Docker, genius"
+        return 0
+    fi
 }
 
 build_dockerimage () {
     docker image build ~/docker-services/base_dev/ -t service:base_dev --build-arg "USER=$USER" --build-arg "UID=$UID"
+}
+executeInDocker () {
+    CURRENTDIR=$( pwd )
+    docker-compose -f ~/docker-services/dev/docker-compose.yml exec dev_rhel7 bash -c "cd ${CURRENTDIR} && $1"
 }
 switch_to_traditional () {
     dconf write /desktop/ibus/engine/pinyin/InitSimplifiedChinese false; ibus restart
@@ -94,7 +105,7 @@ findFIXfield () {
     amIinDocker >/dev/null
     rc=$?
     if [[ $rc != 0 ]]; then
-        docker-compose -f ~/docker-services/dev/docker-compose.yml exec dev_rhel7 bash -c "source ~/.bashrc.d/scripts.bash >/dev/null && findFIXfield_in_Docker $1" 2>/dev/null | grep -Pi"field.*$1.*?\""
+        docker-compose -f ~/docker-services/dev/docker-compose.yml exec dev_rhel7 bash -c "source ~/.bashrc.d/scripts.bash >/dev/null && findFIXfield_in_Docker $1" 2>/dev/null | grep -Pi "field.*$1.*?\""
     else
         findFIXfield_in_Docker "$1"
     fi
