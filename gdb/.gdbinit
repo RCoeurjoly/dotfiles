@@ -2,6 +2,7 @@
 set history save on
 #set history remove-duplicates unlimited
 set history filename ~/.gdb_history
+set print elements 0
 handle SIG35 nostop noprint pass noignore
 #
 #   STL GDB evaluators/views/utilities - 1.03

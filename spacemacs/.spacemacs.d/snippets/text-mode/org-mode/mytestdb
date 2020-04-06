@@ -7,6 +7,7 @@
 #+header: :dbuser root
 #+header: :dbpassword redhatbolsa
 #+header: :database testrd_omsdb
+#+header: :dbhost db
 #+begin_src sql
 $0
 #+end_src

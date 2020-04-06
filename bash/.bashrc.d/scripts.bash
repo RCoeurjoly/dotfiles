@@ -115,10 +115,14 @@ findMeaningOfValueOfFIXfield_in_Docker () {
     FixValues=/usr/local/quickfix-1.13.3.VT13/include/quickfix/FixValues.h
     VTFixFieldNumbers=/data/programs/vtcommon/include/vtfix-base/9.5.8/VTFixFieldNumbers.h
     VTFixFields=/data/programs/vtcommon/include/vtfix-base/9.5.8/VTFixFields.h
-    VALUE=$1
-    FIELD_NAME=$2
 
-    grep -Phi  "const.*${FIELD_NAME}.*'${VALUE}'.*;" $VTFIXDataDictionary $FixValues $VTFixFieldNumbers $VTFixFields
+    if [ "$#" == 2 ]; then
+        VALUE="$2"
+    else
+        VALUE=
+    fi
+    FIELD_NAME=$1
+    grep -Phi  "const.*${FIELD_NAME}.*${VALUE}.*;" $VTFIXDataDictionary $FixValues $VTFixFieldNumbers $VTFixFields
 }
 
 findMeaningOfValueOfFIXfield () {

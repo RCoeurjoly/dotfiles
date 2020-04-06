@@ -280,6 +280,12 @@ of FILE in the current directory, suitable for creation"
  (require 'compile)
  (add-hook 'verilog-mode-hook 'fundamental-mode-hook (lambda () (set (make-local-variable 'compile-command) (format "make -f %s " (get-closest-pathname)))))
 #+END_SRC
+
+*** Compile default
+    #+begin_src emacs-lisp
+(setq compile-command "executeInDocker make")
+    #+end_src
+
 ** Hardware
 *** Verilog
 #+BEGIN_SRC emacs-lisp

@@ -374,7 +374,8 @@ you should place your code here."
      (eval spacemacs/toggle-spelling-checking-off)
      (eval spacemacs/toggle-spelling-checking-off)
      (eval toggle-spelling-checking-off 1)
-     (eval toggle-spelling-checking-off)))))
+     (eval toggle-spelling-checking-off))))
+ '(send-mail-function (quote mailclient-send-it)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
