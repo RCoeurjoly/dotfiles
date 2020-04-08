@@ -1,5 +1,6 @@
 #set history size unlimited
 set history save on
+set print elements 0
 #set history remove-duplicates unlimited
 set history filename ~/.gdb_history
 set print elements 0
