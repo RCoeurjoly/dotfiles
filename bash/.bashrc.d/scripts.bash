@@ -134,6 +134,12 @@ findMeaningOfValueOfFIXfield () {
         findMeaningOfValueOfFIXfield_in_Docker "$1" "$2"
     fi
 }
+tcr_loop() {
+    test_command="$@"
+    echo "Commands passed to tcr_loop:" "${test_command}"
+    # inotify-hookable --watch-directories $(pwd) --quiet -c "tcr.sh ${test_command}"
+    inotify-hookable --watch-directories $(pwd) --quiet -c "bash -C \"\"tcr.sh ${test_command}"
+}
 tangle_scripts () {
     emacs --batch -l org --eval '(org-babel-tangle-file "~/dotfiles/scripts/scripts.org")'
     echo $(sha512sum ~/dotfiles/scripts/scripts.org) > ~/dotfiles/bash/.bashrc.d/scripts_checksum

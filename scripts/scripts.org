@@ -173,6 +173,7 @@ switch_to_simplified () {
 <<git>>
 <<jokes>>
 <<fix_protocol>>
+<<TCR>>
    #+end_src
 
 *** C++ stuff
@@ -211,6 +212,17 @@ timestamp () {
     date +"%Y-%m-%d_%H:%M:%S.%N"
 }
     #+end_src
+*** test && commit || revert (TCR)
+    #+NAME: TCR
+    #+begin_src shell :noweb yes :exports code
+tcr_loop() {
+    test_command="$@"
+    echo "Commands passed to tcr_loop:" "${test_command}"
+    # inotify-hookable --watch-directories $(pwd) --quiet -c "tcr.sh ${test_command}"
+    inotify-hookable --watch-directories $(pwd) --quiet -c "bash -C \"\"tcr.sh ${test_command}"
+}
+    #+end_src
+
 *** Fix protocol
     #+NAME: fix_protocol
     #+begin_src shell :noweb yes :exports code
