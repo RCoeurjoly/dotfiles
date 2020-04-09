@@ -9,5 +9,5 @@ isWorkDirClean(){
 test_command="$@"
 
 if ! isWorkDirClean; then
-    $test_command && git commit -am "WIP" || git checkout -- .
+    $test_command && git commit -am "WIP" || git reset --hard
 fi
