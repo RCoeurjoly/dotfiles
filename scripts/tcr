@@ -1,6 +1,9 @@
 #!/bin/bash
 isWorkDirClean(){
-    git diff-index --quiet HEAD
+    if [ -z "$(git status --porcelain)" ]; then
+        return 0
+    fi
+    return 1
 }
 
 test_command="$@"

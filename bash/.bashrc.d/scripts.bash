@@ -89,7 +89,10 @@ areTherePirateVersions() {
     fi
 }
 isWorkDirClean(){
-    git diff-index --quiet HEAD
+    if [ -z "$(git status --porcelain)" ]; then
+        return 0
+    fi
+    return 1
 }
 hitchhikersGuideToTheGalaxy() {
     return 42
@@ -139,6 +142,19 @@ findMeaningOfValueOfFIXfield () {
 }
 tcr_loop() {
     test_command="$@"
+
+    if ! isWorkDirClean; then
+        echo "Please make sure you have a clean working directory before starting the TCR loop"
+        echo "Commit changes and come back for some fun!"
+        return 1
+    fi
+
+    if ! ${test_command}; then
+        echo
+        echo "Please make sure the test command passes before starting the TCR loop"
+        echo "Maybe test a smaller subcase more relevant to the files you are going to work on?"
+        return 1
+    fi
     inotify-hookable --watch-directories $(pwd) --quiet -c "tcr ${test_command}"
 }
 tangle_scripts () {

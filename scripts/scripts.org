@@ -18,13 +18,29 @@ fi
     #+begin_src shell :noweb yes :exports code
 tcr_loop() {
     test_command="$@"
+
+    if ! isWorkDirClean; then
+        echo "Please make sure you have a clean working directory before starting the TCR loop"
+        echo "Commit changes and come back for some fun!"
+        return 1
+    fi
+
+    if ! ${test_command}; then
+        echo
+        echo "Please make sure the test command passes before starting the TCR loop"
+        echo "Maybe test a smaller subcase more relevant to the files you are going to work on?"
+        return 1
+    fi
     inotify-hookable --watch-directories $(pwd) --quiet -c "tcr ${test_command}"
 }
     #+end_src
 
     #+begin_src shell :shebang #!/bin/bash :noweb yes :results output :tangle tcr
 isWorkDirClean(){
-    git diff-index --quiet HEAD
+    if [ -z "$(git status --porcelain)" ]; then
+        return 0
+    fi
+    return 1
 }
 
 test_command="$@"
@@ -249,7 +265,10 @@ lazygit() {
      #+NAME: isWorkDirClean
      #+begin_src shell :noweb yes :exports code
 isWorkDirClean(){
-    git diff-index --quiet HEAD
+    if [ -z "$(git status --porcelain)" ]; then
+        return 0
+    fi
+    return 1
 }
      #+end_src
 
