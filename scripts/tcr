@@ -1,0 +1,10 @@
+#!/bin/bash
+isWorkDirClean(){
+    git diff-index --quiet HEAD
+}
+
+test_command="$@"
+
+if ! isWorkDirClean; then
+    $test_command && git commit -am "WIP" || git checkout -- .
+fi

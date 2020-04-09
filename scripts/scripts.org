@@ -12,6 +12,262 @@ if [ $? -eq 1 ]; then
     source ~/.bashrc
 fi
    #+end_src
+** Programming
+*** test && commit || revert (TCR)
+    #+NAME: TCR
+    #+begin_src shell :noweb yes :exports code
+tcr_loop() {
+    test_command="$@"
+    inotify-hookable --watch-directories $(pwd) --quiet -c "tcr ${test_command}"
+}
+    #+end_src
+
+    #+begin_src shell :shebang #!/bin/bash :noweb yes :results output :tangle tcr
+isWorkDirClean(){
+    git diff-index --quiet HEAD
+}
+
+test_command="$@"
+
+if ! isWorkDirClean; then
+    $test_command && git commit -am "WIP" || git checkout -- .
+fi
+   #+end_src
+*** Architecture
+   #+NAME: programming
+   #+begin_src shell :noweb yes :exports code
+<<grepcpp>>
+<<greper>>
+<<generateclangcomplete>>
+<<timestamp>>
+<<git>>
+<<jokes>>
+<<fix_protocol>>
+<<TCR>>
+   #+end_src
+
+*** C++ stuff
+
+ #+NAME: generateclangcomplete
+ #+begin_src shell :noweb yes :exports code
+generateclangcomplete () {
+    GIT_ROOT=$(git rev-parse --show-toplevel)
+    echo "Removing"${GIT_ROOT}/build/
+    rm -rf ${GIT_ROOT}/build/
+    mkdir ${GIT_ROOT}/build/
+    cd ${GIT_ROOT}/build
+    clangcompletepp
+    cd -
+}
+ #+end_src
+*** Grepping away!
+
+   #+NAME: grepcpp
+   #+begin_src shell :noweb yes :exports code
+grepcpp () {
+    grep -IRsnEi --exclude-dir=build --include="*.h" --include="*.cpp" --include="*.hpp" "${@}"
+}
+   #+end_src
+
+   #+NAME: greper
+   #+begin_src shell :noweb yes :exports code
+greper () {
+    grep -IRsnEi --exclude-dir=build --exclude="*.bash_history" "${@}"
+}
+   #+end_src
+*** Timestamping
+    #+NAME: timestamp
+    #+begin_src shell :noweb yes :exports code
+timestamp () {
+    date +"%Y-%m-%d_%H:%M:%S.%N"
+}
+    #+end_src
+*** Fix protocol
+    #+NAME: fix_protocol
+    #+begin_src shell :noweb yes :exports code
+<<findFIXfield>>
+<<findMeaningOfValueOfFIXfield>>
+    #+end_src
+**** Find FIX field
+     #+NAME: findFIXfield
+     #+begin_src shell :noweb yes :exports code
+findFIXfield_in_Docker () {
+    VTFIXDataDictionary=/data/programs/vtcommon-files/dictionary/VTFIXDataDictionary.xml
+    FixValues=/usr/local/quickfix-1.13.3.VT13/include/quickfix/FixValues.h
+    VTFixFieldNumbers=/data/programs/vtcommon/include/vtfix-base/9.5.8/VTFixFieldNumbers.h
+    VTFixFields=/data/programs/vtcommon/include/vtfix-base/9.5.8/VTFixFields.h
+    query_input=$1
+
+    grep -vh required $VTFIXDataDictionary $FixValues $VTFixFieldNumbers $VTFixFields | grep -Phi "field\s(number|name)=\".*?${query_input}.*?\""
+}
+
+findFIXfield () {
+    amIinDocker >/dev/null
+    rc=$?
+    if [[ $rc != 0 ]]; then
+        docker-compose -f ~/docker-services/dev/docker-compose.yml exec dev_rhel7 bash -c "source ~/.bashrc.d/scripts.bash >/dev/null && findFIXfield_in_Docker $1" 2>/dev/null | grep -Pi "field.*$1.*?\""
+    else
+        findFIXfield_in_Docker "$1"
+    fi
+}
+     #+end_src
+
+
+**** Find value of field
+     #+NAME: findMeaningOfValueOfFIXfield
+     #+begin_src shell :noweb yes :exports code
+findMeaningOfValueOfFIXfield_in_Docker () {
+    VTFIXDataDictionary=/data/programs/vtcommon-files/dictionary/VTFIXDataDictionary.xml
+    FixValues=/usr/local/quickfix-1.13.3.VT13/include/quickfix/FixValues.h
+    VTFixFieldNumbers=/data/programs/vtcommon/include/vtfix-base/9.5.8/VTFixFieldNumbers.h
+    VTFixFields=/data/programs/vtcommon/include/vtfix-base/9.5.8/VTFixFields.h
+
+    if [ "$#" == 2 ]; then
+        VALUE="$2"
+    else
+        VALUE=
+    fi
+    FIELD_NAME=$1
+    grep -Phi  "const.*${FIELD_NAME}.*${VALUE}.*;" $VTFIXDataDictionary $FixValues $VTFixFieldNumbers $VTFixFields
+}
+
+findMeaningOfValueOfFIXfield () {
+    amIinDocker >/dev/null
+    rc=$?
+    if [[ $rc != 0 ]]; then
+        docker-compose -f ~/docker-services/dev/docker-compose.yml exec dev_rhel7 bash -c "source ~/.bashrc.d/scripts.bash >/dev/null && findMeaningOfValueOfFIXfield_in_Docker $1 $2" 2>/dev/null | grep "const.*;"
+    else
+        findMeaningOfValueOfFIXfield_in_Docker "$1" "$2"
+    fi
+}
+#+end_src
+
+*** Git
+
+    #+NAME: git
+    #+begin_src shell :noweb yes :exports code
+<<lazygit>>
+<<areTherePirateVersions>>
+<<isWorkDirClean>>
+    #+end_src
+
+
+**** Git hooks
+
+     #+NAME: areTherePirateVersions
+     #+begin_src shell :noweb yes :exports code
+areTherePirateVersions() {
+    if [ "$(git tag | grep pirate | wc -l)" == 0 ]; then
+        return 0
+    else
+        return 1
+    fi
+}
+     #+end_src
+***** pre-push
+
+
+  #+begin_src shell :shebang #!/bin/bash :results output :tangle git-hooks/pre-push
+#!/usr/bin/env bash
+
+# An example hook script to verify what is about to be pushed.  Called by "git
+# push" after it has checked the remote status, but before anything has been
+# pushed.  If this script exits with a non-zero status nothing will be pushed.
+#
+# This hook is called with the following parameters:
+#
+# $1 -- Name of the remote to which the push is being done
+# $2 -- URL to which the push is being done
+#
+# If pushing without using a named remote those arguments will be equal.
+#
+# Information about the commits which are being pushed is supplied as lines to
+# the standard input in the form:
+#
+#   <local ref> <local sha1> <remote ref> <remote sha1>
+#
+# This sample shows how to prevent push of commits where the log message starts
+# with "WIP" (work in progress).
+
+remote="$1"
+url="$2"
+
+z40=0000000000000000000000000000000000000000
+
+while read local_ref local_sha remote_ref remote_sha
+do
+	if [ "$local_sha" = $z40 ]
+	then
+		# Handle delete
+		:
+	else
+		if [ "$remote_sha" = $z40 ]
+		then
+			# New branch, examine all commits
+			range="$local_sha"
+		else
+			# Update to existing branch, examine new commits
+			range="$remote_sha..$local_sha"
+		fi
+
+		# Check for WIP commit
+		commit=`git rev-list -n 1 --grep '^WIP' "$range"`
+		if [ -n "$commit" ]
+		then
+			echo >&2 "Found WIP commit in $local_ref, not pushing"
+			exit 1
+		fi
+	fi
+done
+
+source ~/.bashrc # this does nothing, sourcing directly scripts.bash is needed. Weird.
+source ~/.bashrc.d/scripts.bash
+
+areTherePirateVersions
+rc=$?
+if [[ $rc != 0 ]]; then
+    echo "Cannot push, pirate version" $(git tag | grep pirate) "found"
+else
+    echo "No pirate versions. You can push"
+fi
+
+exit $rc
+  #+end_src
+**** Lazygit
+
+     #+NAME: lazygit
+     #+begin_src shell :noweb yes :exports code
+lazygit() {
+    cd ~/Exocortex
+    git add .
+    git commit -m "`date`"
+    git push
+    cd -
+}
+     #+end_src
+**** CleanDir
+     #+NAME: isWorkDirClean
+     #+begin_src shell :noweb yes :exports code
+isWorkDirClean(){
+    git diff-index --quiet HEAD
+}
+     #+end_src
+
+
+*** Jokes
+    #+NAME: jokes
+    #+begin_src shell :noweb yes :exports code
+<<hitchhikersGuideToTheGalaxy>>
+    #+end_src
+
+**** The Hitchhiker's Guide to the Galaxy
+
+    #+NAME: hitchhikersGuideToTheGalaxy
+    #+begin_src shell :noweb yes :exports code
+hitchhikersGuideToTheGalaxy() {
+    return 42
+}
+    #+end_src
 ** Tangling all these scripts
 *** Actual tangling
  #+NAME: tangle_scripts
@@ -162,244 +418,6 @@ switch_to_simplified () {
     dconf write /desktop/ibus/engine/pinyin/InitSimplifiedChinese true; ibus restart
 }
      #+end_src
-** Programming
-*** Architecture
-   #+NAME: programming
-   #+begin_src shell :noweb yes :exports code
-<<grepcpp>>
-<<greper>>
-<<generateclangcomplete>>
-<<timestamp>>
-<<git>>
-<<jokes>>
-<<fix_protocol>>
-<<TCR>>
-   #+end_src
-
-*** C++ stuff
-
- #+NAME: generateclangcomplete
- #+begin_src shell :noweb yes :exports code
-generateclangcomplete () {
-    GIT_ROOT=$(git rev-parse --show-toplevel)
-    echo "Removing"${GIT_ROOT}/build/
-    rm -rf ${GIT_ROOT}/build/
-    mkdir ${GIT_ROOT}/build/
-    cd ${GIT_ROOT}/build
-    clangcompletepp
-    cd -
-}
- #+end_src
-*** Grepping away!
-
-   #+NAME: grepcpp
-   #+begin_src shell :noweb yes :exports code
-grepcpp () {
-    grep -IRsnEi --exclude-dir=build --include="*.h" --include="*.cpp" --include="*.hpp" "${@}"
-}
-   #+end_src
-
-   #+NAME: greper
-   #+begin_src shell :noweb yes :exports code
-greper () {
-    grep -IRsnEi --exclude-dir=build --exclude="*.bash_history" "${@}"
-}
-   #+end_src
-*** Timestamping
-    #+NAME: timestamp
-    #+begin_src shell :noweb yes :exports code
-timestamp () {
-    date +"%Y-%m-%d_%H:%M:%S.%N"
-}
-    #+end_src
-*** test && commit || revert (TCR)
-    #+NAME: TCR
-    #+begin_src shell :noweb yes :exports code
-tcr_loop() {
-    test_command="$@"
-    echo "Commands passed to tcr_loop:" "${test_command}"
-    # inotify-hookable --watch-directories $(pwd) --quiet -c "tcr.sh ${test_command}"
-    inotify-hookable --watch-directories $(pwd) --quiet -c "bash -C \"tcr.sh ${test_command}\""
-}
-    #+end_src
-
-*** Fix protocol
-    #+NAME: fix_protocol
-    #+begin_src shell :noweb yes :exports code
-<<findFIXfield>>
-<<findMeaningOfValueOfFIXfield>>
-    #+end_src
-**** Find FIX field
-     #+NAME: findFIXfield
-     #+begin_src shell :noweb yes :exports code
-findFIXfield_in_Docker () {
-    VTFIXDataDictionary=/data/programs/vtcommon-files/dictionary/VTFIXDataDictionary.xml
-    FixValues=/usr/local/quickfix-1.13.3.VT13/include/quickfix/FixValues.h
-    VTFixFieldNumbers=/data/programs/vtcommon/include/vtfix-base/9.5.8/VTFixFieldNumbers.h
-    VTFixFields=/data/programs/vtcommon/include/vtfix-base/9.5.8/VTFixFields.h
-    query_input=$1
-
-    grep -vh required $VTFIXDataDictionary $FixValues $VTFixFieldNumbers $VTFixFields | grep -Phi "field\s(number|name)=\".*?${query_input}.*?\""
-}
-
-findFIXfield () {
-    amIinDocker >/dev/null
-    rc=$?
-    if [[ $rc != 0 ]]; then
-        docker-compose -f ~/docker-services/dev/docker-compose.yml exec dev_rhel7 bash -c "source ~/.bashrc.d/scripts.bash >/dev/null && findFIXfield_in_Docker $1" 2>/dev/null | grep -Pi "field.*$1.*?\""
-    else
-        findFIXfield_in_Docker "$1"
-    fi
-}
-     #+end_src
-
-
-**** Find value of field
-     #+NAME: findMeaningOfValueOfFIXfield
-     #+begin_src shell :noweb yes :exports code
-findMeaningOfValueOfFIXfield_in_Docker () {
-    VTFIXDataDictionary=/data/programs/vtcommon-files/dictionary/VTFIXDataDictionary.xml
-    FixValues=/usr/local/quickfix-1.13.3.VT13/include/quickfix/FixValues.h
-    VTFixFieldNumbers=/data/programs/vtcommon/include/vtfix-base/9.5.8/VTFixFieldNumbers.h
-    VTFixFields=/data/programs/vtcommon/include/vtfix-base/9.5.8/VTFixFields.h
-
-    if [ "$#" == 2 ]; then
-        VALUE="$2"
-    else
-        VALUE=
-    fi
-    FIELD_NAME=$1
-    grep -Phi  "const.*${FIELD_NAME}.*${VALUE}.*;" $VTFIXDataDictionary $FixValues $VTFixFieldNumbers $VTFixFields
-}
-
-findMeaningOfValueOfFIXfield () {
-    amIinDocker >/dev/null
-    rc=$?
-    if [[ $rc != 0 ]]; then
-        docker-compose -f ~/docker-services/dev/docker-compose.yml exec dev_rhel7 bash -c "source ~/.bashrc.d/scripts.bash >/dev/null && findMeaningOfValueOfFIXfield_in_Docker $1 $2" 2>/dev/null | grep "const.*;"
-    else
-        findMeaningOfValueOfFIXfield_in_Docker "$1" "$2"
-    fi
-}
-#+end_src
-
-*** Git
-
-    #+NAME: git
-    #+begin_src shell :noweb yes :exports code
-<<lazygit>>
-<<areTherePirateVersions>>
-    #+end_src
-
-
-**** Git hooks
-
-     #+NAME: areTherePirateVersions
-     #+begin_src shell :noweb yes :exports code
-areTherePirateVersions() {
-    if [ "$(git tag | grep pirate | wc -l)" == 0 ]; then
-        return 0
-    else
-        return 1
-    fi
-}
-     #+end_src
-***** pre-push
-
-
-  #+begin_src shell :shebang #!/bin/bash :results output :tangle git-hooks/pre-push
-#!/usr/bin/env bash
-
-# An example hook script to verify what is about to be pushed.  Called by "git
-# push" after it has checked the remote status, but before anything has been
-# pushed.  If this script exits with a non-zero status nothing will be pushed.
-#
-# This hook is called with the following parameters:
-#
-# $1 -- Name of the remote to which the push is being done
-# $2 -- URL to which the push is being done
-#
-# If pushing without using a named remote those arguments will be equal.
-#
-# Information about the commits which are being pushed is supplied as lines to
-# the standard input in the form:
-#
-#   <local ref> <local sha1> <remote ref> <remote sha1>
-#
-# This sample shows how to prevent push of commits where the log message starts
-# with "WIP" (work in progress).
-
-remote="$1"
-url="$2"
-
-z40=0000000000000000000000000000000000000000
-
-while read local_ref local_sha remote_ref remote_sha
-do
-	if [ "$local_sha" = $z40 ]
-	then
-		# Handle delete
-		:
-	else
-		if [ "$remote_sha" = $z40 ]
-		then
-			# New branch, examine all commits
-			range="$local_sha"
-		else
-			# Update to existing branch, examine new commits
-			range="$remote_sha..$local_sha"
-		fi
-
-		# Check for WIP commit
-		commit=`git rev-list -n 1 --grep '^WIP' "$range"`
-		if [ -n "$commit" ]
-		then
-			echo >&2 "Found WIP commit in $local_ref, not pushing"
-			exit 1
-		fi
-	fi
-done
-
-source ~/.bashrc # this does nothing, sourcing directly scripts.bash is needed. Weird.
-source ~/.bashrc.d/scripts.bash
-
-areTherePirateVersions
-rc=$?
-if [[ $rc != 0 ]]; then
-    echo "Cannot push, pirate version" $(git tag | grep pirate) "found"
-else
-    echo "No pirate versions. You can push"
-fi
-
-exit $rc
-  #+end_src
-**** Lazygit
-
-     #+NAME: lazygit
-     #+begin_src shell :noweb yes :exports code
-lazygit() {
-    cd ~/Exocortex
-    git add .
-    git commit -m "`date`"
-    git push
-    cd -
-}
-     #+end_src
-
-*** Jokes
-    #+NAME: jokes
-    #+begin_src shell :noweb yes :exports code
-<<hitchhikersGuideToTheGalaxy>>
-    #+end_src
-
-**** The Hitchhiker's Guide to the Galaxy
-
-    #+NAME: hitchhikersGuideToTheGalaxy
-    #+begin_src shell :noweb yes :exports code
-hitchhikersGuideToTheGalaxy() {
-    return 42
-}
-    #+end_src
 ** Pending classification
 * Aliases
 ** Pending classification

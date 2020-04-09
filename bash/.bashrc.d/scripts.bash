@@ -88,6 +88,9 @@ areTherePirateVersions() {
         return 1
     fi
 }
+isWorkDirClean(){
+    git diff-index --quiet HEAD
+}
 hitchhikersGuideToTheGalaxy() {
     return 42
 }
@@ -136,9 +139,7 @@ findMeaningOfValueOfFIXfield () {
 }
 tcr_loop() {
     test_command="$@"
-    echo "Commands passed to tcr_loop:" "${test_command}"
-    # inotify-hookable --watch-directories $(pwd) --quiet -c "tcr.sh ${test_command}"
-    inotify-hookable --watch-directories $(pwd) --quiet -c "bash -C \"tcr.sh ${test_command}\""
+    inotify-hookable --watch-directories $(pwd) --quiet -c "tcr ${test_command}"
 }
 tangle_scripts () {
     emacs --batch -l org --eval '(org-babel-tangle-file "~/dotfiles/scripts/scripts.org")'
