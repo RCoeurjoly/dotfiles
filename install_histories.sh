@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 rm ~/.bash_history
 rm ~/.gdb_history

@@ -18,6 +18,7 @@
 	pull = pull
 	lasttag = describe --tags
 	checkout = checkout
+	wip = commit -am 'WIP'
 [branch]
   autosetuprebase = always
 [color]

@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 # Many of my tools (and my development environment) use Ruby libraries. This
 # installs the necessary ones.
