@@ -47,10 +47,15 @@ isRebaseInProcess() {
     test -d "$(git rev-parse --git-path rebase-merge)" || test -d "$(git rev-parse --git-path rebase-apply) 2>/dev/null"
 }
 
+git-WIP () {
+    git add --all
+    git commit -m "WIP"
+}
+
 test_command="$@"
 
 if ! isWorkDirClean && ! isRebaseInProcess; then
-    $test_command && git commit -am "WIP" || git reset --hard
+    $test_command && git-WIP || git reset --hard
 fi
    #+end_src
 *** Architecture
@@ -170,6 +175,7 @@ findMeaningOfValueOfFIXfield () {
 <<areTherePirateVersions>>
 <<isWorkDirClean>>
 <<isRebaseInProcess>>
+<<git-WIP>>
     #+end_src
 
 
@@ -282,6 +288,15 @@ isWorkDirClean(){
      #+begin_src shell :noweb yes :exports code
 isRebaseInProcess() {
     test -d "$(git rev-parse --git-path rebase-merge)" || test -d "$(git rev-parse --git-path rebase-apply) 2>/dev/null"
+}
+     #+end_src
+
+**** WIP commit
+     #+NAME: git-WIP
+     #+begin_src shell :noweb yes :exports code
+git-WIP () {
+    git add --all
+    git commit -m "WIP"
 }
      #+end_src
 

@@ -97,6 +97,10 @@ isWorkDirClean(){
 isRebaseInProcess() {
     test -d "$(git rev-parse --git-path rebase-merge)" || test -d "$(git rev-parse --git-path rebase-apply) 2>/dev/null"
 }
+git-WIP () {
+    git add --all
+    git commit -m "WIP"
+}
 hitchhikersGuideToTheGalaxy() {
     return 42
 }

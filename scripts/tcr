@@ -10,8 +10,13 @@ isRebaseInProcess() {
     test -d "$(git rev-parse --git-path rebase-merge)" || test -d "$(git rev-parse --git-path rebase-apply) 2>/dev/null"
 }
 
+git-WIP () {
+    git add --all
+    git commit -m "WIP"
+}
+
 test_command="$@"
 
 if ! isWorkDirClean && ! isRebaseInProcess; then
-    $test_command && git commit -am "WIP" || git reset --hard
+    $test_command && git-WIP || git reset --hard
 fi
