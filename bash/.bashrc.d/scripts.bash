@@ -94,6 +94,9 @@ isWorkDirClean(){
     fi
     return 1
 }
+isRebaseInProcess() {
+    test -d "$(git rev-parse --git-path rebase-merge)" || test -d "$(git rev-parse --git-path rebase-apply) 2>/dev/null"
+}
 hitchhikersGuideToTheGalaxy() {
     return 42
 }
@@ -155,7 +158,7 @@ tcr_loop() {
         echo "Maybe test a smaller subcase more relevant to the files you are going to work on?"
         return 1
     fi
-    inotify-hookable --watch-directories $(pwd) --quiet -c "tcr ${test_command}"
+    inotify-hookable --ignore-paths $(pwd)/.git/ $(pwd)/build/ --watch-directories $(pwd) --quiet -c "tcr ${test_command}"
 }
 tangle_scripts () {
     emacs --batch -l org --eval '(org-babel-tangle-file "~/dotfiles/scripts/scripts.org")'

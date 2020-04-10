@@ -31,7 +31,7 @@ tcr_loop() {
         echo "Maybe test a smaller subcase more relevant to the files you are going to work on?"
         return 1
     fi
-    inotify-hookable --watch-directories $(pwd) --quiet -c "tcr ${test_command}"
+    inotify-hookable --ignore-paths $(pwd)/.git/ $(pwd)/build/ --watch-directories $(pwd) --quiet -c "tcr ${test_command}"
 }
     #+end_src
 
@@ -43,9 +43,13 @@ isWorkDirClean(){
     return 1
 }
 
+isRebaseInProcess() {
+    test -d "$(git rev-parse --git-path rebase-merge)" || test -d "$(git rev-parse --git-path rebase-apply) 2>/dev/null"
+}
+
 test_command="$@"
 
-if ! isWorkDirClean; then
+if ! isWorkDirClean && ! isRebaseInProcess; then
     $test_command && git commit -am "WIP" || git reset --hard
 fi
    #+end_src
@@ -165,6 +169,7 @@ findMeaningOfValueOfFIXfield () {
 <<lazygit>>
 <<areTherePirateVersions>>
 <<isWorkDirClean>>
+<<isRebaseInProcess>>
     #+end_src
 
 
@@ -269,6 +274,14 @@ isWorkDirClean(){
         return 0
     fi
     return 1
+}
+     #+end_src
+
+**** Rebase in process
+     #+NAME: isRebaseInProcess
+     #+begin_src shell :noweb yes :exports code
+isRebaseInProcess() {
+    test -d "$(git rev-parse --git-path rebase-merge)" || test -d "$(git rev-parse --git-path rebase-apply) 2>/dev/null"
 }
      #+end_src
 
