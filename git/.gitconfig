@@ -2,24 +2,26 @@
   aa = add --all
   amend = commit --amend
   br = branch
+	checkout = checkout
   checkout-pr = "!f() { git fetch origin pull/$1/head:pr-$1 && git checkout pr-$1; }; f"
   cm = commit -m
   co = checkout
   dc = diff --cached
+	diffcommit = "!f() { git diff $1~ $1; }; f"
   hist = log --pretty=format:\"%h %ad | %s%d [%an]\" --graph --date=short
+	isRebaseInProcess = "!f() { test -d \"$(git rev-parse --git-path rebase-merge)\" || test -d \"$(git rev-parse --git-path rebase-apply) 2>/dev/null\"; }; f"
+	isWorkDirClean = "!f() { if [ -z \"$(git status --porcelain)\" ]; then return 0; fi; return 1; }; f"
+	lasttag = describe --tags
   lg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
   loc = !git diff --stat `git hash-object -t tree /dev/null` | tail -1 | cut -d' ' -f5
   pr = pull-request
+	pull = pull
+	push = push
   st = status -sb
+	status = status
   sum = log --oneline --no-merges
 	unstage = reset HEAD
-	status = status
-	push = push
-	pull = pull
-	lasttag = describe --tags
-	checkout = checkout
 	wip = "!f() { git aa; git cm 'WIP'; }; f"
-	diffcommit = "!f() { git diff $1~ $1; }; f"
 [branch]
   autosetuprebase = always
 [color]

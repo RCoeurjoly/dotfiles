@@ -150,7 +150,7 @@ findMeaningOfValueOfFIXfield () {
 tcr_loop() {
     test_command="$@"
 
-    if ! isWorkDirClean; then
+    if ! git isworkdirclean; then
         echo "Please make sure you have a clean working directory before starting the TCR loop"
         echo "Commit changes and come back for some fun!"
         return 1
@@ -162,7 +162,13 @@ tcr_loop() {
         echo "Maybe test a smaller subcase more relevant to the files you are going to work on?"
         return 1
     fi
-    inotify-hookable --ignore-paths $(pwd)/.git/ $(pwd)/build/ --watch-directories $(pwd) --quiet -c "tcr ${test_command}"
+
+    inotify-hookable \
+        --watch-directories $(pwd) --quiet \
+        --ignore-paths $(pwd)/.git/ $(pwd)/build/ \
+        -c "if ! git isworkdirclean && ! git isrebaseinprocess; then \
+               ${test_command} && git wip || git reset --hard; \
+            fi"
 }
 tangle_scripts () {
     emacs --batch -l org --eval '(org-babel-tangle-file "~/dotfiles/scripts/scripts.org")'
