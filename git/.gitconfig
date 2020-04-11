@@ -18,7 +18,8 @@
 	pull = pull
 	lasttag = describe --tags
 	checkout = checkout
-	wip = commit -am 'WIP'
+	wip = "!f() { git aa; git cm 'WIP'; }; f"
+	diffcommit = "!f() { git diff $1~ $1; }; f"
 [branch]
   autosetuprebase = always
 [color]

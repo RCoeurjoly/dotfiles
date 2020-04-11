@@ -31,7 +31,7 @@ values."
    ;; List of configuration layers to load.
    dotspacemacs-configuration-layers
    '(
-d
+     d
      ;; ;; ----------------------------------------------------------------
      ;; ;; Example of useful layers you may want to use right away.
      ;; ;; Uncomment some layer names and press <SPC f e R> (Vim style) or
@@ -43,7 +43,8 @@ d
             ;; c-c++-enable-clang-format-on-save t
             ;; c-c++-enable-google-style t
             ;; c-c++-enable-google-newline t
-            ;; c-c++-enable-auto-newline t)
+     ;; c-c++-enable-auto-newline t)
+     html
      python
      imenu-list
      shell-scripts
