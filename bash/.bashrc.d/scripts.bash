@@ -60,7 +60,7 @@ grepcpp () {
     grep -IRsnEi --exclude-dir=build --include="*.h" --include="*.cpp" --include="*.hpp" "${@}"
 }
 greper () {
-    grep -IRsnEi --exclude-dir=build --exclude="*.bash_history" "${@}"
+    grep -IRsnEi --exclude-dir=env --exclude-dir=build --exclude="*.bash_history" "${@}"
 }
 generateclangcomplete () {
     GIT_ROOT=$(git rev-parse --show-toplevel)

@@ -97,7 +97,7 @@ grepcpp () {
    #+NAME: greper
    #+begin_src shell :noweb yes :exports code
 greper () {
-    grep -IRsnEi --exclude-dir=build --exclude="*.bash_history" "${@}"
+    grep -IRsnEi --exclude-dir=env --exclude-dir=build --exclude="*.bash_history" "${@}"
 }
    #+end_src
 *** Timestamping
