@@ -11,7 +11,7 @@ cd $INITIALDIR
 
 git clone --depth=1 https://github.com/Bash-it/bash-it.git ~/.bash_it
 
-curl -fsSL https://raw.githubusercontent.com/cask/cask/master/go | python
+
 
 git clone https://github.com/syl20bnr/spacemacs ~/.emacs.d
 
@@ -29,6 +29,7 @@ do
     fi
 done
 
+curl -fsSL https://raw.githubusercontent.com/cask/cask/master/go | python
 DEBIAN_PACKAGES="aptitude \
                         arandr \
                         build-essential \
