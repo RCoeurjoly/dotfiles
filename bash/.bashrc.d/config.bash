@@ -41,10 +41,14 @@ export DEBIAN_PACKAGES="aptitude \
                         build-essential \
                         clang \
                         cmake \
+                        acpi-call-dkms \
+                        tlp \
+                        tp-smapi-dkms \
                         curl \
                         docker \
                         docker-compose \
                         gdb \
+                        libfuse-dev \
                         gdbserver \
                         git \
                         global \
@@ -292,19 +296,6 @@ areTherePirateVersions() {
         return 1
     fi
 }
-isWorkDirClean(){
-    if [ -z "$(git status --porcelain)" ]; then
-        return 0
-    fi
-    return 1
-}
-isRebaseInProcess() {
-    test -d "$(git rev-parse --git-path rebase-merge)" || test -d "$(git rev-parse --git-path rebase-apply) 2>/dev/null"
-}
-git-WIP () {
-    git add --all
-    git commit -m "WIP"
-}
 hitchhikersGuideToTheGalaxy() {
     return 42
 }
@@ -373,25 +364,6 @@ tcr_loop() {
         -c "if ! git isworkdirclean && ! git isrebaseinprocess; then \
                ${test_command} && git wip || git reset --hard; \
             fi"
-}
-install_debian_packages() {
-    for package in ${DEBIAN_PACKAGES};
-    do
-        echo
-        echo "Installing" $package
-        echo
-        sudo apt -y install $package >&/dev/null
-    done
-}
-
-test_debian_packages() {
-    for package in ${DEBIAN_PACKAGES};
-    do
-        if ! dpkg -l $package; then
-            echo "Package" $package "is not installed"
-            return 1
-        fi
-    done
 }
 
 # -*- mode: sh -*-
@@ -584,7 +556,7 @@ ishistoryuniq(){
 
 
 
-createEmacsLink() {
+create_emacs_link() {
     for location in $(whereis emacs);
     do
         SEARCH_RESULT="$(echo $location | grep "\/nix.*user-environment\/bin\/emacs")"
@@ -737,6 +709,43 @@ fi
 
 # When the shell exits, append to the history file instead of overwriting it
 shopt -s histappend
+test_all() {
+    test_installation_all_packages && \
+    test_emacs
+}
+test_emacs() {
+    cd spacemacs/.spacemacs.d; cask install; cask exec ecukes --reporter spec
+}
+test_installation_debian_packages() {
+    for package in ${DEBIAN_PACKAGES};
+    do
+        if ! dpkg -l $package; then
+            echo "Package" $package "is not installed"
+            return 1
+        fi
+    done
+    return 0
+}
+
+test_installation_non_debian_packages() {
+    NON_DEBIAN_PACKAGES="simple-mtpfs \
+                            emacs \
+                           "
+
+    for package in ${NON_DEBIAN_PACKAGES};
+    do
+        if ! $package --version; then
+            echo "Package" $package "is not installed"
+            return 1
+        fi
+    done
+    return 0
+}
+
+test_installation_all_packages() {
+    test_installation_debian_packages && \
+    test_installation_non_debian_packages
+}
 create_checksum_file() {
     echo $(sha512sum ~/dotfiles/scripts/scripts.org) > ~/dotfiles/bash/.bashrc.d/scripts_checksum
 }

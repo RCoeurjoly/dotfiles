@@ -6,6 +6,7 @@
 <<aliases>>
 <<prompt>>
 <<utils>>
+<<test_functions>>
 <<tangle_scripts>>
   #+end_src
 
@@ -31,14 +32,135 @@ fi
  #+end_src
 
 * Utils
+** Instalation
+   #+NAME: installation_functions
+   #+begin_src shell :noweb yes :exports code
+<<apt_functions>>
+<<simple-mtpfs_installation>>
+<<emacs_installation>>
+<<spacemacs_installation>>
+<<nix_installation>>
+<<cask_installation>>
+<<install_all>>
+   #+end_src
+
+*** Install all
+    #+NAME: install_all
+    #+begin_src shell :noweb yes :exports code
+install_all() {
+   install_debian_packages
+   install_bash_it
+   install_cask
+   install_nix
+   install_spacemacs
+   install_emacs
+   install_simple-mtpfs
+   rm -f ~/.bashrc
+   stow_dirs
+}
+    #+end_src
+
+*** Stow dirs
+    #+NAME: stow_dirs
+    #+begin_src shell :noweb yes :exports code
+stow_dirs() {
+    stow bash
+    stow spacemacs
+    stow x-windows
+    stow git
+    stow gdb
+    stow lisp
+    stow rss
+}
+    #+end_src
+
+*** APT
+    #+NAME: apt_functions
+    #+begin_src shell :noweb yes :exports code
+install_debian_packages() {
+    for package in ${DEBIAN_PACKAGES};
+    do
+        echo
+        echo "Installing" $package
+        echo
+        sudo apt -y install $package >&/dev/null
+    done
+}
+    #+end_src
+
+*** GNU Emacs
+    #+NAME: emacs_installation
+    #+begin_src shell :noweb yes :exports code
+install_emacs() {
+    nix-env --install emacs
+    create_emacs_link
+}
+    #+end_src
+
+*** Nix
+    #+NAME: nix_installation
+    #+begin_src shell :noweb yes :exports code
+install_nix(){
+    curl https://nixos.org/nix/install | sh
+    . /home/runner/.nix-profile/etc/profile.d/nix.sh
+}
+    #+end_src
+
+*** Spacemacs
+    #+NAME: spacemacs_installation
+    #+begin_src shell :noweb yes :exports code
+install_spacemacs() {
+    git clone https://github.com/syl20bnr/spacemacs ~/.emacs.d
+}
+    #+end_src
+
+*** Cask
+    #+NAME: cask_installation
+    #+begin_src shell :noweb yes :exports code
+install_cask() {
+    curl -fsSL https://raw.githubusercontent.com/cask/cask/master/go | python
+}
+    #+end_src
+
+*** Bash it
+    #+NAME: bash_it_installation
+    #+begin_src shell :noweb yes :exports code
+install_bash_it() {
+    git clone --depth=1 https://github.com/Bash-it/bash-it.git ~/.bash_it
+}
+    #+end_src
+
+*** MTP
+    #+NAME: simple-mtpfs_installation
+    #+begin_src shell :noweb yes :exports code
+install_simple-mtpfs() {
+    INITIALDIR=$( pwd )
+    git clone https://github.com/phatina/simple-mtpfs ~/simple-mtpfs
+    cd ~/simple-mtpfs
+    ./autogen.sh
+    mkdir build && cd build
+    ../configure
+    make
+    sudo make install
+    rm -rf ~/simple-mtpfs
+    cd $INITIALDIR
+}
+    #+end_src
+*** Installation script
+    #+NAME: installation_script
+    #+begin_src shell :shebang #!/bin/bash :results output :noweb yes :tangle ../install.sh
+source ~/.bashrc.d/config.bash
+install_all
+  #+end_src
+
 ** Architecture
    #+NAME: utils
    #+begin_src shell :shebang #!/bin/bash :noweb yes :results output
 <<Docker>>
 <<language>>
 <<programming>>
-<<instalation-functions>>
-<<utils-pending-classification>>
+<<instalation_functions>>
+<<utils_pending_classification>>
    #+end_src
 ** Docker
    #+NAME: Docker
@@ -297,12 +419,7 @@ findMeaningOfValueOfFIXfield () {
     #+begin_src shell :noweb yes :exports code
 <<lazygit>>
 <<areTherePirateVersions>>
-<<isWorkDirClean>>
-<<isRebaseInProcess>>
-<<git-WIP>>
     #+end_src
-
-
 **** Git hooks
 
      #+NAME: areTherePirateVersions
@@ -396,34 +513,6 @@ lazygit() {
     cd -
 }
      #+end_src
-**** CleanDir
-     #+NAME: isWorkDirClean
-     #+begin_src shell :noweb yes :exports code
-isWorkDirClean(){
-    if [ -z "$(git status --porcelain)" ]; then
-        return 0
-    fi
-    return 1
-}
-     #+end_src
-
-**** Rebase in process
-     #+NAME: isRebaseInProcess
-     #+begin_src shell :noweb yes :exports code
-isRebaseInProcess() {
-    test -d "$(git rev-parse --git-path rebase-merge)" || test -d "$(git rev-parse --git-path rebase-apply) 2>/dev/null"
-}
-     #+end_src
-
-**** WIP commit
-     #+NAME: git-WIP
-     #+begin_src shell :noweb yes :exports code
-git-WIP () {
-    git add --all
-    git commit -m "WIP"
-}
-     #+end_src
-
 *** Jokes
     #+NAME: jokes
     #+begin_src shell :noweb yes :exports code
@@ -437,37 +526,6 @@ git-WIP () {
 hitchhikersGuideToTheGalaxy() {
     return 42
 }
-    #+end_src
-
-** Instalation
-   #+NAME: instalation-functions
-   #+begin_src shell :noweb yes :exports code
-<<apt-functions>>
-   #+end_src
-
-*** APT
-    #+NAME: apt-functions
-    #+begin_src shell :noweb yes :exports code
-install_debian_packages() {
-    for package in ${DEBIAN_PACKAGES};
-    do
-        echo
-        echo "Installing" $package
-        echo
-        sudo apt -y install $package >&/dev/null
-    done
-}
-
-test_debian_packages() {
-    for package in ${DEBIAN_PACKAGES};
-    do
-        if ! dpkg -l $package; then
-            echo "Package" $package "is not installed"
-            return 1
-        fi
-    done
-}
-
     #+end_src
 
 ** Devices
@@ -490,7 +548,7 @@ test_debian_packages() {
      #+end_src
 
 ** Pending classification
-   #+NAME: utils-pending-classification
+   #+NAME: utils_pending_classification
    #+begin_src shell :noweb yes :exports code
 # -*- mode: sh -*-
 is_user_root () { [ ${EUID:-$(id -u)} -eq 0 ]; }
@@ -682,7 +740,7 @@ ishistoryuniq(){
 
 
 
-createEmacsLink() {
+create_emacs_link() {
     for location in $(whereis emacs);
     do
         SEARCH_RESULT="$(echo $location | grep "\/nix.*user-environment\/bin\/emacs")"
@@ -841,21 +899,25 @@ shopt -s histappend
 ** Architecture
    #+NAME: variables
    #+begin_src shell :noweb yes :exports code
-<<variables-pending-classification>>
-<<debian-packages>>
+<<variables_pending_classification>>
+<<debian_packages>>
    #+end_src
 ** Debian packages
-   #+NAME: debian-packages
+   #+NAME: debian_packages
    #+begin_src shell :noweb yes :exports code
 export DEBIAN_PACKAGES="aptitude \
                         arandr \
                         build-essential \
                         clang \
                         cmake \
+                        acpi-call-dkms \
+                        tlp \
+                        tp-smapi-dkms \
                         curl \
                         docker \
                         docker-compose \
                         gdb \
+                        libfuse-dev \
                         gdbserver \
                         git \
                         global \
@@ -880,10 +942,9 @@ export DEBIAN_PACKAGES="aptitude \
                         auto-complete-el \
 "
    #+end_src
-
 ** Pending classification
 
-   #+NAME: variables-pending-classification
+   #+NAME: variables_pending_classification
    #+begin_src shell :noweb yes :exports code
 source $HOME/.bin/git-completion.sh
 ulimit -c unlimited
@@ -1120,12 +1181,68 @@ set echo-control-characters Off
 set mark-directories On
 set mark-symlinked-directories On
   #+end_src
-* Instalation scripts
-** All
-** APT
-** tor
-** GNU Emacs
-** FPGA tools
-** ruby gems
-** udev rules
-** histories
+* Tests
+** Architecture
+   #+NAME: test_functions
+   #+begin_src shell :noweb yes :exports code
+<<test_all>>
+<<test_emacs>>
+<<test_packages>>
+   #+end_src
+
+** Test all
+   #+NAME: test_all
+   #+begin_src shell :noweb yes :exports code
+test_all() {
+    test_installation_all_packages && \
+    test_emacs
+}
+   #+end_src
+** Test emacs
+   #+NAME: test_emacs
+   #+begin_src shell :noweb yes :exports code
+test_emacs() {
+    cd spacemacs/.spacemacs.d; cask install; cask exec ecukes --reporter spec
+}
+   #+end_src
+
+** Test packages
+   #+NAME: test_packages
+   #+begin_src shell :noweb yes :exports code
+test_installation_debian_packages() {
+    for package in ${DEBIAN_PACKAGES};
+    do
+        if ! dpkg -l $package; then
+            echo "Package" $package "is not installed"
+            return 1
+        fi
+    done
+    return 0
+}
+
+test_installation_non_debian_packages() {
+    NON_DEBIAN_PACKAGES="simple-mtpfs \
+                            emacs \
+                           "
+
+    for package in ${NON_DEBIAN_PACKAGES};
+    do
+        if ! $package --version; then
+            echo "Package" $package "is not installed"
+            return 1
+        fi
+    done
+    return 0
+}
+
+test_installation_all_packages() {
+    test_installation_debian_packages && \
+    test_installation_non_debian_packages
+}
+   #+end_src
+** Test script
+   #+NAME: test_script
+   #+begin_src shell :shebang #!/bin/bash :results output :noweb yes :tangle ../test.sh
+source ~/.bashrc.d/config.bash
+test_all
+  #+end_src
