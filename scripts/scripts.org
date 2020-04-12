@@ -33,6 +33,18 @@ fi
 
 * Utils
 ** Instalation
+*** Installation script
+    #+NAME: installation_script
+    #+begin_src shell :shebang #!/bin/bash :results output :noweb yes :tangle ../install.sh
+if [ -e $HOME/.bashrc.d/config.bash ]; then
+    source $HOME/.bashrc.d/config.bash
+else
+    source bash/.bashrc.d/config.bash
+fi
+install_all
+  #+end_src
+
+*** Architecture
    #+NAME: installation_functions
    #+begin_src shell :noweb yes :exports code
 <<apt_functions>>
@@ -146,17 +158,6 @@ install_simple-mtpfs() {
     cd $INITIALDIR
 }
     #+end_src
-*** Installation script
-    #+NAME: installation_script
-    #+begin_src shell :shebang #!/bin/bash :results output :noweb yes :tangle ../install.sh
-if [ -e $HOME/.bashrc.d/config.bash ]; then
-    source $HOME/.bashrc.d/config.bash
-else
-    source .bashrc.d/config.bash
-fi
-install_all
-  #+end_src
-
 ** Architecture
    #+NAME: utils
    #+begin_src shell :shebang #!/bin/bash :noweb yes :results output
@@ -1186,6 +1187,17 @@ set mark-directories On
 set mark-symlinked-directories On
   #+end_src
 * Tests
+** Test script
+   #+NAME: test_script
+   #+begin_src shell :shebang #!/bin/bash :results output :noweb yes :tangle ../test.sh
+if [ -e $HOME/.bashrc.d/config.bash ]; then
+    source $HOME/.bashrc.d/config.bash
+else
+    source bash/.bashrc.d/config.bash
+fi
+
+test_all
+  #+end_src
 ** Architecture
    #+NAME: test_functions
    #+begin_src shell :noweb yes :exports code
@@ -1244,14 +1256,3 @@ test_installation_all_packages() {
     test_installation_non_debian_packages
 }
    #+end_src
-** Test script
-   #+NAME: test_script
-   #+begin_src shell :shebang #!/bin/bash :results output :noweb yes :tangle ../test.sh
-if [ -e $HOME/.bashrc.d/config.bash ]; then
-    source $HOME/.bashrc.d/config.bash
-else
-    source .bashrc.d/config.bash
-fi
-
-test_all
-  #+end_src
