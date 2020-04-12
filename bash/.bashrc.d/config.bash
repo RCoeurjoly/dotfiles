@@ -1,5 +1,5 @@
 #!/bin/bash
-source $HOME/.bin/git-completion.sh
+source $HOME/.bin/git-completion.sh || source bash/.bin/git-completion.sh
 ulimit -c unlimited
 
 export ALTERNATE_EDITOR=""
