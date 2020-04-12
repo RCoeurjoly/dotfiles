@@ -19,6 +19,9 @@ create_checksum_file() {
 }
 
 tangle_scripts () {
+    if ! test_installation_non_debian_packages; then
+        return 0
+    fi
     emacs --batch -l org --eval '(org-babel-tangle-file "~/dotfiles/scripts/scripts.org")'
     create_checksum_file
 }
