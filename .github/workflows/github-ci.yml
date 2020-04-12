@@ -10,4 +10,4 @@ jobs:
     - uses: actions/checkout@v1
     - name: Install and test
       run: |
-        export PATH="/home/runner/.cask/bin:$PATH" && source bash/.bashrc.d/config.bash && bash -i install.sh && bash -i test.sh
+        export PATH="/home/runner/.cask/bin:$PATH" && source bash/.bashrc && bash -i install.sh && bash -i test.sh
