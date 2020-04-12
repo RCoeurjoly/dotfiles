@@ -3,6 +3,6 @@
 #key : tangleshell
 #contributor : Roland Coeurjoly
 # --
-#+begin_src shell :shebang #!/bin/bash :results output :tangle $1
+#+begin_src shell :shebang #!/bin/bash :results output :noweb yes :tangle $1
 $2
 #+end_src

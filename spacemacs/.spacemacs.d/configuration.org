@@ -71,6 +71,14 @@ pairing or presenting code.
     #+begin_src emacs-lisp
 (setq org-hierarchical-todo-statistics t)
     #+end_src
+** Roam
+   #+begin_src emacs-lisp
+;;(setq org-roam-directory "/home/rcl/Exocortex/")
+(load-file "~/dotfiles/spacemacs/.spacemacs.d/layers/org-roam/packages.el")
+'(org-roam-completion-system (quote helm))
+;; '(org-roam-directory "~/zk" nil nil "Customized with use-package org-roam")
+   #+end_src
+
 ** Visual
     I like seeing a little downward-pointing arrow instead of the usual ellipsis
    (=...=) that org displays when there's stuff under a header.
@@ -184,7 +192,7 @@ Insertion of code blocks
 *** Project structure
     #+begin_src emacs-lisp
 (fset 'orgproject
-   [C-return M-right ?R ?a ?t ?i ?o ?n ?a ?l ?e C-return ?D ?e ?s ?i ?r ?e ?d ?  ?r ?e ?s ?u ?l ?t ? ?( ?D ?e ?f ?i ?n ?i ?t ?i ?o ?n ?  ?o ?f ?  ?D ?o ?n ?e ?) C-return ?R ?e ?l ?e ?v ?a ?n ?t ?  ?i ?n ?f ?o ?r ?m ?a ?t ?i ?o ?n C-return M-right ?S ?t ?r ?e ?a ?m ?  ?o ?f ?  ?c ?o ?n ?s ?c ?i ?o ?u ?s ?n ?e ?s ?s  C-return M-left ?A ?c ?t ?i ?o ?n ?s])
+   [C-return M-right ?R ?a ?t ?i ?o ?n ?a ?l ?e C-return ?D ?e ?s ?i ?r ?e ?d ?  ?r ?e ?s ?u ?l ?t ? ?\( ?D ?e ?f ?i ?n ?i ?t ?i ?o ?n ?  ?o ?f ?  ?D ?o ?n ?e ?\) C-return ?R ?e ?l ?e ?v ?a ?n ?t ?  ?i ?n ?f ?o ?r ?m ?a ?t ?i ?o ?n C-return M-right ?S ?t ?r ?e ?a ?m ?  ?o ?f ?  ?c ?o ?n ?s ?c ?i ?o ?u ?s ?n ?e ?s ?s  C-return M-left ?A ?c ?t ?i ?o ?n ?s])
     #+end_src
 
 ** Links
@@ -316,11 +324,11 @@ of FILE in the current directory, suitable for creation"
 
 * Docker
 #+begin_src emacs-lisp
-(fset 'open_file_in_docker
-   "\C-x\C-f\C-a\C-k/docker\C-?::drcoeurjoly@dev_dev_rhel7_1:/data/programs/oms/include/vtstore/1.6.6/Node.h")
+;;(fset 'open_file_in_docker
+;;   "\C-x\C-f\C-a\C-k/docker\C-?::drcoeurjoly@dev_dev_rhel7_1:/data/programs/oms/include/vtstore/1.6.6/Node.h")
 #+end_src
 
 #+begin_src emacs-lisp
-(defun file_in_docker
-    find-file "/docker:drcoeurjoly@dev_dev_rhel7_1:/")
+;;(defun file_in_docker
+;;    find-file "/docker:drcoeurjoly@dev_dev_rhel7_1:/")
 #+end_src

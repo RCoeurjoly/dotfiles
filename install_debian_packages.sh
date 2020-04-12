@@ -30,6 +30,8 @@ DEBIAN_PACKAGES="aptitude \
      texlive-fonts-recommended \
      texlive-latex-base \
      unar \
+     sqlite3 \
+     mongod \
 "
 
 for package in ${DEBIAN_PACKAGES};
@@ -45,3 +47,10 @@ sudo apt-get -y install \
      acpi-call-dkms \
      tlp \
      tp-smapi-dkms
+
+test_debian_packages() {
+    for package in ${DEBIAN_PACKAGES};
+    do
+        $package --version
+    done
+}
