@@ -149,7 +149,11 @@ install_simple-mtpfs() {
 *** Installation script
     #+NAME: installation_script
     #+begin_src shell :shebang #!/bin/bash :results output :noweb yes :tangle ../install.sh
-source ~/.bashrc.d/config.bash
+if [ -e $HOME/.bashrc.d/config.bash ]; then
+    source $HOME/.bashrc.d/config.bash
+else
+    source .bashrc.d/config.bash
+fi
 install_all
   #+end_src
 
@@ -1243,6 +1247,11 @@ test_installation_all_packages() {
 ** Test script
    #+NAME: test_script
    #+begin_src shell :shebang #!/bin/bash :results output :noweb yes :tangle ../test.sh
-source ~/.bashrc.d/config.bash
+if [ -e $HOME/.bashrc.d/config.bash ]; then
+    source $HOME/.bashrc.d/config.bash
+else
+    source .bashrc.d/config.bash
+fi
+
 test_all
   #+end_src
