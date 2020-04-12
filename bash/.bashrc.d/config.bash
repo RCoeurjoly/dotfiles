@@ -1,9 +1,5 @@
 #!/bin/bash
-
-if [ -e $HOME/.bashrc.local ]; then
-    source $HOME/.bin/git-completion.sh
-fi
-
+source $HOME/.bin/git-completion.sh
 ulimit -c unlimited
 
 export ALTERNATE_EDITOR=""

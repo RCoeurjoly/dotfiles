@@ -1,3 +1,8 @@
 #!/bin/bash
-source ~/.bashrc.d/config.bash
+if [ -e $HOME/.bashrc.d/config.bash ]; then
+    source $HOME/.bashrc.d/config.bash
+else
+    source .bashrc.d/config.bash
+fi
+
 test_all
