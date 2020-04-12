@@ -755,9 +755,14 @@ tangle_scripts () {
     create_checksum_file
 }
 
-sha512sum -c ~/dotfiles/bash/.bashrc.d/scripts_checksum >&/dev/null
-if [ $? -eq 1 ]; then
-    tangle_scripts
-    echo -e "\n\n\nTangling done\n\n\n"
-    source ~/.bashrc
-fi
+case $- in
+  *i*)
+      sha512sum -c ~/dotfiles/bash/.bashrc.d/scripts_checksum >&/dev/null
+      if [ $? -eq 1 ]; then
+          tangle_scripts
+          echo -e "\n\n\nTangling done\n\n\n"
+          source ~/.bashrc
+      fi
+      ;;
+  *) echo "Running in CI";;
+esac
