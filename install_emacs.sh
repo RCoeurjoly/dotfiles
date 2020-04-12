@@ -5,7 +5,7 @@
 curl https://nixos.org/nix/install | sh
 . /home/runner/.nix-profile/etc/profile.d/nix.sh
 nix-env --install emacs
-source bash/.bashrc.d/utils.bash
+source bash/.bashrc.d/config.bash
 createEmacsLink
 
 # Installing Spacemacs
