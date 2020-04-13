@@ -151,33 +151,6 @@ install_bash_it() {
 }
     #+end_src
 
-*** MTP
-    #+NAME: simple-mtpfs_installation
-    #+begin_src shell :noweb yes :exports code
-install_simple-mtpfs() {
-    PACKAGE=simple-mtpfs
-
-    if $PACKAGE --version; then
-        echo $PACKAGE " already installed"
-        return 0
-    fi
-
-    if [ -d ~/$PACKAGE ]; then
-        rm -rf ~/$PACKAGE
-    fi
-
-    INITIALDIR=$( pwd )
-    git clone https://github.com/phatina/simple-mtpfs ~/$PACKAGE
-    cd ~/$PACKAGE
-    ./autogen.sh
-    mkdir build && cd build
-    ../configure
-    make
-    sudo make install
-    rm -rf ~/$PACKAGE
-    cd $INITIALDIR
-}
-    #+end_src
 ** Architecture
    #+NAME: utils
    #+begin_src shell :shebang #!/bin/bash :noweb yes :results output
@@ -934,6 +907,7 @@ export DEBIAN_PACKAGES="aptitude \
                         arandr \
                         build-essential \
                         clang \
+                        gmtp \
                         cmake \
                         libmtp-dev \
                         acpi-call-dkms \

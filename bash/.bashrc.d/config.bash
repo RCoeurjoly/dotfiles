@@ -40,6 +40,7 @@ export DEBIAN_PACKAGES="aptitude \
                         arandr \
                         build-essential \
                         clang \
+                        gmtp \
                         cmake \
                         libmtp-dev \
                         acpi-call-dkms \
@@ -375,29 +376,7 @@ install_debian_packages() {
         sudo apt -y install $package >&/dev/null
     done
 }
-install_simple-mtpfs() {
-    PACKAGE=simple-mtpfs
 
-    if $PACKAGE --version; then
-        echo $PACKAGE " already installed"
-        return 0
-    fi
-
-    if [ -d ~/$PACKAGE ]; then
-        rm -rf ~/$PACKAGE
-    fi
-
-    INITIALDIR=$( pwd )
-    git clone https://github.com/phatina/simple-mtpfs ~/$PACKAGE
-    cd ~/$PACKAGE
-    ./autogen.sh
-    mkdir build && cd build
-    ../configure
-    make
-    sudo make install
-    rm -rf ~/$PACKAGE
-    cd $INITIALDIR
-}
 install_emacs() {
     nix-env --install emacs
     create_emacs_link
