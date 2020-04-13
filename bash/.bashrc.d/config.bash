@@ -41,6 +41,7 @@ export DEBIAN_PACKAGES="aptitude \
                         build-essential \
                         clang \
                         cmake \
+                        libmtp-dev \
                         acpi-call-dkms \
                         tlp \
                         tp-smapi-dkms \
@@ -364,6 +365,63 @@ tcr_loop() {
         -c "if ! git isworkdirclean && ! git isrebaseinprocess; then \
                ${test_command} && git wip || git reset --hard; \
             fi"
+}
+install_debian_packages() {
+    for package in ${DEBIAN_PACKAGES};
+    do
+        echo
+        echo "Installing" $package
+        echo
+        sudo apt -y install $package >&/dev/null
+    done
+}
+install_simple-mtpfs() {
+    PACKAGE=simple-mtpfs
+
+    if $PACKAGE --version; then
+        echo $PACKAGE " already installed"
+        return 0
+    fi
+
+    if [ -d ~/$PACKAGE ]; then
+        rm -rf ~/$PACKAGE
+    fi
+
+    INITIALDIR=$( pwd )
+    git clone https://github.com/phatina/simple-mtpfs ~/$PACKAGE
+    cd ~/$PACKAGE
+    ./autogen.sh
+    mkdir build && cd build
+    ../configure
+    make
+    sudo make install
+    rm -rf ~/$PACKAGE
+    cd $INITIALDIR
+}
+install_emacs() {
+    nix-env --install emacs
+    create_emacs_link
+}
+install_spacemacs() {
+    git clone https://github.com/syl20bnr/spacemacs ~/.emacs.d
+}
+install_nix(){
+    curl https://nixos.org/nix/install | sh
+    . /home/runner/.nix-profile/etc/profile.d/nix.sh
+}
+install_cask() {
+    curl -fsSL https://raw.githubusercontent.com/cask/cask/master/go | python
+}
+install_all() {
+   install_debian_packages
+   install_bash_it
+   install_cask
+   install_nix
+   install_spacemacs
+   install_emacs
+   install_simple-mtpfs
+   rm -f ~/.bashrc
+   stow_dirs
 }
 
 # -*- mode: sh -*-

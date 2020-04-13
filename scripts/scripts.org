@@ -60,6 +60,7 @@ install_all
 <<nix_installation>>
 <<cask_installation>>
 <<install_all>>
+<<libmtp_installation>>
    #+end_src
 
 *** Install all
@@ -152,15 +153,26 @@ install_bash_it() {
     #+NAME: simple-mtpfs_installation
     #+begin_src shell :noweb yes :exports code
 install_simple-mtpfs() {
+    PACKAGE=simple-mtpfs
+
+    if $PACKAGE --version; then
+        echo $PACKAGE " already installed"
+        return 0
+    fi
+
+    if [ -d ~/$PACKAGE ]; then
+        rm -rf ~/$PACKAGE
+    fi
+
     INITIALDIR=$( pwd )
-    git clone https://github.com/phatina/simple-mtpfs ~/simple-mtpfs
-    cd ~/simple-mtpfs
+    git clone https://github.com/phatina/simple-mtpfs ~/$PACKAGE
+    cd ~/$PACKAGE
     ./autogen.sh
     mkdir build && cd build
     ../configure
     make
     sudo make install
-    rm -rf ~/simple-mtpfs
+    rm -rf ~/$PACKAGE
     cd $INITIALDIR
 }
     #+end_src
@@ -170,7 +182,7 @@ install_simple-mtpfs() {
 <<Docker>>
 <<language>>
 <<programming>>
-<<instalation_functions>>
+<<installation_functions>>
 <<utils_pending_classification>>
    #+end_src
 ** Docker
@@ -921,6 +933,7 @@ export DEBIAN_PACKAGES="aptitude \
                         build-essential \
                         clang \
                         cmake \
+                        libmtp-dev \
                         acpi-call-dkms \
                         tlp \
                         tp-smapi-dkms \
