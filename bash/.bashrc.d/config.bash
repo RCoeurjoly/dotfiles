@@ -424,6 +424,15 @@ install_all() {
    stow_dirs
 }
 
+stow_dirs() {
+    stow bash
+    stow spacemacs
+    stow x-windows
+    stow git
+    stow gdb
+    stow lisp
+    stow rss
+}
 # -*- mode: sh -*-
 is_user_root () { [ ${EUID:-$(id -u)} -eq 0 ]; }
 

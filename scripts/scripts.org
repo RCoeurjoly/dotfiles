@@ -61,6 +61,7 @@ install_all
 <<cask_installation>>
 <<install_all>>
 <<libmtp_installation>>
+<<stow_dirs>>
    #+end_src
 
 *** Install all
