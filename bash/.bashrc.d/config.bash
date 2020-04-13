@@ -376,7 +376,6 @@ install_debian_packages() {
         sudo apt -y install $package >&/dev/null
     done
 }
-
 install_emacs() {
     nix-env --install emacs
     create_emacs_link
@@ -398,7 +397,6 @@ install_all() {
    install_nix
    install_spacemacs
    install_emacs
-   install_simple-mtpfs
    rm -f ~/.bashrc
    stow_dirs
 }
@@ -451,122 +449,6 @@ isKindleMounted() {
         findKindle
     fi
     return 1
-}
-
-getMTPpoint() {
-    number="([0-9]*):\s"
-    pocketComputerRegex="AsusZenFone\s5\sA500KL\s\(MTP\)"
-    bigReaderRegex="VariousViewpia\sDR/bq\sKepler\sDebugging"
-
-    # if no command line arg given exit
-    if [ -z $1 ]
-    then
-        exit 1
-    elif [ -n $1 ]
-    then
-        # otherwise make first arg as device
-        device=$1
-    fi
-
-    # use case statement to make decision for rental
-    case $device in
-        "pocket_computer")
-            deviceRegex=${pocketComputerRegex};;
-        "big_reader")
-            deviceRegex=${bigReaderRegex};;
-        *)
-            echo "Sorry, $device is not a known device!";
-            return 1;;
-    esac
-
-    if [[ $(simple-mtpfs -l)  =~ ${number}${deviceRegex} ]]
-    then
-        echo "${BASH_REMATCH[1]}"
-        return 0
-    else
-        echo "$device is not connected"
-        return 1
-    fi
-}
-
-isPocketComputerMounted() {
-    return 1
-}
-
-
-mountMTPdevice() {
-    # if no command line arg given exit
-    if [ -z $1 ]
-    then
-        exit 1
-    elif [ -n $1 ]
-    then
-        # otherwise make first arg as device
-        device=$1
-    fi
-
-    # use case statement to make decision for rental
-    case $device in
-        "pocket_computer");;
-        "big_reader");;
-        *)
-            echo "Sorry, $device is not a known device!";
-            return 1;;
-    esac
-
-    mkdir ~/${device}
-    if getMTPpoint ${device} >&/dev/null
-    then
-        simple-mtpfs --device $(getMTPpoint ${device}) ~/${device}
-        return 0
-    else
-        return 1
-    fi
-}
-
-unmountMTPdevice() {
-    # if no command line arg given exit
-    if [ -z $1 ]
-    then
-        exit 1
-    elif [ -n $1 ]
-    then
-        # otherwise make first arg as device
-        device=$1
-    fi
-
-    # use case statement to make decision for rental
-    case $device in
-        "pocket_computer");;
-        "big_reader");;
-        *)
-            echo "Sorry, $device is not a known device!";
-            return 1;;
-    esac
-
-    fusemount -u ~/${device}
-    rmdir ~/${device}
-}
-
-
-mountPocketComputer() {
-    mountMTPdevice pocket_computer
-}
-
-unmountPocketComputer() {
-    unmountMTPdevice pocket_computer
-}
-
-isBigReaderMounted() {
-    return 1
-}
-
-mountBigReader() {
-    mountMTPdevice big_reader
-}
-
-unmountBigReader() {
-    unmountMTPdevice big_reader
 }
 
 setkeyboard() {
@@ -777,8 +659,7 @@ test_installation_debian_packages() {
 }
 
 test_installation_non_debian_packages() {
-    NON_DEBIAN_PACKAGES="simple-mtpfs \
-                            emacs \
+    NON_DEBIAN_PACKAGES="emacs \
                            "
 
     for package in ${NON_DEBIAN_PACKAGES};
