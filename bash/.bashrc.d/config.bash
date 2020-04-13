@@ -424,6 +424,9 @@ install_all() {
    stow_dirs
 }
 
+install_bash_it() {
+    git clone --depth=1 https://github.com/Bash-it/bash-it.git ~/.bash_it
+}
 stow_dirs() {
     stow bash
     stow spacemacs
