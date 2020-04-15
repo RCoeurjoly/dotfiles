@@ -1,5 +1,5 @@
 #!/bin/bash
-source $HOME/.bin/git-completion.sh
+source "$HOME"/.bin/git-completion.sh
 ulimit -c unlimited
 
 export ALTERNATE_EDITOR=""
@@ -11,7 +11,8 @@ export CMAKE_CXX_COMPILER="g++"
 export EDITOR="$HOME/.bin/em"
 export EMAIL="rolandcoeurjoly@gmail.com"
 export GOPATH="$HOME/code/go"
-export GPG_TTY=$(tty)export HOMEBREW_NO_ANALYTICS=1
+export GPG_TTY=$(tty)
+export HOMEBREW_NO_ANALYTICS=1
 export LANG="en_US"
 export LC_ALL="en_US.UTF-8"
 export LC_CTYPE="en_US.UTF-8"
@@ -32,8 +33,8 @@ export GTI_SPEED=4000
 
 ### local config settings, if any
 
-if [ -e $HOME/.bashrc.local ]; then
-  source $HOME/.bashrc.local
+if [ -e "$HOME"/.bashrc.local ]; then
+  source "$HOME"/.bashrc.local
 fi
 
 export DEBIAN_PACKAGES="aptitude \
@@ -75,7 +76,7 @@ export DEBIAN_PACKAGES="aptitude \
                         auto-complete-el \
 "
 pathmunge () {
-  if ! echo $PATH | egrep -q "(^|:)$1($|:)" ; then
+  if ! echo "$PATH" | egrep -q "(^|:)$1($|:)" ; then
     if [ "$2" = "after" ] ; then
       PATH=$PATH:$1
     else
@@ -86,21 +87,21 @@ pathmunge () {
 
 pathmunge /usr/lib64/ccache
 pathmunge /usr/local/sbin
-pathmunge $HOME/.cask/bin
-pathmunge $HOME/dotfiles/scripts
+pathmunge "$HOME"/.cask/bin
+pathmunge "$HOME"/dotfiles/scripts
 pathmunge /usr/bin
 pathmunge /usr/share
 pathmunge /usr/local/bin
 pathmunge /usr/local/heroku/bin
 pathmunge /usr/lib/mutt
 pathmunge /sbin after
-pathmunge $HOME/bin after
-pathmunge $HOME/.bin after
-pathmunge $HOME/.cabal/bin after
-pathmunge $HOME/.local/bin after
-pathmunge $GOPATH/bin after
-pathmunge $HOME/go/bin
-pathmunge $HOME/.gem/bin
+pathmunge "$HOME"/bin after
+pathmunge "$HOME"/.bin after
+pathmunge "$HOME"/.cabal/bin after
+pathmunge "$HOME"/.local/bin after
+pathmunge "$GOPATH"/bin after
+pathmunge "$HOME"/go/bin
+pathmunge "$HOME"/.gem/bin
 pathmunge /usr/lib64/ccache
 
 export PATH
@@ -125,7 +126,7 @@ alias ls="ls --color -h"
 alias lh='ls -lahS'
 
 alias mkdir="mkdir -p"
-alias mutt="cd $HOME/downloads; /usr/bin/mutt; cd - > /dev/null"
+alias mutt='cd $HOME/downloads; /usr/bin/mutt; cd - > /dev/null'
 alias myip="ip address | grep inet.*wlan0 | cut -d' ' -f6 | sed \"s/\/24//g\""
 alias pbcopy="xsel --clipboard --input"
 alias pbpaste="xsel --clipboard --output"
@@ -144,7 +145,7 @@ alias pcss='sudo pcs status | grep '
 
 
 # Make using all available cores
-alias make="make -j$( nproc --all )"
+alias make='make -j$( nproc --all )'
 
 usage() {
   du -sch "$@" | sort -h
@@ -201,7 +202,8 @@ GIT_PS1_SHOWDIRTYSTATE=true
 # repositories; unfortunately, pre-commit hooks are generally kept in
 # an empty git repo in $HOME, resulting in unneeded grossness.
 __quiet_git_ps1() {
-  local b="$(__git_ps1)"
+  local b
+  b="$(__git_ps1)"
   if [ "$b" != " ((unknown))" ]; then
     echo -n "$b"
   fi
@@ -274,10 +276,10 @@ greper () {
 }
 generateclangcomplete () {
     GIT_ROOT=$(git rev-parse --show-toplevel)
-    echo "Removing"${GIT_ROOT}/build/
-    rm -rf ${GIT_ROOT}/build/
-    mkdir ${GIT_ROOT}/build/
-    cd ${GIT_ROOT}/build
+    echo "Removing""${GIT_ROOT}"/build/
+    rm -rf "${GIT_ROOT}"/build/
+    mkdir "${GIT_ROOT}"/build/
+    cd "${GIT_ROOT}"/build
     clangcompletepp
     cd -
 }
@@ -287,12 +289,12 @@ timestamp () {
 lazygit() {
     cd ~/Exocortex
     git add .
-    git commit -m "`date`"
+    git commit -m "$(date)"
     git push
     cd -
 }
 areTherePirateVersions() {
-    if [ "$(git tag | grep pirate | wc -l)" == 0 ]; then
+    if [ "$(git tag | grep -c pirate)" == 0 ]; then
         return 0
     else
         return 1
@@ -345,7 +347,7 @@ findMeaningOfValueOfFIXfield () {
     fi
 }
 tcr_loop() {
-    test_command="$@"
+    test_command="$*"
 
     if ! git isworkdirclean; then
         echo "Please make sure you have a clean working directory before starting the TCR loop"
@@ -361,8 +363,8 @@ tcr_loop() {
     fi
 
     inotify-hookable \
-        --watch-directories $(pwd) --quiet \
-        --ignore-paths $(pwd)/.git/ $(pwd)/build/ \
+        --watch-directories "$(pwd)" --quiet \
+        --ignore-paths "$(pwd)/.git/" "$(pwd)/build/" \
         -c "if ! git isworkdirclean && ! git isrebaseinprocess; then \
                ${test_command} && git wip || git reset --hard; \
             fi"
@@ -371,9 +373,9 @@ install_debian_packages() {
     for package in ${DEBIAN_PACKAGES};
     do
         echo
-        echo "Installing" $package
+        echo "Installing" "$package"
         echo
-        sudo apt -y install $package >&/dev/null
+        sudo apt -y install "$package" >&/dev/null
     done
 }
 install_emacs() {
@@ -457,17 +459,17 @@ setkeyboard() {
 }
 
 findprocess(){
-    if [ "$(ps -aux | grep -v grep | grep "${1}\|PID" | wc -l)" -ne 1 ]; then
-        ps -aux | grep -v grep | grep "${1}\|PID"
+    if [ "$(pgrep -v grep | grep -c "${1}\|PID")" -ne 1 ]; then
+        pgrep -v grep | grep "${1}\|PID"
         return 0
     else
-        echo "Process" ${1} "not found"
+        echo "Process" "${1}" "not found"
         return 1
     fi
 }
 
 ishistoryuniq(){
-    if [ "$(grep -v ^# ~/.bash_history | wc -l)" -eq "$(grep -v ^# ~/.bash_history | uniq | wc -l)" ]; then
+    if [ "$(grep -cv ^# ~/.bash_history)" -eq "$(grep -v ^# ~/.bash_history | uniq | wc -l)" ]; then
         #echo "$(grep -v ^# ~/.bash_history | wc -l)"
         #echo "$(grep -v ^# ~/.bash_history | uniq | wc -l)"
         #echo "$(${COMMAND_SEARCH} | wc -l)"
@@ -490,11 +492,11 @@ ishistoryuniq(){
 create_emacs_link() {
     for location in $(whereis emacs);
     do
-        SEARCH_RESULT="$(echo $location | grep "\/nix.*user-environment\/bin\/emacs")"
+        SEARCH_RESULT="$(echo "$location" | grep "\/nix.*user-environment\/bin\/emacs")"
         if [ "${SEARCH_RESULT}" ]; then
             NIX_EMACS=${SEARCH_RESULT}
             sudo rm /usr/bin/emacs
-            sudo ln -s ${NIX_EMACS} /usr/bin/emacs;
+            sudo ln -s "${NIX_EMACS}" /usr/bin/emacs;
             return 0
         fi
     done
@@ -504,9 +506,9 @@ create_emacs_link() {
 
 whichkeyboard(){
     KEYBOARD=$( xset -q | grep -A 0 'LED' | cut -c59-67 )
-    if [ $KEYBOARD  = 00000000 ]; then
+    if [ "$KEYBOARD"  = 00000000 ]; then
         echo en
-    elif [ $KEYBOARD  = 00001000 ]; then
+    elif [ "$KEYBOARD"  = 00001000 ]; then
         echo es
     fi
 }
@@ -517,26 +519,24 @@ switch_sink() {
     #               `hsp':  Telephony Profile
     #               <Index> Default Sink (try `0' or `1')
 
-    SINK=$( pacmd list-cards | grep -B 1 bluez )
     INDEX=$( pacmd list-cards | grep -B 1 bluez | head -1 | awk ' { print $2 } ' )
-    SINK=$( pacmd list-cards | grep bluez )
     MAC=$( pacmd list-cards | grep bluez | head -1 | awk -F . ' { print substr($2,0,17) }' )
     BT_SINK="bluez_sink.$MAC"
     BT_SOURCE="bluez_source.$MAC"
 
     if [ "$1" = a2dp ]; then
-        echo Setting A2DP audio sink $BT_SINK
-        pacmd set-card-profile $INDEX a2dp_sink
-        pacmd set-default-sink $BT_SINK
+        echo Setting A2DP audio sink "$BT_SINK"
+        pacmd set-card-profile "$INDEX" a2dp_sink
+        pacmd set-default-sink "$BT_SINK"
     elif [ "$1" = hsp ]; then
-        echo Setting HSP headset sink $BT_SOURCE
-        pacmd set-card-profile $INDEX headset_head_unit
-        pacmd set-default-sink $BT_SINK
-        pacmd set-default-source $BT_SOURCE
+        echo Setting HSP headset sink "$BT_SOURCE"
+        pacmd set-card-profile "$INDEX" headset_head_unit
+        pacmd set-default-sink "$BT_SINK"
+        pacmd set-default-source "$BT_SOURCE"
     else
         echo Resetting to internal audio
-        pacmd set-default-sink $1
-        pacmd set-default-source $1
+        pacmd set-default-sink "$1"
+        pacmd set-default-source "$1"
     fi
 }
 
@@ -554,7 +554,7 @@ countpage() {
 }
 
 path() {
-  echo $PATH | tr ':' '\n'
+  echo "$PATH" | tr ':' '\n'
 }
 
 # ~/.bashrc: executed by bash(1) for non-login shells.
@@ -650,8 +650,8 @@ test_emacs() {
 test_installation_debian_packages() {
     for package in ${DEBIAN_PACKAGES};
     do
-        if ! dpkg -l $package; then
-            echo "Package" $package "is not installed"
+        if ! dpkg -l "$package"; then
+            echo "Package" "$package" "is not installed"
             return 1
         fi
     done
@@ -665,7 +665,7 @@ test_installation_non_debian_packages() {
     for package in ${NON_DEBIAN_PACKAGES};
     do
         if ! $package --version; then
-            echo "Package" $package "is not installed"
+            echo "Package" "$package" "is not installed"
             return 1
         fi
     done

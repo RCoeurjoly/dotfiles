@@ -1,6 +1,6 @@
 # -*- mode: snippet -*-
-#name : pyo
-#key : pyo
+#name : pyout
+#key : pyout
 #contributor : Roland Coeurjoly
 # --
 #+begin_src python :results output

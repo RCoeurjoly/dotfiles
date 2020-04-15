@@ -7,7 +7,7 @@
     :hook
     (after-init . org-roam-mode)
     :custom
-    (org-roam-directory "/path/to/org-files/")
+    (org-roam-directory "~/Exocortex/")
     :init
     (progn
       (spacemacs/declare-prefix "ar" "org-roam")

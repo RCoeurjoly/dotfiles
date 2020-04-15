@@ -73,10 +73,8 @@ pairing or presenting code.
     #+end_src
 ** Roam
    #+begin_src emacs-lisp
-(setq org-roam-directory "/home/rcl/Exocortex/")
 (load-file "~/dotfiles/spacemacs/.spacemacs.d/layers/org-roam/packages.el")
 '(org-roam-completion-system (quote helm))
-;; '(org-roam-directory "~/zk" nil nil "Customized with use-package org-roam")
    #+end_src
 
 ** Visual
