@@ -294,7 +294,7 @@ lazygit() {
     cd -
 }
 areTherePirateVersions() {
-    if [ "$(git tag | grep -c pirate)" == 0 ]; then
+    if [ "$(git tag | grep pirate | wc -l)" == 0 ]; then
         return 0
     else
         return 1
@@ -459,7 +459,7 @@ setkeyboard() {
 }
 
 findprocess(){
-    if [ "$(pgrep -v grep | grep -c "${1}\|PID")" -ne 1 ]; then
+    if [ "$(pgrep -v grep | grep "${1}\|PID" | wc -l)" -ne 1 ]; then
         pgrep -v grep | grep "${1}\|PID"
         return 0
     else
@@ -469,18 +469,10 @@ findprocess(){
 }
 
 ishistoryuniq(){
-    if [ "$(grep -cv ^# ~/.bash_history)" -eq "$(grep -v ^# ~/.bash_history | uniq | wc -l)" ]; then
-        #echo "$(grep -v ^# ~/.bash_history | wc -l)"
-        #echo "$(grep -v ^# ~/.bash_history | uniq | wc -l)"
-        #echo "$(${COMMAND_SEARCH} | wc -l)"
-        #echo "$(${COMMAND_SEARCH} | uniq | wc -l)"
+    if [ "$(grep -v ^# ~/.bash_history | wc -l)" -eq "$(grep -v ^# ~/.bash_history | uniq | wc -l)" ]; then
         echo "All unique commands in history"
         return 0
     else
-        # echo "$(grep -v ^# ~/.bash_history | wc -l)"
-        # echo "$(grep -v ^# ~/.bash_history | uniq | wc -l)"
-        # echo "$(${COMMAND_SEARCH} | wc -l)"
-        # echo "$(${COMMAND_SEARCH} | uniq | wc -l)"
         echo "History not uniq"
         return 1
     fi
