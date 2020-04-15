@@ -45,6 +45,13 @@ pairing or presenting code.
   (global-hl-line-mode)
 #+END_SRC
 * Org mode
+** Roam
+   #+begin_src emacs-lisp
+(setq org-roam-directory "~/Exocortex/")
+(load-file "~/dotfiles/spacemacs/.spacemacs.d/layers/org-roam/packages.el")
+'(org-roam-completion-system (quote helm))
+   #+end_src
+
 ** General
    Recommended setting in the manual
    #+BEGIN_SRC emacs-lisp
