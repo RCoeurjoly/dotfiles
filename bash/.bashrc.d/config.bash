@@ -366,8 +366,16 @@ tcr_loop() {
         --watch-directories "$(pwd)" --quiet \
         --ignore-paths "$(pwd)/.git/" "$(pwd)/build/" \
         -c "if ! git isworkdirclean && ! git isrebaseinprocess; then \
-               ${test_command} && git wip || git reset --hard; \
+               ${test_command} && git wip || git reset --hard
             fi"
+    #if '${test_command}'; then \
+    #              git wip \
+    #           else \
+    #              git reset --hard; \
+    #           fi \
+    #        else \
+    #           true \
+    #        fi"
 }
 install_debian_packages() {
     for package in ${DEBIAN_PACKAGES};
