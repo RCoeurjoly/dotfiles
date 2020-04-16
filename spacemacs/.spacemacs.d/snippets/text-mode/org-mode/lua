@@ -3,6 +3,6 @@
 #key : lua
 #contributor : Roland Coeurjoly
 # --
-#+begin_src lua
+#+begin_src lua :results output
 $0
 #+end_src
