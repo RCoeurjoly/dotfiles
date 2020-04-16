@@ -1,0 +1,8 @@
+# -*- mode: snippet -*-
+#name : lua
+#key : lua
+#contributor : Roland Coeurjoly
+# --
+#+begin_src lua
+$0
+#+end_src
