@@ -383,7 +383,7 @@ install_debian_packages() {
         echo
         echo "Installing" "$package"
         echo
-        sudo apt -y install "$package" >&/dev/null
+        sudo apt -y install "$package"
     done
 }
 install_emacs() {
