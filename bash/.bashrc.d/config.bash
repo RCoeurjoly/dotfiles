@@ -317,7 +317,7 @@ findFIXfield () {
     amIinDocker >/dev/null
     rc=$?
     if [[ $rc != 0 ]]; then
-        docker-compose -f ~/docker-services/dev/docker-compose.yml exec dev_rhel7 bash -c "source ~/.bashrc.d/scripts.bash >/dev/null && findFIXfield_in_Docker $1" 2>/dev/null | grep -Pi "field.*$1.*?\""
+        docker-compose -f ~/docker-services/dev/docker-compose.yml exec dev_rhel7 bash -c "source ~/.bashrc.d/config.bash >/dev/null && findFIXfield_in_Docker $1" 2>/dev/null | grep -Pi "field.*$1.*?\""
     else
         findFIXfield_in_Docker "$1"
     fi
@@ -341,7 +341,7 @@ findMeaningOfValueOfFIXfield () {
     amIinDocker >/dev/null
     rc=$?
     if [[ $rc != 0 ]]; then
-        docker-compose -f ~/docker-services/dev/docker-compose.yml exec dev_rhel7 bash -c "source ~/.bashrc.d/scripts.bash >/dev/null && findMeaningOfValueOfFIXfield_in_Docker $1 $2" 2>/dev/null | grep "const.*;"
+        docker-compose -f ~/docker-services/dev/docker-compose.yml exec dev_rhel7 bash -c "source ~/.bashrc.d/config.bash >/dev/null && findMeaningOfValueOfFIXfield_in_Docker $1 $2" 2>/dev/null | grep "const.*;"
     else
         findMeaningOfValueOfFIXfield_in_Docker "$1" "$2"
     fi

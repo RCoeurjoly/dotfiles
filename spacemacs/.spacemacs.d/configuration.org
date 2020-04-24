@@ -147,7 +147,8 @@ pairing or presenting code.
      (perl . t)
      (python . t)
      (lua . t)
-     (haskell . t)))
+     (haskell . t)
+     (coq . t)))
 #+END_SRC
     Use syntax highlighting in source blocks while editing.
 

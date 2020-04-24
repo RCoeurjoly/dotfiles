@@ -50,8 +50,8 @@ do
 	fi
 done
 
-source ~/.bashrc # this does nothing, sourcing directly scripts.bash is needed. Weird.
-source ~/.bashrc.d/scripts.bash
+source ~/.bashrc # this does nothing, sourcing directly config.bash is needed. Weird.
+source ~/.bashrc.d/config.bash
 
 areTherePirateVersions
 rc=$?

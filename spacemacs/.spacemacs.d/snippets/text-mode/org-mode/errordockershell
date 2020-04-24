@@ -6,7 +6,6 @@
 #+begin_src sh :dir /docker:drcoeurjoly@dev_dev_rhel7_1:~/ :results verbatim
 exec 2>&1
 source ~/.bashrc
-source ~/.bashrc.d/scripts.bash
 source ~/.bashrc.d/config.bash
 $1
 :
