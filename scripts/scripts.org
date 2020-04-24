@@ -439,7 +439,7 @@ areTherePirateVersions() {
 ***** pre-push
 
 
-  #+begin_src shell :noweb yes :exports code :tangle git-hooks/pre-push
+  #+begin_src shell :noweb yes :exports code :tangle git-hooks/pre-push :tangle-mode (identity #o755)
 #!/usr/bin/env bash
 
 # An example hook script to verify what is about to be pushed.  Called by "git
