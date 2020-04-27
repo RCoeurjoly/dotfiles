@@ -99,6 +99,11 @@ pairing or presenting code.
 #+RESULTS:
 | ① | ② | ③ | ④ | ⑤ | ⑥ | ⑦ | ⑧ | ⑨ | ⑩ | ⑪ | ⑫ | ⑬ | ⑭ | ⑮ | ⑯ | ⑰ | ⑱ | ⑲ | ⑳ |
 
+*** Always always visual line mode
+    #+begin_src emacs-lisp
+(add-hook 'org-mode-hook #'visual-line-mode)
+    #+end_src
+
 ** [[https://orgmode.org/worg/org-tutorials/encrypting-files.html][Crypto]]
    I set org mode so that I can encrypt headings with the tag crypt
    #+BEGIN_SRC emacs-lisp
@@ -198,10 +203,30 @@ Insertion of code blocks
   (setq org-log-done 'time)
 #+END_SRC
 *** Project structure
-    #+begin_src emacs-lisp
-(fset 'orgproject
-   [C-return M-right ?R ?a ?t ?i ?o ?n ?a ?l ?e C-return ?D ?e ?s ?i ?r ?e ?d ?  ?r ?e ?s ?u ?l ?t ? ?\( ?D ?e ?f ?i ?n ?i ?t ?i ?o ?n ?  ?o ?f ?  ?D ?o ?n ?e ?\) C-return ?R ?e ?l ?e ?v ?a ?n ?t ?  ?i ?n ?f ?o ?r ?m ?a ?t ?i ?o ?n C-return M-right ?S ?t ?r ?e ?a ?m ?  ?o ?f ?  ?c ?o ?n ?s ?c ?i ?o ?u ?s ?n ?e ?s ?s  C-return M-left ?A ?c ?t ?i ?o ?n ?s])
-    #+end_src
+
+   #+begin_src emacs-lisp
+(defun insert-orgproject-template ()
+  "Insert org project template under current heading."
+  (interactive)
+  (org-insert-heading-respect-content)
+  (org-metaright)
+  (insert "Rationale")
+  (org-insert-heading-respect-content)
+  (insert "Desired result (Definition of Done)")
+  (org-insert-heading-respect-content)
+  (insert "Relevant informacion")
+  (org-insert-heading-respect-content)
+  (org-metaright)
+  (insert "Stream of Consciousness")
+  (org-insert-heading-respect-content)
+  (org-metaleft)
+  (insert "Actions")
+  (org-insert-heading-respect-content)
+  (org-metaright)
+  (insert "TODO_NEXT Determine the next [[file+emacs:20200427191126-moonshots.org::* Work on the hard part first][monkey action]]"))
+#+end_src
+
+
 
 ** Links
    By default is eww
