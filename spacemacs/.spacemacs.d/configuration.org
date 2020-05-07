@@ -153,7 +153,8 @@ pairing or presenting code.
      (python . t)
      (lua . t)
      (haskell . t)
-     (coq . t)))
+     (coq . t)
+     (ocaml . t)))
 #+END_SRC
     Use syntax highlighting in source blocks while editing.
 
@@ -214,6 +215,8 @@ Insertion of code blocks
   (org-insert-heading-respect-content)
   (insert "Desired result (Definition of Done)")
   (org-insert-heading-respect-content)
+  (insert "Results")
+  (org-insert-heading-respect-content)
   (insert "Relevant informacion")
   (org-insert-heading-respect-content)
   (org-metaright)
@@ -223,10 +226,14 @@ Insertion of code blocks
   (insert "Actions")
   (org-insert-heading-respect-content)
   (org-metaright)
-  (insert "TODO_NEXT Determine the next [[file+emacs:20200427191126-moonshots.org::* Work on the hard part first][monkey action]]"))
+  (insert "TODO_NEXT Determine the next [[file+emacs:~/Exocortex/20200427191126-moonshots.org::* Work on the hard part first][monkey action]] :monkey:"))
 #+end_src
+** Keys
+   #+begin_src emacs-lisp
+;;(define-key org-mode-map (kbd "M-return") nil)
+   #+end_src
 
-
+   #+RESULTS:
 
 ** Links
    By default is eww
@@ -244,14 +251,15 @@ when exporting.
 
 Use flycheck in the appropriate buffers:
 
-#+BEGIN_SRC emacs-lisp
+#+begin_src emacs-lisp
   (add-hook 'markdown-mode-hook #'flycheck-mode)
   (add-hook 'gfm-mode-hook #'flycheck-mode)
   (add-hook 'text-mode-hook #'flycheck-mode)
   (add-hook 'org-mode-hook #'flycheck-mode)
   (add-hook 'verilog-mode-hook #'flycheck-mode)
   (add-hook 'arduino-mode-hook #'flycheck-mode)
-#+END_SRC
+#+end_src
+
 * Programming
 ** Software
 *** CPP
@@ -267,6 +275,10 @@ Use flycheck in the appropriate buffers:
 (setq compile-command "docker-compose -f ~/docker-services/dev/docker-compose.yml exec dev_rhel7 bash -c \"make\"")
      #+end_src
 
+*** Coq
+    #+begin_src emacs-lisp
+(load "~/.emacs.d/lisp/PG/generic/proof-site")
+    #+end_src
 
 *** Python
 #+BEGIN_SRC emacs-lisp

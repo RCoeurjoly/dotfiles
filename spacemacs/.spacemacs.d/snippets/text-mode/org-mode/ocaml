@@ -1,8 +1,8 @@
 # -*- mode: snippet -*-
-#name : haskell
-#key : haskell
+#name : ocaml
+#key : ocaml
 #contributor : Roland Coeurjoly
 # --
-#+begin_src haskell
+#+begin_src ocaml
 $0
 #+end_src

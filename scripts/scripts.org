@@ -394,8 +394,9 @@ findFIXfield () {
 findMeaningOfValueOfFIXfield_in_Docker () {
     VTFIXDataDictionary=/data/programs/vtcommon-files/dictionary/VTFIXDataDictionary.xml
     FixValues=/usr/local/quickfix-1.13.3.VT13/include/quickfix/FixValues.h
-    VTFixFieldNumbers=/data/programs/vtcommon/include/vtfix-base/9.5.8/VTFixFieldNumbers.h
-    VTFixFields=/data/programs/vtcommon/include/vtfix-base/9.5.8/VTFixFields.h
+    VTFixFieldNumbers=/data/programs/vtcommon/include/vtfix-base/9.6.6/VTFixFieldNumbers.h
+    VTFixFields=/data/programs/vtcommon/include/vtfix-base/9.6.6/VTFixFields.h
+
 
     if [ "$#" == 2 ]; then
         VALUE="$2"

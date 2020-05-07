@@ -8,6 +8,6 @@
 #+header: :dbpassword redhatbolsa
 #+header: :dbhost 10.0.7.2
 #+header: :database cdomscommon
-#+begin_src sql
+#+begin_src sql :exports both
 $0
 #+end_src

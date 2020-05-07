@@ -7,6 +7,6 @@
 #+header: :dbuser root
 #+header: :dbpassword root
 #+header: :database fiction
-#+begin_src sql
+#+begin_src sql :exports both
 $0
 #+end_src

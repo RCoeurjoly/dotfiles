@@ -8,6 +8,6 @@
 #+header: :dbpassword redhatbolsa
 #+header: :database vtcommon
 #+header: :dbhost db
-#+begin_src sql
+#+begin_src sql :exports both
 $0
 #+end_src
