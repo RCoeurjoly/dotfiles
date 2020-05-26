@@ -57,7 +57,6 @@ values."
                       auto-completion-return-key-behavior 'complete
                       auto-completion-tab-key-behavior 'complete
                       auto-completion-enable-snippets-in-popup t)
-     javascript
      yaml
      ;;myleetcode
      ruby
@@ -87,7 +86,7 @@ values."
      version-control
      cucumber
      docker
-     coq
+     ;; coq
      pdf-tools
      ocaml
      go
@@ -345,7 +344,6 @@ executes.
  This function is mostly useful for variables that need to be set
 before packages are loaded. If you are unsure, you should try in setting them in
 `dotspacemacs/user-config' first."
-  (add-to-list 'package-pinned-packages '(spaceline . "melpa-stable"))
   (add-to-list 'package-pinned-packages '(spaceline-all-the-icons . "melpa-stable"))
   (add-to-list 'package-pinned-packages '(all-the-icons . "melpa-stable"))
   )

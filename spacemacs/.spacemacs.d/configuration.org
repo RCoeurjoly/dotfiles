@@ -45,6 +45,78 @@ pairing or presenting code.
   (global-hl-line-mode)
 #+END_SRC
 * Org mode
+** Babel
+*** Languages
+    Allow =babel= to evaluate Emacs lisp, verilog  or Gnuplot code.
+
+#+BEGIN_SRC emacs-lisp
+  (org-babel-do-load-languages
+   'org-babel-load-languages
+   '((emacs-lisp . t)
+     (gnuplot . t)
+     ;;(arduino . t)
+     ;(verilog . t)
+     (clojure . t)
+     (C . t)
+     (latex . t)
+     (shell . t)
+     (R . t)
+     (sql . t)
+     (perl . t)
+     (python . t)
+     (lua . t)
+     (haskell . t)
+     (coq . t)
+     (ocaml . t)))
+#+END_SRC
+
+*** highlighting
+Use syntax highlighting in source blocks while editing.
+
+#+BEGIN_SRC emacs-lisp
+  (setq org-src-fontify-natively t)
+#+END_SRC
+[[https://www.wisdomandwonder.com/link/9573/how-to-correctly-enable-flycheck-in-babel-source-blocks][how to correctly enable flycheck in babel source blocks]]
+#+BEGIN_SRC emacs-lisp
+(defadvice org-edit-src-code (around set-buffer-file-name activate compile)
+  (let ((file-name (buffer-file-name))) ;; (1)
+    ad-do-it                            ;; (2)
+    (setq buffer-file-name file-name))) ;; (3)
+#+END_SRC
+Make TAB act as if it were issued in a buffer of the language's major mode.
+
+#+BEGIN_SRC emacs-lisp
+  (setq org-src-tab-acts-natively t)
+#+END_SRC
+
+Don't ask before evaluating code blocks.
+
+#+BEGIN_SRC emacs-lisp
+  (setq org-confirm-babel-evaluate nil)
+#+END_SRC
+
+For tangling to work with makefiles:
+
+#+BEGIN_SRC emacs-lisp
+  (setq org-src-preserve-indentation t)
+#+END_SRC
+
+Insertion of code blocks
+
+#+BEGIN_SRC emacs-lisp
+;;(require 'org-tempo)
+(add-to-list 'org-structure-template-alist
+'("sh" . "src shell"))
+(add-to-list 'org-structure-template-alist
+'("cpp" . "src C++"))
+(add-to-list 'org-structure-template-alist
+'("py" . "src python"))
+#+END_SRC
+*** Export
+    #+begin_src emacs-lisp
+(setq org-export-babel-evaluate nil)
+    #+end_src
+
 ** Roam
    #+begin_src emacs-lisp
 (setq org-roam-directory "~/Exocortex/")
@@ -133,78 +205,6 @@ pairing or presenting code.
      ;;                            (set (make-local-variable 'auto-save) nil)))
      ;; ;; Global Tags
     #+END_SRC
-** Babel
-*** Languages
-    Allow =babel= to evaluate Emacs lisp, verilog  or Gnuplot code.
-
-#+BEGIN_SRC emacs-lisp
-  (org-babel-do-load-languages
-   'org-babel-load-languages
-   '((emacs-lisp . t)
-     (gnuplot . t)
-     ;;(arduino . t)
-     ;(verilog . t)
-     (clojure . t)
-     (C . t)
-     (latex . t)
-     (shell . t)
-     (R . t)
-     (sql . t)
-     (perl . t)
-     (python . t)
-     (lua . t)
-     (haskell . t)
-     (coq . t)
-     (ocaml . t)))
-#+END_SRC
-
-*** highlighting
-Use syntax highlighting in source blocks while editing.
-
-#+BEGIN_SRC emacs-lisp
-  (setq org-src-fontify-natively t)
-#+END_SRC
-[[https://www.wisdomandwonder.com/link/9573/how-to-correctly-enable-flycheck-in-babel-source-blocks][how to correctly enable flycheck in babel source blocks]]
-#+BEGIN_SRC emacs-lisp
-(defadvice org-edit-src-code (around set-buffer-file-name activate compile)
-  (let ((file-name (buffer-file-name))) ;; (1)
-    ad-do-it                            ;; (2)
-    (setq buffer-file-name file-name))) ;; (3)
-#+END_SRC
-Make TAB act as if it were issued in a buffer of the language's major mode.
-
-#+BEGIN_SRC emacs-lisp
-  (setq org-src-tab-acts-natively t)
-#+END_SRC
-
-Don't ask before evaluating code blocks.
-
-#+BEGIN_SRC emacs-lisp
-  (setq org-confirm-babel-evaluate nil)
-#+END_SRC
-
-For tangling to work with makefiles:
-
-#+BEGIN_SRC emacs-lisp
-  (setq org-src-preserve-indentation t)
-#+END_SRC
-
-Insertion of code blocks
-
-#+BEGIN_SRC emacs-lisp
-;;(require 'org-tempo)
-(add-to-list 'org-structure-template-alist
-'("sh" . "src shell"))
-(add-to-list 'org-structure-template-alist
-'("cpp" . "src C++"))
-(add-to-list 'org-structure-template-alist
-'("py" . "src python"))
-#+END_SRC
-*** Export
-    #+begin_src emacs-lisp
-(setq org-export-babel-evaluate nil)
-    #+end_src
-
 ** Project management
     Record the time that a todo was archived.
 

@@ -43,6 +43,7 @@ export DEBIAN_PACKAGES="aptitude \
                         clang \
                         gmtp \
                         cmake \
+                        fonts-inconsolata \
                         libmtp-dev \
                         acpi-call-dkms \
                         tlp \
@@ -52,6 +53,7 @@ export DEBIAN_PACKAGES="aptitude \
                         docker-compose \
                         ghc \
                         gdb \
+                        opam \
                         libfuse-dev \
                         gdbserver \
                         git \
