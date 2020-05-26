@@ -50,6 +50,7 @@ export DEBIAN_PACKAGES="aptitude \
                         curl \
                         docker \
                         docker-compose \
+                        ghc \
                         gdb \
                         libfuse-dev \
                         gdbserver \
@@ -92,6 +93,7 @@ pathmunge "$HOME"/dotfiles/scripts
 pathmunge /usr/bin
 pathmunge /usr/share
 pathmunge /usr/local/bin
+pathmunge /usr/local/go/bin
 pathmunge /usr/local/heroku/bin
 pathmunge /usr/lib/mutt
 pathmunge /sbin after
