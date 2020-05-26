@@ -134,6 +134,7 @@ pairing or presenting code.
      ;; ;; Global Tags
     #+END_SRC
 ** Babel
+*** Languages
     Allow =babel= to evaluate Emacs lisp, verilog  or Gnuplot code.
 
 #+BEGIN_SRC emacs-lisp
@@ -156,7 +157,9 @@ pairing or presenting code.
      (coq . t)
      (ocaml . t)))
 #+END_SRC
-    Use syntax highlighting in source blocks while editing.
+
+*** highlighting
+Use syntax highlighting in source blocks while editing.
 
 #+BEGIN_SRC emacs-lisp
   (setq org-src-fontify-natively t)
@@ -197,6 +200,11 @@ Insertion of code blocks
 (add-to-list 'org-structure-template-alist
 '("py" . "src python"))
 #+END_SRC
+*** Export
+    #+begin_src emacs-lisp
+(setq org-export-babel-evaluate nil)
+    #+end_src
+
 ** Project management
     Record the time that a todo was archived.
 
