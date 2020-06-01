@@ -3,48 +3,86 @@
 #+EMAIL: rolandcoeurjoly@gmail.com
 #+OPTIONS: toc:nil num:nil
 
-* General settings
-** Lines
-    Wrap lines
-#+BEGIN_SRC emacs-lisp
-  (setq global-visual-line-mode t)
-#+END_SRC
-** Visual
-   #+begin_src emacs-lisp
-(add-hook 'org-mode-hook
-          (lambda () (face-remap-add-relative 'default :family "Monospace")))
-   #+end_src
-
-   #+RESULTS:
-*** Theme
-    #+begin_src emacs-lisp
-(add-to-list 'custom-theme-load-path "~/.emacs.d/themes/")
-    #+end_src
-
-
-** Terminal
-   Use the settings of [[https://stackoverflow.com/questions/12224909/is-there-a-way-to-get-my-emacs-to-recognize-my-bash-aliases-and-custom-functions/12229404#12229404][bashrc when using emacs term]]:
-#+begin_src emacs-lisp
-  (setq shell-file-name "bash")
-  (setq shell-command-switch "-ic")
-#+end_src
-* Set personal information
-** Who am I? Where am I?
-
-#+BEGIN_SRC emacs-lisp
-  (setq user-full-name "Roland Coeurjoly"
-        user-mail-address "rolandcoeurjoly@gmail.com")
-#+END_SRC
-** Highlight the current line
-
-=global-hl-line-mode= softly highlights the background color of the line
-containing point. It makes it a bit easier to find point, and it's useful when
-pairing or presenting code.
-
-#+BEGIN_SRC emacs-lisp
-  (global-hl-line-mode)
-#+END_SRC
 * Org mode
+** Project management
+    Record the time that a todo was archived.
+
+#+BEGIN_SRC emacs-lisp
+  (setq org-log-done 'time)
+#+END_SRC
+*** Project structure
+
+**** Generic project
+     #+begin_src emacs-lisp
+(add-to-list 'org-capture-templates
+             '("j" "JIRA" entry
+               (file+headline "~/Exocortex/Exocortex.org" "JIRAs")
+               (file "~/dotfiles/spacemacs/.spacemacs.d/templates/project.txt")))
+     #+end_src
+
+
+
+
+        #+begin_src emacs-lisp
+(defun insert-orgproject-template ()
+  "Insert org project template under current heading."
+  (interactive)
+  (org-insert-heading-respect-content)
+  (org-metaright)
+  (insert "Rationale")
+  (org-insert-heading-respect-content)
+  (insert "Desired result (Definition of Done)")
+  (org-insert-heading-respect-content)
+  (insert "Results")
+  (org-insert-heading-respect-content)
+  (insert "Relevant informacion")
+  (org-insert-heading-respect-content)
+  (org-metaright)
+  (insert "Stream of Consciousness")
+  (org-insert-heading-respect-content)
+  (org-metaleft)
+  (insert "Actions")
+  (org-insert-heading-respect-content)
+  (org-metaright)
+  (insert "TODO_NEXT Determine the next [[file+emacs:~/Exocortex/20200427191126-moonshots.org::* Work on the hard part first][monkey action]] :monkey:"))
+#+end_src
+
+**** JIRA Issue
+        #+begin_src emacs-lisp
+(defun insert-jira-template (jira-code)
+  "Insert org project template under current heading."
+  (interactive)
+  (org-insert-link (concat "https://jira-inntech.grupobme.es/jira/browse/" jira-code) jira-code)
+  (org-insert-heading-respect-content)
+  (org-metaright)
+  (insert "Rationale")
+  (org-insert-heading-respect-content)
+  (insert "Desired result (Definition of Done)")
+  (org-insert-heading-respect-content)
+  (insert "Informe de resolución")
+  (org-insert-heading-respect-content)
+  (org-metaright)
+  (insert "Acciones realizadas")
+  (org-insert-heading-respect-content)
+  (org-metaright)
+  (insert "Análisis de impacto")
+  (org-insert-heading-respect-content)
+  (org-metaright)
+  (insert "Pruebas sugeridas")
+  (org-insert-heading-respect-content)
+  (org-metaleft)
+  (insert "Relevant informacion")
+  (org-insert-heading-respect-content)
+  (org-metaright)
+  (insert "Stream of Consciousness")
+  (org-insert-heading-respect-content)
+  (org-metaleft)
+  (insert "Actions")
+  (org-insert-heading-respect-content)
+  (org-metaright)
+  (insert "TODO_NEXT Determine the next [[file+emacs:~/Exocortex/20200427191126-moonshots.org::* Work on the hard part first][monkey action]] :monkey:"))
+#+end_src
+
 ** Babel
 *** Languages
     Allow =babel= to evaluate Emacs lisp, verilog  or Gnuplot code.
@@ -67,7 +105,8 @@ pairing or presenting code.
      (lua . t)
      (haskell . t)
      (coq . t)
-     (ocaml . t)))
+     (ocaml . t)
+     (dot . t)))
 #+END_SRC
 
 *** highlighting
@@ -205,37 +244,6 @@ Insertion of code blocks
      ;;                            (set (make-local-variable 'auto-save) nil)))
      ;; ;; Global Tags
     #+END_SRC
-** Project management
-    Record the time that a todo was archived.
-
-#+BEGIN_SRC emacs-lisp
-  (setq org-log-done 'time)
-#+END_SRC
-*** Project structure
-
-   #+begin_src emacs-lisp
-(defun insert-orgproject-template ()
-  "Insert org project template under current heading."
-  (interactive)
-  (org-insert-heading-respect-content)
-  (org-metaright)
-  (insert "Rationale")
-  (org-insert-heading-respect-content)
-  (insert "Desired result (Definition of Done)")
-  (org-insert-heading-respect-content)
-  (insert "Results")
-  (org-insert-heading-respect-content)
-  (insert "Relevant informacion")
-  (org-insert-heading-respect-content)
-  (org-metaright)
-  (insert "Stream of Consciousness")
-  (org-insert-heading-respect-content)
-  (org-metaleft)
-  (insert "Actions")
-  (org-insert-heading-respect-content)
-  (org-metaright)
-  (insert "TODO_NEXT Determine the next [[file+emacs:~/Exocortex/20200427191126-moonshots.org::* Work on the hard part first][monkey action]] :monkey:"))
-#+end_src
 ** Keys
    #+begin_src emacs-lisp
 ;;(define-key org-mode-map (kbd "M-return") nil)
@@ -268,6 +276,47 @@ Use flycheck in the appropriate buffers:
   (add-hook 'arduino-mode-hook #'flycheck-mode)
 #+end_src
 
+* General settings
+** Lines
+    Wrap lines
+#+BEGIN_SRC emacs-lisp
+  (setq global-visual-line-mode t)
+#+END_SRC
+** Visual
+   #+begin_src emacs-lisp
+(add-hook 'org-mode-hook
+          (lambda () (face-remap-add-relative 'default :family "Monospace")))
+   #+end_src
+
+   #+RESULTS:
+*** Theme
+    #+begin_src emacs-lisp
+(add-to-list 'custom-theme-load-path "~/.emacs.d/themes/")
+    #+end_src
+
+
+** Terminal
+   Use the settings of [[https://stackoverflow.com/questions/12224909/is-there-a-way-to-get-my-emacs-to-recognize-my-bash-aliases-and-custom-functions/12229404#12229404][bashrc when using emacs term]]:
+#+begin_src emacs-lisp
+  (setq shell-file-name "bash")
+  (setq shell-command-switch "-ic")
+#+end_src
+* Set personal information
+** Who am I? Where am I?
+
+#+BEGIN_SRC emacs-lisp
+  (setq user-full-name "Roland Coeurjoly"
+        user-mail-address "rolandcoeurjoly@gmail.com")
+#+END_SRC
+** Highlight the current line
+
+=global-hl-line-mode= softly highlights the background color of the line
+containing point. It makes it a bit easier to find point, and it's useful when
+pairing or presenting code.
+
+#+BEGIN_SRC emacs-lisp
+  (global-hl-line-mode)
+#+END_SRC
 * Programming
 ** Software
 *** CPP
@@ -285,7 +334,7 @@ Use flycheck in the appropriate buffers:
 
 *** Coq
     #+begin_src emacs-lisp
-(load "~/.emacs.d/lisp/PG/generic/proof-site")
+(load "~/.emacs.d/lisp/PG/generic/proof-site.el")
     #+end_src
 
 *** Python

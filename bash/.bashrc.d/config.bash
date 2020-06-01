@@ -44,6 +44,7 @@ export DEBIAN_PACKAGES="aptitude \
                         gmtp \
                         cmake \
                         fonts-inconsolata \
+                        screen \
                         libmtp-dev \
                         acpi-call-dkms \
                         tlp \
@@ -276,7 +277,7 @@ grepcpp () {
     grep -IRsnEi --exclude-dir=build --include="*.h" --include="*.cpp" --include="*.hpp" "${@}"
 }
 greper () {
-    grep -IRsnEi --exclude-dir=env --exclude-dir=build --exclude="*.bash_history" "${@}"
+    grep -IRsnEia --exclude-dir=env --exclude-dir=build --exclude="*.bash_history" "${@}"
 }
 generateclangcomplete () {
     GIT_ROOT=$(git rev-parse --show-toplevel)
