@@ -14,10 +14,10 @@
 
 **** Generic project
      #+begin_src emacs-lisp
-(add-to-list 'org-capture-templates
-             '("j" "JIRA" entry
-               (file+headline "~/Exocortex/Exocortex.org" "JIRAs")
-               (file "~/dotfiles/spacemacs/.spacemacs.d/templates/project.txt")))
+(setq org-capture-templates
+      '(("j" "JIRA" entry
+         (file+headline "~/Exocortex/Exocortex.org" "JIRAs")
+         (file "~/dotfiles/spacemacs/.spacemacs.d/templates/project.txt"))))
      #+end_src
 
 
@@ -177,13 +177,18 @@ Insertion of code blocks
 *** Change to DONE when children are DONE
     [[https://orgmode.org/manual/Breaking-down-tasks.html][If you would like a TODO entry to automatically change to DONE when all children are done, you can use the following setup:]]
    #+begin_src emacs-lisp
-(defun org-summary-todo (n-done n-not-done)
-  "Switch entry to DONE when all subentries are done, to TODO otherwise."
-  (let (org-log-done org-log-states)   ; turn off logging
-    (org-todo (if (= n-not-done 0) "DONE" "TODO"))))
+;;(defun org-summary-todo (n-done n-not-done)
+;;  "Switch entry to DONE when all subentries are done, to TODO otherwise."
+;;  (let (org-log-done org-log-states)   ; turn off logging
+;;    (org-todo (if (= n-not-done 0) "DONE" "TODO"))))
 
-(add-hook 'org-after-todo-statistics-hook 'org-summary-todo)
+;; (add-hook 'org-after-todo-statistics-hook 'org-summary-todo)
    #+end_src
+*** Set global TODO keywords
+#+begin_src emacs-lisp
+(setq org-todo-keywords
+      '((sequence "TODO_NEXT(n!)" "TODO(t!)" "WAIT(w!)" "|" "DONE(d!)" "CANCELED(c!)")))
+#+end_src
 
 *** Calculate statistics taking into account all [[https://orgmode.org/manual/Breaking-down-tasks.html][children]]
     #+begin_src emacs-lisp
@@ -201,6 +206,7 @@ Insertion of code blocks
 #+BEGIN_SRC emacs-lisp
   (setq org-ellipsis "⤵")
 #+END_SRC
+
 #+BEGIN_SRC emacs-lisp
 ;;(setq org-bullets-bullet-list '("■" "◆" "▲" "▶"))
 ;;(setq org-bullets-bullet-list '("甲" "乙" "丙" "丁"))
@@ -252,6 +258,14 @@ Insertion of code blocks
    #+RESULTS:
 
 ** Links
+
+*** Don't match exact
+#+begin_src emacs-lisp
+(setq org-link-search-must-match-exact-headline nil)
+#+end_src
+
+*** Browser
+
    By default is eww
    #+begin_src emacs-lisp
 ;;(setq browse-url-browser-function 'eww-browse-url)
@@ -388,7 +402,6 @@ of FILE in the current directory, suitable for creation"
 			if (equal d root)
 			return nil))))
  (require 'compile)
- (add-hook 'verilog-mode-hook 'fundamental-mode-hook (lambda () (set (make-local-variable 'compile-command) (format "make -f %s " (get-closest-pathname)))))
 #+END_SRC
 
 *** Compile default

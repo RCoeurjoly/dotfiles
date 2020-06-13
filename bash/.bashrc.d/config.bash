@@ -274,10 +274,10 @@ switch_to_simplified () {
     dconf write /desktop/ibus/engine/pinyin/InitSimplifiedChinese true; ibus restart
 }
 grepcpp () {
-    grep -IRsnEi --exclude-dir=build --include="*.h" --include="*.cpp" --include="*.hpp" "${@}"
+    grep -IRsnEi --exclude-dir=.git --exclude-dir=build --include="*.h" --include="*.cpp" --include="*.hpp" "${@}"
 }
 greper () {
-    grep -IRsnEia --exclude-dir=env --exclude-dir=build --exclude="*.bash_history" "${@}"
+    grep -IRsnEia --exclude-dir=.git --exclude-dir=env --exclude-dir=build --exclude="*.bash_history" "${@}"
 }
 generateclangcomplete () {
     GIT_ROOT=$(git rev-parse --show-toplevel)

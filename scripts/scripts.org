@@ -340,14 +340,14 @@ generateclangcomplete () {
    #+NAME: grepcpp
    #+begin_src shell :noweb yes :exports code
 grepcpp () {
-    grep -IRsnEi --exclude-dir=build --include="*.h" --include="*.cpp" --include="*.hpp" "${@}"
+    grep -IRsnEi --exclude-dir=.git --exclude-dir=build --include="*.h" --include="*.cpp" --include="*.hpp" "${@}"
 }
    #+end_src
 
    #+NAME: greper
    #+begin_src shell :noweb yes :exports code
 greper () {
-    grep -IRsnEia --exclude-dir=env --exclude-dir=build --exclude="*.bash_history" "${@}"
+    grep -IRsnEia --exclude-dir=.git --exclude-dir=env --exclude-dir=build --exclude="*.bash_history" "${@}"
 }
    #+end_src
 *** Timestamping
