@@ -311,11 +311,11 @@ hitchhikersGuideToTheGalaxy() {
 findFIXfield_in_Docker () {
     VTFIXDataDictionary=/data/programs/vtcommon-files/dictionary/VTFIXDataDictionary.xml
     FixValues=/usr/local/quickfix-1.13.3.VT13/include/quickfix/FixValues.h
-    VTFixFieldNumbers=/data/programs/vtcommon/include/vtfix-base/9.5.8/VTFixFieldNumbers.h
-    VTFixFields=/data/programs/vtcommon/include/vtfix-base/9.5.8/VTFixFields.h
+    VTFixFieldNumbers=/data/programs/vtcommon/include/vtfix-base/*/VTFixFieldNumbers.h
+    VTFixFields=/data/programs/vtcommon/include/vtfix-base/*/VTFixFields.h
     query_input=$1
 
-    grep -vh required $VTFIXDataDictionary $FixValues $VTFixFieldNumbers $VTFixFields | grep -Phi "field\s(number|name)=\".*?${query_input}.*?\""
+    grep -vh required $VTFIXDataDictionary $FixValues $VTFixFieldNumbers $VTFixFields | grep -Phi "field\s(number|name)=\"${query_input}\""
 }
 
 findFIXfield () {
@@ -330,8 +330,8 @@ findFIXfield () {
 findMeaningOfValueOfFIXfield_in_Docker () {
     VTFIXDataDictionary=/data/programs/vtcommon-files/dictionary/VTFIXDataDictionary.xml
     FixValues=/usr/local/quickfix-1.13.3.VT13/include/quickfix/FixValues.h
-    VTFixFieldNumbers=/data/programs/vtcommon/include/vtfix-base/9.6.6/VTFixFieldNumbers.h
-    VTFixFields=/data/programs/vtcommon/include/vtfix-base/9.6.6/VTFixFields.h
+    VTFixFieldNumbers=/data/programs/vtcommon/include/vtfix-base/*/VTFixFieldNumbers.h
+    VTFixFields=/data/programs/vtcommon/include/vtfix-base/*/VTFixFields.h
 
 
     if [ "$#" == 2 ]; then
@@ -340,7 +340,7 @@ findMeaningOfValueOfFIXfield_in_Docker () {
         VALUE=
     fi
     FIELD_NAME=$1
-    grep -Phi  "const.*${FIELD_NAME}.*${VALUE}.*;" $VTFIXDataDictionary $FixValues $VTFixFieldNumbers $VTFixFields
+    grep -Phi  "const.*${FIELD_NAME}.*['\"]${VALUE}['\"].*;" $VTFIXDataDictionary $FixValues $VTFixFieldNumbers $VTFixFields
 }
 
 findMeaningOfValueOfFIXfield () {
