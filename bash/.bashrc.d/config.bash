@@ -546,7 +546,12 @@ switch_sink() {
     fi
 }
 
+connect_bluetooth_earpods() {
+    echo connect C0:00:00:02:18:A9 | bluetoothctl
+}
+
 connect_bluetooth() {
+    # C0:00:00:02:18:A9
     echo connect 0C:E0:E4:A0:8E:DB | bluetoothctl
 }
 
