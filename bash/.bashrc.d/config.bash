@@ -315,7 +315,12 @@ findFIXfield_in_Docker () {
     VTFixFields=/data/programs/vtcommon/include/vtfix-base/*/VTFixFields.h
     query_input=$1
 
-    grep -vh required $VTFIXDataDictionary $FixValues $VTFixFieldNumbers $VTFixFields | grep -Phi "field\s(number|name)=\"${query_input}\""
+    if ! [[ "$query_input" =~ ^[0-9]+$ ]] ; then
+        grep -vh required $VTFIXDataDictionary $FixValues $VTFixFieldNumbers $VTFixFields | grep -Phi "field\snumber.*name=\"${query_input}\""
+    else
+        grep -vh required $VTFIXDataDictionary $FixValues $VTFixFieldNumbers $VTFixFields | grep -Phi "field\snumber=\"${query_input}\""
+    fi
+
 }
 
 findFIXfield () {
@@ -340,7 +345,7 @@ findMeaningOfValueOfFIXfield_in_Docker () {
         VALUE=".*"
     fi
     FIELD_NAME=$1
-    grep -Phi  "const.*${FIELD_NAME}.*['\"]${VALUE}['\"].*;" $VTFIXDataDictionary $FixValues $VTFixFieldNumbers $VTFixFields
+    grep -Pi  "const.*${FIELD_NAME}.*['\"]${VALUE}['\"].*;" $VTFIXDataDictionary $FixValues $VTFixFieldNumbers $VTFixFields
 }
 
 findMeaningOfValueOfFIXfield () {

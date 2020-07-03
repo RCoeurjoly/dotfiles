@@ -1,4 +1,4 @@
-* TODO [[eww:https://jira-inntech.grupobme.es/jira/si/jira.issueviews:issue-html/%^{JIRA code}/%^{JIRA code}.html][%^{JIRA code}]] [/]
+* TODO [[eww:https://jira-inntech.grupobme.es/jira/si/jira.issueviews:issue-html/%^{JIRA code}/%^{JIRA code}.html][%^{JIRA code}]] [%]
   :PROPERTIES:
   :COOKIE_DATA: todo recursive
   :END:
@@ -13,3 +13,4 @@
 ** Relevant informacion
 *** Stream of Consciousness
 ** Actions
+*** TODO_NEXT Crear WIP MR

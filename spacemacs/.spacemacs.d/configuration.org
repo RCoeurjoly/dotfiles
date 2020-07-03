@@ -340,13 +340,17 @@ Use flycheck in the appropriate buffers:
 (add-to-list 'custom-theme-load-path "~/.emacs.d/themes/")
     #+end_src
 
-
 ** Terminal
    Use the settings of [[https://stackoverflow.com/questions/12224909/is-there-a-way-to-get-my-emacs-to-recognize-my-bash-aliases-and-custom-functions/12229404#12229404][bashrc when using emacs term]]:
 #+begin_src emacs-lisp
   (setq shell-file-name "bash")
   (setq shell-command-switch "-ic")
 #+end_src
+** Snippets
+   #+begin_src emacs-lisp
+(setq yas-snippet-dirs '("~/dotfiles/spacemacs/.spacemacs.d/snippets"))
+   #+end_src
+
 * Set personal information
 ** Who am I? Where am I?
 
