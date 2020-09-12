@@ -3,6 +3,6 @@
 #key : compile_haskell
 #contributor : Roland Coeurjoly
 # --
-#+begin_src haskell :compile yes
+#+begin_src haskell :compile yes :results output
 $0
 #+end_src

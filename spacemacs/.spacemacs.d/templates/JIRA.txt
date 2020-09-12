@@ -1,0 +1,15 @@
+* TODO [[eww:https://jira-inntech.grupobme.es/jira/si/jira.issueviews:issue-html/%^{JIRA code}/%^{JIRA code}.html][%^{JIRA code}]] [%]
+  :PROPERTIES:
+  :COOKIE_DATA: todo recursive
+  :END:
+** Informe de resolución
+   #+OPTIONS: ^:nil toc:10
+   #+SUBTITLE: %^{JIRA code}
+   #+EXPORT_FILE_NAME: Informe_de_resolución_%^{JIRA code}.html
+ [[eww:https://jira-inntech.grupobme.es/jira/browse/%^{JIRA code}][%^{JIRA code} en JIRA]]
+*** Acciones realizadas
+*** Análisis de impacto
+*** Pruebas sugeridas
+** Relevant informacion
+*** Stream of Consciousness
+** Actions

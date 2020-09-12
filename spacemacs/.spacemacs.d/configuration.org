@@ -17,6 +17,9 @@
 (setq org-capture-templates
       '(("j" "JIRA" entry
          (file+headline "~/Exocortex/Exocortex.org" "JIRAs")
+         (file "~/dotfiles/spacemacs/.spacemacs.d/templates/JIRA.txt"))
+        ("p" "project" entry
+         (file+headline "~/Exocortex/Exocortex.org" "projects")
          (file "~/dotfiles/spacemacs/.spacemacs.d/templates/project.txt"))))
      #+end_src
 
