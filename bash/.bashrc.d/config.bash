@@ -265,7 +265,8 @@ build_dockerimage () {
 }
 executeInDocker () {
     CURRENTDIR=$( pwd )
-    docker-compose -f ~/docker-services/dev/docker-compose.yml exec dev_rhel7 bash -c "cd ${CURRENTDIR} && $1"
+    my_commands="$@"
+    docker-compose -f ~/docker-services/dev/docker-compose.yml exec dev_rhel7 bash -c "cd ${CURRENTDIR} && ${my_commands}"
 }
 switch_to_traditional () {
     dconf write /desktop/ibus/engine/pinyin/InitSimplifiedChinese false; ibus restart
@@ -288,6 +289,12 @@ generateclangcomplete () {
     clangcompletepp
     cd -
 }
+change_makefile_versions () {
+    GIT_ROOT=$(git rev-parse --show-toplevel)
+    OLD_VERSION="$1"
+    NEW_VERSION="$2"
+    sed -i s/${OLD_VERSION}/${NEW_VERSION}/g "${GIT_ROOT}"/Makefile.VERSIONS
+}
 timestamp () {
     date +"%Y-%m-%d_%H:%M:%S.%N"
 }
@@ -299,11 +306,33 @@ lazygit() {
     cd -
 }
 areTherePirateVersions() {
-    if [ "$(git tag | grep pirate | wc -l)" == 0 ]; then
+    if [ "$(git tag | grep pirat | wc -l)" == 0 ]; then
         return 0
     else
         return 1
     fi
+}
+install_submodules() {
+    git -C "${REPO_PATH}" config -f .gitmodules --get-regexp '^submodule\..*\.path$' |
+        while read -r KEY MODULE_PATH
+        do
+            # If the module's path exists, remove it.
+            # This is done b/c the module's path is currently
+            # not a valid git repo and adding the submodule will cause an error.
+            [ -d "${MODULE_PATH}" ] && sudo rm -rf "${MODULE_PATH}"
+
+            NAME="$(echo "${KEY}" | sed 's/^submodule\.\(.*\)\.path$/\1/')"
+
+            url_key="$(echo "${KEY}" | sed 's/\.path$/.url/')"
+            branch_key="$(echo "${KEY}" | sed 's/\.path$/.branch/')"
+
+            URL="$(git config -f .gitmodules --get "${url_key}")"
+            BRANCH="$(git config -f .gitmodules --get "${branch_key}" || echo "master")"
+
+            git -C "${REPO_PATH}" submodule add --force -b "${BRANCH}" --name "${NAME}" "${URL}" "${MODULE_PATH}" || continue
+        done
+
+    git -C "${REPO_PATH}" submodule update --init --recursive
 }
 hitchhikersGuideToTheGalaxy() {
     return 42
@@ -379,14 +408,15 @@ tcr_loop() {
         -c "if ! git isworkdirclean && ! git isrebaseinprocess; then \
                ${test_command} && git wip || git reset --hard
             fi"
-    #if '${test_command}'; then \
-    #              git wip \
-    #           else \
-    #              git reset --hard; \
-    #           fi \
-    #        else \
-    #           true \
-    #        fi"
+}
+findprocess(){
+    if [ "$(pgrep -v grep | grep "${1}\|PID" | wc -l)" -ne 1 ]; then
+        pgrep -v grep | grep "${1}\|PID"
+        return 0
+    else
+        echo "Process" "${1}" "not found"
+        return 1
+    fi
 }
 install_debian_packages() {
     for package in ${DEBIAN_PACKAGES};
@@ -477,15 +507,6 @@ setkeyboard() {
     setxkbmap -option 'grp:rctrl_toggle'
 }
 
-findprocess(){
-    if [ "$(pgrep -v grep | grep "${1}\|PID" | wc -l)" -ne 1 ]; then
-        pgrep -v grep | grep "${1}\|PID"
-        return 0
-    else
-        echo "Process" "${1}" "not found"
-        return 1
-    fi
-}
 
 ishistoryuniq(){
     if [ "$(grep -v ^# ~/.bash_history | wc -l)" -eq "$(grep -v ^# ~/.bash_history | uniq | wc -l)" ]; then

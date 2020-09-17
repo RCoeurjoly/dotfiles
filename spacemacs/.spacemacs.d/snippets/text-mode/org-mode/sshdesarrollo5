@@ -1,11 +1,11 @@
 # -*- mode: snippet -*-
-#name : sshdesarrollo
-#key : sshdesarrollo
+#name : sshdesarrollo5
+#key : sshdesarrollo5
 #contributor : Roland Coeurjoly
 # --
 #+begin_src sh :dir /sshx:drcoeurjoly@10.0.9.240:~/ :results verbatim
-cd /srv/standard/oms/soms1/
 exec 2>&1
-$1
+source dotfiles/bash/.bashrc.d/aliases.bash
+$0
 :
 #+end_src

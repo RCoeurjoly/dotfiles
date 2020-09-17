@@ -370,6 +370,13 @@ pairing or presenting code.
 #+BEGIN_SRC emacs-lisp
   (global-hl-line-mode)
 #+END_SRC
+* PDF
+  Zoom in and out
+  #+begin_src emacs-lisp
+(global-set-key [C-mouse-4] 'text-scale-increase)
+(global-set-key [C-mouse-5] 'text-scale-decrease)
+  #+end_src
+
 * Programming
 ** Software
 *** CPP

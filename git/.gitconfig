@@ -22,6 +22,8 @@
   sum = log --oneline --no-merges
 	unstage = reset HEAD
 	wip = "!f() { git aa; git cm 'WIP'; }; f"
+	escalera = "!f() { git add $(git rev-parse --show-toplevel)/Makefile.VERSIONS && git cm 'Escalera'; }; f"
+	diffo = "!f() { git diff -b origin/master; }; f"
 [branch]
   autosetuprebase = always
 [color]
