@@ -1,4 +1,6 @@
 #!/bin/bash
+mkdir -p "$HOME"/.bin/
+touch "$HOME"/.bin/git-completion.sh
 source "$HOME"/.bin/git-completion.sh
 ulimit -c unlimited
 

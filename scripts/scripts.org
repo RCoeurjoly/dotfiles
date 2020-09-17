@@ -902,6 +902,8 @@ export DEBIAN_PACKAGES="aptitude \
 
    #+NAME: variables_pending_classification
    #+begin_src shell :noweb yes :exports code
+mkdir -p "$HOME"/.bin/
+touch "$HOME"/.bin/git-completion.sh
 source "$HOME"/.bin/git-completion.sh
 ulimit -c unlimited
 
