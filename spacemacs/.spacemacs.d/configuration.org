@@ -208,6 +208,12 @@ Insertion of code blocks
 (global-set-key "\C-cb" 'org-iswitchb)
 (global-font-lock-mode 1)
    #+END_SRC
+** Tables
+   To be able to shrink table:
+   #+begin_src emacs-lisp
+(setq org-startup-align-all-table t)
+   #+end_src
+
 ** TODOs
 *** Change to DONE when children are DONE
     [[https://orgmode.org/manual/Breaking-down-tasks.html][If you would like a TODO entry to automatically change to DONE when all children are done, you can use the following setup:]]
