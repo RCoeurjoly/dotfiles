@@ -295,7 +295,7 @@ change_makefile_versions () {
     GIT_ROOT=$(git rev-parse --show-toplevel)
     OLD_VERSION="$1"
     NEW_VERSION="$2"
-    sed -i s/${OLD_VERSION}/${NEW_VERSION}/g "${GIT_ROOT}"/Makefile.VERSIONS
+    sed -i s/^${OLD_VERSION}$/${NEW_VERSION}/g "${GIT_ROOT}"/Makefile.VERSIONS
 }
 timestamp () {
     date +"%Y-%m-%d_%H:%M:%S.%N"

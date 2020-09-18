@@ -109,6 +109,7 @@
      (haskell . t)
      (coq . t)
      (ocaml . t)
+     (sqlite . t)
      (dot . t)))
 #+END_SRC
 
@@ -196,7 +197,6 @@ Insertion of code blocks
 
   (add-hook 'org-export-before-processing-hook 'my/org-export-preprocessor)
     #+end_src
-
 
 ** General
    Recommended setting in the manual
