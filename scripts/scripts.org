@@ -296,7 +296,7 @@ tcr_loop() {
         --watch-directories "$(pwd)" --quiet \
         --ignore-paths "$(pwd)/.git/" "$(pwd)/build/" \
         -c "if ! git isworkdirclean && ! git isrebaseinprocess; then \
-               ${test_command} && git wip || git reset --hard
+            . ~/dotfiles/bash/.bashrc.d/config.bash && ${test_command} && git wip || git reset --hard
             fi"
 }
     #+end_src

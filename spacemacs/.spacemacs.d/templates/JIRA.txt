@@ -13,3 +13,18 @@
 ** Relevant informacion
 *** Stream of Consciousness
 ** Actions
+*** TODO_NEXT Crear WIP MR
+#+begin_src shell :shebang #!/bin/bash -i :results output
+cd ~/
+git checkout master
+git pull
+git checkout -b %^{JIRA code}
+git push
+#+end_src
+
+[[https://gitlab.grupobme.es/inntech/desarrollo/drivers/allfundsdriver/-/merge_requests/new?merge_request%5Bsource_branch%5D=%^{JIRA code}&merge_request%5Btarget_branch%5D=master][link de MR %^{JIRA code}]]
+*** TODO Crear informe de resolución
+*** TODO Sacar version
+**** TODO Etiquetar y pushear
+**** TODO Crear release
+**** TODO Asignarle la release a Val

@@ -4,6 +4,11 @@
 #+OPTIONS: toc:nil num:nil
 
 * Org mode
+** Itself
+   #+begin_src emacs-lisp
+(add-to-list 'load-path "~/org-mode/lisp")
+   #+end_src
+
 ** Project management
     Record the time that a todo was archived.
 
@@ -85,7 +90,6 @@
   (org-metaright)
   (insert "TODO_NEXT Determine the next [[file+emacs:~/Exocortex/20200427191126-moonshots.org::* Work on the hard part first][monkey action]] :monkey:"))
 #+end_src
-
 ** Babel
 *** Languages
     Allow =babel= to evaluate Emacs lisp, verilog  or Gnuplot code.
@@ -225,6 +229,11 @@ Insertion of code blocks
 
 ;; (add-hook 'org-after-todo-statistics-hook 'org-summary-todo)
    #+end_src
+*** Do not fontify DONE headings, otherwise links cannot be seen
+    #+begin_src emacs-lisp
+(setq org-fontify-done-headline nil)
+    #+end_src
+
 *** Set global TODO keywords
 #+begin_src emacs-lisp
 (setq org-todo-keywords
