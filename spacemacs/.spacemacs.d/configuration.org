@@ -216,6 +216,7 @@ Insertion of code blocks
    To be able to shrink table:
    #+begin_src emacs-lisp
 (setq org-startup-align-all-table t)
+(setq org-startup-shrink-all-tables t)
    #+end_src
 
 ** TODOs
