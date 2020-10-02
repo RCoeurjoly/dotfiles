@@ -114,6 +114,7 @@
      (coq . t)
      (ocaml . t)
      (sqlite . t)
+     (org . t)
      (dot . t)))
 #+END_SRC
 
@@ -309,7 +310,6 @@ Insertion of code blocks
    #+RESULTS:
 
 ** Links
-
 *** Don't match exact
 #+begin_src emacs-lisp
 (setq org-link-search-must-match-exact-headline nil)
@@ -319,8 +319,18 @@ Insertion of code blocks
 
    By default is eww
    #+begin_src emacs-lisp
-;;(setq browse-url-browser-function 'eww-browse-url)
+(setq browse-url-browser-function 'eww-browse-url)
    #+end_src
+
+
+*** Open files default app
+    #+begin_src emacs-lisp
+(setq org-file-apps
+      '((auto-mode . emacs)
+        ("\\.pdf\\'" . emacs)
+        ("\\.pdf::\\([0-9]+\\)\\'" . emacs)
+        ("\\.pdf.xoj" . "xournal %s")))
+    #+end_src
 
 ** Export
     Translate regular ol' straight quotes to typographically-correct curly quotes
