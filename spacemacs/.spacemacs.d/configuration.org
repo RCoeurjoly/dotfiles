@@ -91,6 +91,13 @@
   (insert "TODO_NEXT Determine the next [[file+emacs:~/Exocortex/20200427191126-moonshots.org::* Work on the hard part first][monkey action]] :monkey:"))
 #+end_src
 ** Babel
+*** Elixir
+    #+begin_src emacs-lisp
+(add-to-list 'load-path "~/ob-elixir/ob-elixir.el")
+(require 'ob-elixir)
+    #+end_src
+
+
 *** Languages
     Allow =babel= to evaluate Emacs lisp, verilog  or Gnuplot code.
 
@@ -115,9 +122,9 @@
      (ocaml . t)
      (sqlite . t)
      (org . t)
+     (elixir . t)
      (dot . t)))
 #+END_SRC
-
 *** highlighting
 Use syntax highlighting in source blocks while editing.
 
