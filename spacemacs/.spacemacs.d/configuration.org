@@ -9,6 +9,18 @@
 (add-to-list 'load-path "~/org-mode/lisp")
    #+end_src
 
+** Agenda
+   #+begin_src emacs-lisp
+(setq org-agenda-files '("~/Exocortex"))
+   #+end_src
+*** Ignore files
+    #+begin_src emacs-lisp
+(custom-set-variables
+ '(org-agenda-custom-commands
+   '(("c" "Custom agenda, ignore IGNORE_FOR_AGENDA tag"
+      ((agenda ""))
+      ((org-agenda-tag-filter-preset '("-IGNORE_FOR_AGENDA")))))))
+    #+end_src
 ** Project management
     Record the time that a todo was archived.
 

@@ -1,5 +1,5 @@
 [alias]
-  aa = "!f() { git add $(git rev-parse --show-toplevel) -all; }; f"
+  aa = "!f() { git add $(git rev-parse --show-toplevel) --all; }; f"
   amend = commit --amend
   br = branch
 	checkout = checkout
