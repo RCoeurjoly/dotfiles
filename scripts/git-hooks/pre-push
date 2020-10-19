@@ -56,7 +56,7 @@ source ~/.bashrc.d/config.bash
 areTherePirateVersions
 rc=$?
 if [[ $rc != 0 ]]; then
-    echo "Cannot push, pirate version" $(git tag | grep pirat) "found"
+    echo "Cannot push, pirate version" $(git tag | grep pirat | head -n 1) "found"
 else
     echo "No pirate versions. You can push"
 fi

@@ -529,7 +529,7 @@ source ~/.bashrc.d/config.bash
 areTherePirateVersions
 rc=$?
 if [[ $rc != 0 ]]; then
-    echo "Cannot push, pirate version" $(git tag | grep pirate) "found"
+    echo "Cannot push, pirate version" $(git tag | grep pirat | head -n 1) "found"
 else
     echo "No pirate versions. You can push"
 fi
@@ -847,7 +847,7 @@ shopt -s histappend
 
 ** Python scripts
    #+NAME:
-   #+begin_src python :noweb yes :session python :exports code :tangle ../scripts.py :results output
+   #+begin_src python :noweb yes :session python :exports code :tangle ../JIRA_to_path.py :results output
 import sys
 import re
 from os.path import expanduser
@@ -855,6 +855,8 @@ from os.path import expanduser
 JIRA_PATH_CORRESPONDENCE = {"DRVINET":    expanduser("~") + "/driiiiiiiiiiiiiiiiiiiivers/inetdriver/",
                             "OMSRBT":     expanduser("~") + "/oooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooms/oms-trade-robot",
                             "VTGTWY":     expanduser("~") + "/inntech/desarrollo/gateway/vtgateway",
+                            "OMSTRD":     expanduser("~") + "/oms/oms-suuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuper-largo/oms-trd",
+                            "DRVALLFNDS":     expanduser("~") + "/driiiiiiiiiiiiiiiiiiiivers/allfundsdriver",
                             "VTFIXBRDG":  expanduser("~") + "/inntech/desarrollo/gateway/fixbridge"}
 
 def remove_code(JIRA):
