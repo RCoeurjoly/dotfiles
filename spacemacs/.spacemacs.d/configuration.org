@@ -6,7 +6,7 @@
 * Org mode
 ** Itself
    #+begin_src emacs-lisp
-(add-to-list 'load-path "~/org-mode/lisp")
+;;(add-to-list 'load-path "~/org-mode/lisp")
    #+end_src
 
 ** Agenda
@@ -108,7 +108,6 @@
 (add-to-list 'load-path "~/ob-elixir/ob-elixir.el")
 (require 'ob-elixir)
     #+end_src
-
 
 *** Languages
     Allow =babel= to evaluate Emacs lisp, verilog  or Gnuplot code.
@@ -439,7 +438,14 @@ pairing or presenting code.
 
 *** Coq
     #+begin_src emacs-lisp
-(load "~/.emacs.d/lisp/PG/generic/proof-site.el")
+;;(load "~/.emacs.d/lisp/PG/generic/proof-site.el")
+    #+end_src
+
+*** SMT-LIB
+    #+begin_src emacs-lisp
+(setq auto-mode-alist (cons '("\\.smt$" . smtlib-mode) auto-mode-alist))
+(autoload 'smtlib-mode "smtlib" "Major mode for SMTLIB" t)
+(setq smtlib-solver-cmd "z3")
     #+end_src
 
 *** Python
