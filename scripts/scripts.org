@@ -15,7 +15,7 @@
  #+NAME: tangle_scripts
  #+begin_src shell :shebang #!/bin/bash :noweb yes :results output
 create_checksum_file() {
-    echo $(sha512sum -l ~/dotfiles/scripts/scripts.org) > ~/dotfiles/bash/.bashrc.d/scripts_checksum
+    echo $(sha512sum ~/dotfiles/scripts/scripts.org) > ~/dotfiles/bash/.bashrc.d/scripts_checksum
 }
 
 tangle_scripts () {

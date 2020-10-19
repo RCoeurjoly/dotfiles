@@ -716,7 +716,7 @@ test_installation_all_packages() {
     test_installation_non_debian_packages
 }
 create_checksum_file() {
-    echo $(sha512sum -l ~/dotfiles/scripts/scripts.org) > ~/dotfiles/bash/.bashrc.d/scripts_checksum
+    echo $(sha512sum ~/dotfiles/scripts/scripts.org) > ~/dotfiles/bash/.bashrc.d/scripts_checksum
 }
 
 tangle_scripts () {
