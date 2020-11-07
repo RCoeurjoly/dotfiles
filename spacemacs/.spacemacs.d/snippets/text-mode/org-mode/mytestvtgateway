@@ -1,13 +1,13 @@
 # -*- mode: snippet -*-
-#name : cdomscommon
-#key : cdomscommon
+#name : mytestvtgateway
+#key : mytestvtgateway
 #contributor : Roland Coeurjoly
 # --
 #+header: :engine mysql
 #+header: :dbuser root
 #+header: :dbpassword redhatbolsa
-#+header: :dbhost 10.0.7.2
-#+header: :database cdomscommon
+#+header: :database vtgwy_test
+#+header: :dbhost db
 #+begin_src sql :exports both
 $0
 #+end_src

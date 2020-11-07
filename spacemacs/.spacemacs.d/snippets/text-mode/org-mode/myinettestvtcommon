@@ -1,13 +1,13 @@
 # -*- mode: snippet -*-
-#name : cdomscommon
-#key : cdomscommon
+#name : myinettestvtcommon
+#key : myinettestvtcommon
 #contributor : Roland Coeurjoly
 # --
 #+header: :engine mysql
 #+header: :dbuser root
 #+header: :dbpassword redhatbolsa
-#+header: :dbhost 10.0.7.2
-#+header: :database cdomscommon
+#+header: :database test_inetdrv_vtcommon
+#+header: :dbhost db
 #+begin_src sql :exports both
 $0
 #+end_src

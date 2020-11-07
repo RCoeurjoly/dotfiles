@@ -7,7 +7,8 @@ JIRA_PATH_CORRESPONDENCE = {"DRVINET":    expanduser("~") + "/driiiiiiiiiiiiiiii
                             "VTGTWY":     expanduser("~") + "/inntech/desarrollo/gateway/vtgateway",
                             "OMSTRD":     expanduser("~") + "/oms/oms-suuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuper-largo/oms-trd",
                             "DRVALLFNDS":     expanduser("~") + "/driiiiiiiiiiiiiiiiiiiivers/allfundsdriver",
-                            "VTFIXBRDG":  expanduser("~") + "/inntech/desarrollo/gateway/fixbridge"}
+                            "VTFIXBRDG":  expanduser("~") + "/inntech/desarrollo/gateway/fixbridge",
+                            "OMSCLIP":  expanduser("~") + "/oms/Clipsy"}
 
 def remove_code(JIRA):
     return re.sub(r'-[0-9]*', '', JIRA)
