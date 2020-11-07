@@ -291,6 +291,11 @@ Insertion of code blocks
 (add-hook 'org-mode-hook #'visual-line-mode)
     #+end_src
 
+*** Latex
+    Make it bigger.
+#+begin_src emacs-lisp
+(setq org-format-latex-options (plist-put org-format-latex-options :scale 5.0))
+        #+end_src
 ** [[https://orgmode.org/worg/org-tutorials/encrypting-files.html][Crypto]]
    I set org mode so that I can encrypt headings with the tag crypt
    #+BEGIN_SRC emacs-lisp
