@@ -10,7 +10,7 @@
 *** Acciones realizadas
 *** Análisis de impacto
 *** Pruebas sugeridas
-** Relevant informacion
+** Relevant information
 *** Stream of Consciousness
 ** Actions
 *** TODO_NEXT Crear WIP MR

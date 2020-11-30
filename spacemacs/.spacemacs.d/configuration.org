@@ -55,7 +55,7 @@
   (org-insert-heading-respect-content)
   (insert "Results")
   (org-insert-heading-respect-content)
-  (insert "Relevant informacion")
+  (insert "Relevant information")
   (org-insert-heading-respect-content)
   (org-metaright)
   (insert "Stream of Consciousness")
@@ -91,7 +91,7 @@
   (insert "Pruebas sugeridas")
   (org-insert-heading-respect-content)
   (org-metaleft)
-  (insert "Relevant informacion")
+  (insert "Relevant information")
   (org-insert-heading-respect-content)
   (org-metaright)
   (insert "Stream of Consciousness")
@@ -294,7 +294,7 @@ Insertion of code blocks
 *** Latex
     Make it bigger.
 #+begin_src emacs-lisp
-(setq org-format-latex-options (plist-put org-format-latex-options :scale 5.0))
+(setq org-format-latex-options (plist-put org-format-latex-options :scale 2.0))
         #+end_src
 ** [[https://orgmode.org/worg/org-tutorials/encrypting-files.html][Crypto]]
    I set org mode so that I can encrypt headings with the tag crypt
@@ -401,6 +401,10 @@ Use flycheck in the appropriate buffers:
 ** Snippets
    #+begin_src emacs-lisp
 (setq yas-snippet-dirs '("~/dotfiles/spacemacs/.spacemacs.d/snippets"))
+   #+end_src
+** Helm
+   #+begin_src emacs-lisp
+(setq history-delete-duplicates t)
    #+end_src
 
 * Set personal information
