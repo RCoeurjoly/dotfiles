@@ -237,7 +237,7 @@ isOSgood(){
     fi
 }
 isGCCgood(){
-    GCC_IN_DOCKER='gcc (GCC) 4.8.5 20150623 (Red Hat 4.8.5-39)
+    GCC_IN_DOCKER='gcc (GCC) 4.8.5 20150623 (Red Hat 4.8.5-44)
 Copyright (C) 2015 Free Software Foundation, Inc.
 This is free software; see the source for copying conditions.  There is NO
 warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.'
@@ -281,6 +281,9 @@ grepcpp () {
 }
 greper () {
     grep -IRsnEia --exclude-dir=.git --exclude-dir=env --exclude-dir=build --exclude="*.bash_history" "${@}"
+}
+greporg () {
+    grep -IRsnEia --exclude-dir=.git --exclude-dir=env --exclude-dir=build --exclude="*.bash_history" "${@}" ~/Exocortex/*org
 }
 generateclangcomplete () {
     GIT_ROOT=$(git rev-parse --show-toplevel)

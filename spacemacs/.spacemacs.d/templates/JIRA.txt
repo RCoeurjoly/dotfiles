@@ -15,8 +15,11 @@
 ** Actions
 *** TODO_NEXT Crear WIP MR
 #+begin_src shell :shebang #!/bin/bash -i :results output
-cd $(python ~/dotfiles/JIRA_to_path.py %^{JIRA code})
+exec 2>&1
+
+python ~/dotfiles/JIRA_to_path.py %^{JIRA code} >/dev/null 2>&1
 if [ $? -eq 0 ]; then
+    cd $(python ~/dotfiles/JIRA_to_path.py %^{JIRA code})
     git checkout master
     git pull
     git checkout -b %^{JIRA code}
@@ -24,11 +27,11 @@ if [ $? -eq 0 ]; then
 else
     echo "Please fill corresponding path for %^{JIRA code}"
 fi
+:
 #+end_src
 
-[[https://gitlab.grupobme.es/inntech/desarrollo/drivers/allfundsdriver/-/merge_requests/new?merge_request%5Bsource_branch%5D=%^{JIRA code}&merge_request%5Btarget_branch%5D=master][link de MR %^{JIRA code}]]
-*** TODO Crear informe de resolución
-*** TODO Sacar version
-**** TODO Etiquetar y pushear
-**** TODO Crear release
-**** TODO Asignarle la release a Val
+*** WAIT Crear informe de resolución
+*** WAIT Sacar version
+**** WAIT Etiquetar y pushear
+**** WAIT Crear release
+**** WAIT Asignarle la release a Val

@@ -1,23 +1,23 @@
 #set history size unlimited
+set confirm off
 set history save on
 set print elements 0
 #set history remove-duplicates unlimited
 set history filename ~/.gdb_history
-set print elements 0
 handle SIG35 nostop noprint pass noignore
 #
-#   STL GDB evaluators/views/utilities - 1.03
+#  STL GDB evaluators/views/utilities - 1.03
 #
 #   The new GDB commands:
 # 	    are entirely non instrumental
 # 	    do not depend on any "inline"(s) - e.g. size(), [], etc
 #       are extremely tolerant to debugger settings
-#
+# #
 #   This file should be "included" in .gdbinit as following:
 #   source stl-views.gdb or just paste it into your .gdbinit file
-#
+# #
 #   The following STL containers are currently supported:
-#
+# #
 #       std::vector<T> -- via pvector command
 #       std::list<T> -- via plist or plist_member command
 #       std::map<T,T> -- via pmap or pmap_member command
@@ -31,22 +31,22 @@ handle SIG35 nostop noprint pass noignore
 #       std::bitset<n> -- via pbitset command
 #       std::string -- via pstring command
 #       std::widestring -- via pwstring command
-#
+# #
 #   The end of this file contains (optional) C++ beautifiers
 #   Make sure your debugger supports $argc
-#
+# #
 #   Simple GDB Macros writen by Dan Marinescu (H-PhD) - License GPL
 #   Inspired by intial work of Tom Malnar,
 #     Tony Novac (PhD) / Cornell / Stanford,
 #     Gilad Mishne (PhD) and Many Many Others.
 #   Contact: dan_c_marinescu@yahoo.com (Subject: STL)
-#
+# #
 #   Modified to work with g++ 4.3 by Anders Elton
 #   Also added _member functions, that instead of printing the entire class in map, prints a member.
 
 
 
-#
+# #
 # std::vector<>
 #
 
@@ -700,5 +700,5 @@ set print demangle on
 set demangle-style gnu-v3
 set print sevenbit-strings off
 
-set follow-fork-mode child
-set detach-on-fork off
+# set follow-fork-mode child
+# set detach-on-fork off

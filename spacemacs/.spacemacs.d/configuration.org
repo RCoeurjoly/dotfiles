@@ -447,9 +447,11 @@ pairing or presenting code.
 
 *** Coq
     #+begin_src emacs-lisp
-;;(load "~/.emacs.d/lisp/PG/generic/proof-site.el")
     #+end_src
-
+#+begin_quote
+;;(load "~/.emacs.d/lisp/PG/generic/proof-site.el")
+#+end_quote
+    
 *** SMT-LIB
     #+begin_src emacs-lisp
 (setq auto-mode-alist (cons '("\\.smt$" . smtlib-mode) auto-mode-alist))
