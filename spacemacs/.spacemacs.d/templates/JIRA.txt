@@ -16,16 +16,19 @@
 *** TODO_NEXT Crear WIP MR
 #+begin_src shell :shebang #!/bin/bash -i :results output
 exec 2>&1
-
 python ~/dotfiles/JIRA_to_path.py %^{JIRA code} >/dev/null 2>&1
-if [ $? -eq 0 ]; then
-    cd $(python ~/dotfiles/JIRA_to_path.py %^{JIRA code})
-    git checkout master
-    git pull
-    git checkout -b %^{JIRA code}
-    git push -u origin %^{JIRA code}
-else
+if [ $? -ne 0 ]; then
     echo "Please fill corresponding path for %^{JIRA code}"
+else
+    cd $(python ~/dotfiles/JIRA_to_path.py %^{JIRA code})
+    if [ $? -ne 0 ]; then
+        echo "Please fill a valid corresponding path for %^{JIRA code}"
+    else
+        git checkout master
+        git pull
+        git checkout -b %^{JIRA code}
+        git push -u origin %^{JIRA code}
+    fi
 fi
 :
 #+end_src

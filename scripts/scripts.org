@@ -218,7 +218,7 @@ amIinDocker(){
  #+NAME: isGCCgood
  #+begin_src shell :noweb yes :exports code
 isGCCgood(){
-    GCC_IN_DOCKER='gcc (GCC) 4.8.5 20150623 (Red Hat 4.8.5-44)
+    GCC_IN_DOCKER='gcc (GCC) 4.8.5 20150623 (Red Hat 4.8.5-39)
 Copyright (C) 2015 Free Software Foundation, Inc.
 This is free software; see the source for copying conditions.  There is NO
 warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.'
@@ -871,7 +871,8 @@ JIRA_PATH_CORRESPONDENCE = {"DRVINET":    expanduser("~") + "/driiiiiiiiiiiiiiii
                             "CMNFLSVT":  expanduser("~") + "/inntech/desarrollo/vtcommon/vtcommon-files",
                             "VTIMM":  expanduser("~") + "/inntech/desarrollo/gateway/IMMBackoffice",
                             "STID":  expanduser("~") + "/driiiiiiiiiiiiiiiiiiiivers/sixfixdriver",
-                            "OMSCLIP":  expanduser("~") + "/oms/Cliiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiipsy"}
+                            "OMSCLIP":  expanduser("~") + "/oms/Cliiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiipsy",
+                            "DRVSMR":  expanduser("~") + "/driiiiiiiiiiiiiiiiiiiivers/smxdriver"}
 
 def remove_code(JIRA):
     return re.sub(r'-[0-9]*', '', JIRA)
