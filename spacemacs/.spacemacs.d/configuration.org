@@ -377,6 +377,11 @@ Use flycheck in the appropriate buffers:
 ** Habits
    #+begin_src emacs-lisp
 (add-to-list 'org-modules 'org-habit t)
+#+end_src
+** Macros
+   #+begin_src emacs-lisp
+(fset 'add\ row\ to\ habit\ table
+      (kmacro-lambda-form [134217798 134217798 134217798 134217798 ?\S-\C-f ?\M-w tab tab tab tab tab tab tab tab ?\C-y ?\M-b ?\M-b S-up S-up S-up S-up S-up S-up S-up tab ?\M-b ?\M-b ?\M-b ?\M-b left] 0 "%d"))
    #+end_src
 
 * General settings
@@ -482,6 +487,11 @@ pairing or presenting code.
           'auto-complete-mode
           'company-mode)
     #+END_SRC
+*** Dafny
+    #+begin_src emacs-lisp
+(setq flycheck-dafny-executable "~/Downloads/dafny/dafny")
+    #+end_src
+
 ** General
    I use a few packages in virtually every programming or writing environment to manage the project, handle auto-completion, search for terms, and deal with version control. That's all in here.
 *** =flycheck=
