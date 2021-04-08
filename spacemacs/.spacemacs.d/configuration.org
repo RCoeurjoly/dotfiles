@@ -374,6 +374,11 @@ Use flycheck in the appropriate buffers:
   (add-hook 'arduino-mode-hook #'flycheck-mode)
 #+end_src
 
+** Habits
+   #+begin_src emacs-lisp
+(add-to-list 'org-modules 'org-habit t)
+   #+end_src
+
 * General settings
 ** Lines
     Wrap lines
@@ -451,7 +456,7 @@ pairing or presenting code.
 #+begin_quote
 ;;(load "~/.emacs.d/lisp/PG/generic/proof-site.el")
 #+end_quote
-    
+
 *** SMT-LIB
     #+begin_src emacs-lisp
 (setq auto-mode-alist (cons '("\\.smt$" . smtlib-mode) auto-mode-alist))
